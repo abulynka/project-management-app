@@ -166,7 +166,8 @@
             "parser": "angular"
           }
         ]
-      }
+      },
+      "plugins": ["import"]
     }
   ]
 }
