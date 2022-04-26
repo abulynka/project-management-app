@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/explicit-member-accessibility */
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { debounceTime } from 'rxjs/operators';
@@ -9,11 +8,12 @@ import { debounceTime } from 'rxjs/operators';
   styleUrls: ['./search-box.component.scss'],
 })
 export class SearchBoxComponent implements OnInit {
-  @Input() placeholder: string = 'Type smth ...';
+  @Input() public placeholder: string = 'Type smth ...';
 
-  @Input() label: string = 'Task name';
+  @Input() public label: string = 'Task name';
 
-  @Output() searchValueEvent: EventEmitter<string> = new EventEmitter<string>();
+  @Output() public searchValueEvent: EventEmitter<string> =
+    new EventEmitter<string>();
 
   public searchForm: FormGroup = new FormGroup({
     searchValue: new FormControl(''),
