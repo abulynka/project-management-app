@@ -1,30 +1,28 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { NotFoundComponent } from './core/pages/not-found/not-found.component';
-import { BoardsComponent } from './project-management/pages/boards/boards.component';
-import { LoginComponent } from './auth/pages/login/login.component';
-import { BoardComponent } from './project-management/pages/board/board.component';
 
 const routes: Routes = [
   {
     path: '',
-    component: BoardsComponent,
-  },
-  {
-    path: 'login',
-    component: LoginComponent,
+    redirectTo: 'boards',
+    pathMatch: 'full',
   },
   {
     path: 'boards',
-    component: BoardsComponent,
+    loadChildren: async () =>
+      import('./project-management/project-management.module').then(
+        (m) => m.ProjectManagementModule,
+      ),
   },
   {
-    path: 'boards/:id',
-    component: BoardComponent,
+    path: 'login',
+    loadChildren: async () =>
+      import('./auth/auth-routing.module').then((m) => m.AuthRoutingModule),
   },
   {
     path: '**',
-    component: NotFoundComponent,
+    loadChildren: async () =>
+      import('./core/core-routing.module').then((m) => m.CoreRoutingModule),
   },
 ];
 
