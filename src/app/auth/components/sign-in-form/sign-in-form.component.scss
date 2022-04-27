@@ -1,0 +1,54 @@
+$bg-color: #E5E5E5;
+$header-button-color: blue;
+$button-color: #2F7FEE;
+$white-color: #FFF;
+$card-bg-color: #E5E5E5;
+$desc-font-color: #828282;
+$login-bg-color: #F2F2F2;
+$login-input-color: #E0E0E0;
+$button-hover-color: #5398F8;
+$input-color: #F0EFEF;
+$shadow-color: #2F80ED;
+$info-bg-color: #33333340;
+
+
+.signin {
+  width: 350px;
+  height: 250px;
+  padding: 20px 20px;
+  background-color: $login-bg-color;
+  &__form {
+    display: flex;
+    flex-direction: column;
+    & > * {
+      margin-top: 8px;
+    }
+  }
+  &__title {
+    font-size: 18px;
+    font-weight: bold;
+  }
+  &__label {
+    font-size: 12px;
+  }
+  &__input {
+    height: 37px;
+    background-color: $login-input-color;
+    border: none;
+    padding: 8px;
+    font-size: 10px;
+  }
+  &__button {
+  width: 124px;
+  height: 30px;
+  background-color: $button-color;
+  border: none;
+  align-self: flex-end;
+  border-radius: 4px;
+  color: $white-color;
+  &:hover {
+    cursor: pointer;
+    background-color: $button-hover-color;
+  }
+  }
+}
