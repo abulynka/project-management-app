@@ -1,0 +1,17 @@
+.header {
+  position: sticky;
+  top: 0;
+
+  &__space {
+    width: 50%;
+  }
+
+  &__toolbar {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  &__toggle {
+    width: 70px;
+  }
+}

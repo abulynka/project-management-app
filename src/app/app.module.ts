@@ -9,6 +9,9 @@ import { CoreModule } from './core/core.module';
 import { ProjectManagementModule } from './project-management/project-management.module';
 import { HeaderComponent } from './core/components/header/header.component';
 import { FooterComponent } from './core/components/footer/footer.component';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
+import { MatButtonModule } from '@angular/material/button';
 
 @NgModule({
   declarations: [AppComponent, HeaderComponent, FooterComponent],
@@ -19,6 +22,9 @@ import { FooterComponent } from './core/components/footer/footer.component';
     AuthModule,
     CoreModule,
     ProjectManagementModule,
+    MatToolbarModule,
+    MatSlideToggleModule,
+    MatButtonModule,
   ],
   providers: [],
   bootstrap: [AppComponent],
