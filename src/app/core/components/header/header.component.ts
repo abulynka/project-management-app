@@ -1,5 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { MatSlideToggleChange } from '@angular/material/slide-toggle';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-header',
@@ -9,13 +10,17 @@ import { MatSlideToggleChange } from '@angular/material/slide-toggle';
 export class HeaderComponent {
   @Input() public authorized: boolean = true;
 
-  @Input() public languageTitle: string = 'Ru';
+  @Input() public languageTitle: string = 'En';
+
+  public constructor(public translate: TranslateService) {}
 
   @Input() public changeLanguage = (event: MatSlideToggleChange): void => {
     if (event.checked) {
-      this.languageTitle = 'En';
-    } else {
       this.languageTitle = 'Ru';
+      this.translate.use('ru');
+    } else {
+      this.languageTitle = 'En';
+      this.translate.use('en');
     }
   };
 }
