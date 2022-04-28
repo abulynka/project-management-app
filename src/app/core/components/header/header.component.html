@@ -1,14 +1,20 @@
 <header class="header">
   <mat-toolbar class="header__toolbar" color="primary">
-    <span>{{ translate('project management') }}</span>
+    <span>{{ 'app.title' | translate | titlecase }}</span>
     <div class="header__space"></div>
-    <button mat-flat-button>{{ translate('create new board') }}</button>
+    <button mat-flat-button>
+      {{ 'header.create-new-board' | translate | titlecase }}
+    </button>
     <mat-slide-toggle
       class="header__toggle"
       (change)="changeLanguage($event)"
       >{{ languageTitle }}</mat-slide-toggle
     >
-    <button mat-flat-button>{{ translate('edit profile') }}</button>
-    <button mat-flat-button>{{ translate('logout') }}</button>
+    <button mat-flat-button>
+      {{ 'header.edit-profile' | translate | titlecase }}
+    </button>
+    <button mat-flat-button>
+      {{ 'header.logout' | translate | titlecase }}
+    </button>
   </mat-toolbar>
 </header>

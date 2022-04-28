@@ -1,5 +1,10 @@
 {
   "app": {
-    "title": "Page title"
+    "title": "project management"
+  },
+  "header": {
+    "create-new-board": "create new board",
+    "edit-profile": "edit profile",
+    "logout": "logout"
   }
 }
