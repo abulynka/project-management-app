@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { NotFoundComponent } from './core/pages/not-found/not-found.component';
 
 const routes: Routes = [
   {
@@ -10,19 +11,22 @@ const routes: Routes = [
   {
     path: 'boards',
     loadChildren: async () =>
-      import('./project-management/project-management.module').then(
-        (m) => m.ProjectManagementModule,
-      ),
+      // eslint-disable-next-line @typescript-eslint/typedef
+      import('./project-management/project-management.module').then((m) => {
+        return m.ProjectManagementModule;
+      }),
   },
   {
     path: 'login',
     loadChildren: async () =>
-      import('./auth/auth-routing.module').then((m) => m.AuthRoutingModule),
+      // eslint-disable-next-line @typescript-eslint/typedef
+      import('./auth/auth.module').then((m) => {
+        return m.AuthModule;
+      }),
   },
   {
     path: '**',
-    loadChildren: async () =>
-      import('./core/core-routing.module').then((m) => m.CoreRoutingModule),
+    component: NotFoundComponent,
   },
 ];
 
