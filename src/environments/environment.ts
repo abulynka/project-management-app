@@ -2,8 +2,22 @@
 // `ng build` replaces `environment.ts` with `environment.prod.ts`.
 // The list of file replacements can be found in `angular.json`.
 
-export const environment: { production: boolean } = {
+type ILocale = 'en' | 'ru';
+
+type ILocales = ['en', 'ru'];
+
+const LOCALES: ILocales = ['en', 'ru'];
+
+interface IEnvironment {
+  production: boolean;
+  locales: ILocales;
+  defaultLocale: ILocale;
+}
+
+export const environment: IEnvironment = {
   production: false,
+  locales: LOCALES,
+  defaultLocale: 'en',
 };
 
 /*

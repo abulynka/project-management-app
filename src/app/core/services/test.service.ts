@@ -9,10 +9,7 @@ import { HttpClient } from '@angular/common/http';
 export class TestService {
   public apiRoot: string = 'http://localhost:4200/api';
 
-  public constructor(public http: HttpClient) {}
-
-  public addUser(): void {
-    console.log('here');
+  public constructor(public http: HttpClient) {
     this.http
       .get(`${this.apiRoot}`, { responseType: 'text' })
       .subscribe((res: any) => {
