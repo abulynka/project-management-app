@@ -3,14 +3,14 @@ import { Component } from '@angular/core';
 import { TestService } from 'src/app/core/services/test.service';
 
 @Component({
-  selector: 'app-sign-in-form',
-  templateUrl: './sign-in-form.component.html',
-  styleUrls: ['./sign-in-form.component.scss'],
+  selector: 'app-sign-up-form',
+  templateUrl: './sign-up-form.component.html',
+  styleUrls: ['./sign-up-form.component.scss'],
 })
-export class SignInFormComponent {
+export class SignUpFormComponent {
   public form: any = {
     login: null,
-    username: null,
+    name: null,
     password: null,
   };
 
@@ -23,17 +23,15 @@ export class SignInFormComponent {
   public constructor(public testService: TestService) {}
 
   public onSubmit(): void {
-    const { login, username, password }: any = this.form;
-    this.testService.signUp(login, username, password).subscribe(
-      (data: any) => {
-        console.log(data);
+    const { login, name, password }: any = this.form;
+    this.testService.signUp(login, name, password).subscribe({
+      error: () => {
+        this.isSignUpFailed = true;
+      },
+      complete: () => {
         this.isSuccessful = true;
         this.isSignUpFailed = false;
       },
-      (err: any) => {
-        this.errorMessage = err.error.message;
-        this.isSignUpFailed = true;
-      }
-    );
+    });
   }
 }
