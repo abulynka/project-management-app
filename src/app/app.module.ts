@@ -10,6 +10,7 @@ import { FormsModule } from '@angular/forms';
 import { AppComponent } from './app.component';
 import { SignUpFormComponent } from './auth/components/sign-up-form/sign-up-form.component';
 import { SignInFormComponent } from './auth/components/sign-in-form/sign-in-form.component';
+import { authInterceptorProviders } from './auth/interceptors/auth-interceptor';
 
 export function HttpLoaderFactory(httpClient: HttpClient): TranslateHttpLoader {
   return new TranslateHttpLoader(httpClient, './assets/i18n/', '.json');
@@ -31,7 +32,7 @@ export function HttpLoaderFactory(httpClient: HttpClient): TranslateHttpLoader {
       useDefaultLang: true,
     }),
   ],
-  providers: [],
+  providers: [authInterceptorProviders],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

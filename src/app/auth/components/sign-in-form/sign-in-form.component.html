@@ -1,68 +1,67 @@
-<<!--<div class="signup">
-  <h4 class="signup__title">Register</h4>
+<div class="signin">
+  <h4 class="signin__title">Sign In</h4>
   <form
-    action="#"
-    class="signup__form"
-    *ngIf="!isSuccessful"
+    class="signin__form"
+    *ngIf="!isLoggedIn"
     name="form"
     (ngSubmit)="f.form.valid && onSubmit()"
     #f="ngForm"
     novalidate
   >
-    <label class="signup__label" for="login">login</label>
-    <input
-      id="signup-input"
-      placeholder="Enter Your Login"
-      class="signup__input"
-      type="text"
-      [(ngModel)]="form.login"
-      required
-      minlength="3"
-      maxlength="20"
-      #login="ngModel"
-    />
-    <div class="alert-danger" *ngIf="username.errors && f.submitted">
-      <div *ngIf="username.errors.required">Username is required</div>
-      <div *ngIf="username.errors.minlength">
-        Username must be at least 3 characters
-      </div>
-      <div *ngIf="username.errors.maxlength">
-        Username must be at most 20 characters
+    <div class="form-group signin__form-group">
+      <label class="signin__label" for="login">Login</label>
+      <input
+        placeholder="Enter Your Login"
+        class="signin__input form-control"
+        type="text"
+        name="login"
+        [(ngModel)]="form.login"
+        required
+        #login="ngModel"
+      />
+      <div
+        class="alert alert-danger"
+        role="alert"
+        *ngIf="login.errors && f.submitted"
+      >
+        Login is required!
       </div>
     </div>
-    <label class="signup__label" for="signup-input">name</label>
-    <input
-      id="signup-input"
-      placeholder="Enter Your Name"
-      class="signup__input"
-      type="text"
-    />
-    <label class="signup__label" for="password">Password</label>
-    <input
-      type="text"
-      class="signup__input"
-      placeholder="Enter Password"
-      name="password"
-      [(ngModel)]="form.password"
-      required
-      minlength="6"
-      #password="ngModel"
-    />
-    <div class="alert-danger" *ngIf="password.errors && f.submitted">
-      <div *ngIf="password.errors.required">Password is required</div>
-      <div *ngIf="password.errors.minlength">
-        Password must be at least 6 characters
+    <div class="signin__form-group form-group">
+      <label class="signin__label" for="password">Password</label>
+      <input
+        type="password"
+        class="signin__input form-control"
+        placeholder="Enter Password"
+        name="password"
+        [(ngModel)]="form.password"
+        required
+        minlength="6"
+        #password="ngModel"
+      />
+      <div
+        class="alert-danger"
+        role="alert"
+        *ngIf="password.errors && f.submitted"
+      >
+        <div *ngIf="password?.errors?.['required']">Password is required</div>
+        <div *ngIf="password?.errors?.['minlength']">
+          Password must be at least 6 characters
+        </div>
       </div>
-    </div><div class="form-group">
-      <button class="btn btn-primary btn-block">Sign Up</button>
     </div>
-    <div class="alert alert-warning" *ngIf="f.submitted && isSignUpFailed">
-      Signup failed!<br />{{ errorMessage }}
+    <div class="form-group">
+      <button class="btn btn-primary btn-block signin__button">Sign In</button>
     </div>
-    <button class="signup__button" type="submit">SignIn</button>
+    <div class="form-group">
+      <div
+        class="alert alert-danger"
+        role="alert"
+        *ngIf="f.submitted && isLoginFailed"
+      >
+        Login failed: {{ errorMessage }}
+      </div>
+    </div>
   </form>
-  <div class="alert alert-success" *ngIf="isSuccessful">
-    Your registration is successful!
-  </div>
+  <div class="alert alert-success" *ngIf="isLoggedIn">Logged in.</div>
 </div>
--->

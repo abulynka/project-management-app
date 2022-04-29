@@ -12,11 +12,12 @@ $shadow-color: #2F80ED;
 $info-bg-color: #33333340;
 
 
-.signup {
+.signin {
   width: 350px;
-  height: 250px;
+  height: 300px;
   padding: 20px 20px;
   background-color: $login-bg-color;
+  margin: 10px;
   &__form {
     display: flex;
     flex-direction: column;
@@ -27,6 +28,10 @@ $info-bg-color: #33333340;
   &__title {
     font-size: 18px;
     font-weight: bold;
+  }
+  &__form-group {
+    display:flex;
+    flex-direction: column;
   }
   &__label {
     font-size: 12px;

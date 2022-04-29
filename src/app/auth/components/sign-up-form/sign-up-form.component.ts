@@ -25,12 +25,22 @@ export class SignUpFormComponent {
   public onSubmit(): void {
     const { login, name, password }: any = this.form;
     this.testService.signUp(login, name, password).subscribe({
-      error: () => {
-        this.isSignUpFailed = true;
-      },
-      complete: () => {
+      next: (response: any) => {
+        console.log(response);
         this.isSuccessful = true;
         this.isSignUpFailed = false;
+      },
+      error: (error: any) => {
+        this.isSignUpFailed = true;
+        console.log(error);
+      },
+    });
+    this.testService.getUsers().subscribe({
+      next: (response: any) => {
+        console.log(response);
+      },
+      error: (error: any) => {
+        console.log(error);
       },
     });
   }

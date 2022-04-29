@@ -1,6 +1,6 @@
 export interface SignInData {
-  name: string;
   login: string;
+  password: string;
 }
 
 export interface SignUpData {

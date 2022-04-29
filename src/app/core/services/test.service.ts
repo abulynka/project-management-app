@@ -14,20 +14,15 @@ const httpOptions: any = {
 export class TestService {
   public apiRoot: string = 'http://localhost:4200/api';
 
-  public constructor(public http: HttpClient) {
-    console.log('here');
-    this.http
-      .get(`${this.apiRoot}/users`, { responseType: 'json' })
-      .subscribe((res: any) => {
-        console.log(res);
-      });
-  }
+  public user: any;
 
-  public signIn(name: string, password: string): Observable<any> {
+  public constructor(public http: HttpClient) {}
+
+  public signIn(login: string, password: string): Observable<any> {
     return this.http.post(
       `${this.apiRoot}/signin`,
       {
-        name,
+        login,
         password,
       },
       httpOptions
@@ -48,5 +43,9 @@ export class TestService {
       },
       httpOptions
     );
+  }
+
+  public getUsers(): Observable<any> {
+    return this.http.get(`${this.apiRoot}/users`, httpOptions);
   }
 }
