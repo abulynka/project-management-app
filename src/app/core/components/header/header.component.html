@@ -27,7 +27,7 @@
           <mat-slide-toggle
             class="header__toggle"
             (change)="changeLanguage($event)"
-            >{{ languageTitle }}</mat-slide-toggle
+            >{{ langTitle.short }}</mat-slide-toggle
           >
         </li>
       </ul>
@@ -42,7 +42,7 @@
       <mat-slide-toggle
         class="header__toggle_large"
         (change)="changeLanguage($event)"
-        >{{ languageTitleLarge }}</mat-slide-toggle
+        >{{ langTitle.long }}</mat-slide-toggle
       >
     </mat-toolbar-row>
     <mat-toolbar-row class="header__menu header__menu_large" *ngIf="isShowMenu">
