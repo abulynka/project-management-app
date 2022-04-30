@@ -1,5 +1,4 @@
 /* eslint-disable @typescript-eslint/comma-dangle */
-/* eslint-disable @typescript-eslint/indent */
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
@@ -11,7 +10,7 @@ const httpOptions: any = {
 @Injectable({
   providedIn: 'root',
 })
-export class TestService {
+export class AuthService {
   public apiRoot: string = 'http://localhost:4200/api';
 
   public user: any;
@@ -43,9 +42,5 @@ export class TestService {
       },
       httpOptions
     );
-  }
-
-  public getUsers(): Observable<any> {
-    return this.http.get(`${this.apiRoot}/users`, httpOptions);
   }
 }

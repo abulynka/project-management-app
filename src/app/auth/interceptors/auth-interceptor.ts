@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/comma-dangle */
-import { HTTP_INTERCEPTORS, HttpEvent } from '@angular/common/http';
-import { Injectable, InjectionToken } from '@angular/core';
+import { HttpEvent } from '@angular/common/http';
+import { Injectable } from '@angular/core';
 import {
   HttpInterceptor,
   HttpHandler,
@@ -27,8 +27,3 @@ export class AuthInterceptor implements HttpInterceptor {
     return next.handle(authReq);
   }
 }
-export const authInterceptorProviders: Array<{
-  provide: InjectionToken<HttpInterceptor[]>;
-  useClass: typeof AuthInterceptor;
-  multi: boolean;
-}> = [{ provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true }];
