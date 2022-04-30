@@ -8,9 +8,9 @@ import { TranslateService } from '@ngx-translate/core';
   styleUrls: ['./header.component.scss'],
 })
 export class HeaderComponent {
-  @Input() public languageTitle: string = 'En';
+  @Input() public languageTitle: 'En' | 'Ru' = 'En';
 
-  @Input() public languageTitleLarge: string = 'English';
+  @Input() public languageTitleLarge: 'English' | 'Russian' = 'English';
 
   public isShowMenu: boolean = false;
 
@@ -18,17 +18,25 @@ export class HeaderComponent {
 
   @Input() public changeLanguage = (event: MatSlideToggleChange): void => {
     if (event.checked) {
-      this.languageTitle = 'Ru';
-      this.languageTitleLarge = 'Russian';
-      this.translate.use('ru');
+      this.setLangage('ru');
     } else {
-      this.languageTitle = 'En';
-      this.languageTitleLarge = 'English';
-      this.translate.use('en');
+      this.setLangage('en');
     }
   };
 
   public toggle(): void {
     this.isShowMenu = !this.isShowMenu;
+  }
+
+  private setLangage(language: 'en' | 'ru'): void {
+    if (language === 'en') {
+      this.languageTitle = 'En';
+      this.languageTitleLarge = 'English';
+      this.translate.use('en');
+    } else {
+      this.languageTitle = 'Ru';
+      this.languageTitleLarge = 'Russian';
+      this.translate.use('ru');
+    }
   }
 }
