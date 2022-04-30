@@ -1,15 +1,15 @@
-import { ILang } from '../../../services/lang.service';
+import { Lang } from '../../../services/lang.service';
 
-export interface ILangTitleItem {
+export interface LangTitleItem {
   short: string;
   long: string;
 }
 
-type ILangTitleMap = {
-  [key in ILang]: ILangTitleItem;
+type LangTitleMap = {
+  [key in Lang]: LangTitleItem;
 };
 
-export const langTitleMap: ILangTitleMap = {
+export const langTitleMap: LangTitleMap = {
   en: {
     short: 'En',
     long: 'English',

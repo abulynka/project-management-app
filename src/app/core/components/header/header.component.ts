@@ -1,7 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { MatSlideToggleChange } from '@angular/material/slide-toggle';
-import { ILang, LangService } from '../../services/lang.service';
-import { ILangTitleItem, langTitleMap } from './utils/languageTitleMap';
+import { Lang, LangService } from '../../services/lang.service';
+import { LangTitleItem, langTitleMap } from './utils/languageTitleMap';
 
 @Component({
   selector: 'app-header',
@@ -9,7 +9,7 @@ import { ILangTitleItem, langTitleMap } from './utils/languageTitleMap';
   styleUrls: ['./header.component.scss'],
 })
 export class HeaderComponent implements OnInit {
-  public langTitle!: ILangTitleItem;
+  public langTitle!: LangTitleItem;
 
   public isShowMenu: boolean = false;
 
@@ -26,7 +26,7 @@ export class HeaderComponent implements OnInit {
   };
 
   public ngOnInit(): void {
-    const curLang: ILang = this.langService.getLang();
+    const curLang: Lang = this.langService.getLang();
     this.setLanguageTitle(curLang);
   }
 
@@ -34,7 +34,7 @@ export class HeaderComponent implements OnInit {
     this.isShowMenu = !this.isShowMenu;
   }
 
-  private setLanguageTitle(lang: ILang): void {
+  private setLanguageTitle(lang: Lang): void {
     this.langTitle = langTitleMap[lang];
   }
 }
