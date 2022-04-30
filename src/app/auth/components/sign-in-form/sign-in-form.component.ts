@@ -2,8 +2,8 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../../services/auth.service';
 import { TokenStorageService } from 'src/app/core/services/token-storage.service';
-
 import { UserService } from 'src/app/project-management/services/user.service';
+//import { SignInData } from '../../models/authorization.model';
 
 @Component({
   selector: 'app-sign-in-form',
@@ -32,14 +32,6 @@ export class SignInFormComponent implements OnInit {
     if (this.tokenStorage.getToken()) {
       this.isLoggedIn = true;
     }
-    this.userService.getUsers().subscribe({
-      next: (response: any) => {
-        console.log(response);
-      },
-      error: (error: any) => {
-        console.log(error);
-      },
-    });
   }
 
   public onSubmit(): void {
