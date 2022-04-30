@@ -8,11 +8,11 @@
     #f="ngForm"
     novalidate
   >
-    <div class="form-group signup__form-group">
-      <label class="signup__label" for="login">Login</label>
+    <mat-form-field class="form-group" appearance="fill">
+      <mat-label>Login</mat-label>
       <input
+        matInput
         placeholder="Enter Your Login"
-        class="signup__input form-control"
         type="text"
         name="login"
         [(ngModel)]="form.login"
@@ -30,12 +30,12 @@
           Login must be at most 20 characters
         </div>
       </div>
-    </div>
-    <div class="form-group signup__form-group">
-      <label class="signup__label" for="name">Name</label>
+    </mat-form-field>
+    <mat-form-field class="form-group" appearance="fill">
+      <mat-label>Name</mat-label>
       <input
+        matInput
         placeholder="Enter Your Name"
-        class="signup__input form-control"
         type="text"
         name="name"
         [(ngModel)]="form.name"
@@ -53,14 +53,14 @@
           Name must be at most 20 characters
         </div>
       </div>
-    </div>
-    <div class="signup__form-group">
-      <label class="signup__label" for="password">Password</label>
+    </mat-form-field>
+    <mat-form-field class="form-group" appearance="fill">
+      <mat-label>Password</mat-label>
       <input
-        type="password"
-        class="signup__input form-control"
+        matInput
         placeholder="Enter Password"
         name="password"
+        type="password"
         [(ngModel)]="form.password"
         required
         minlength="6"
@@ -72,9 +72,9 @@
           Password must be at least 6 characters
         </div>
       </div>
-    </div>
+    </mat-form-field>
     <div class="form-group">
-      <button class="btn btn-primary btn-block signup__button">Sign Up</button>
+      <button type="submit" mat-button>Sign Up</button>
     </div>
     <div class="alert alert-warning" *ngIf="f.submitted && isSignUpFailed">
       Signup failed!<br />{{ errorMessage }}

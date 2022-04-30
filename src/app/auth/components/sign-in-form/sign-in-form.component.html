@@ -8,15 +8,17 @@
     #f="ngForm"
     novalidate
   >
-    <div class="form-group signin__form-group">
-      <label class="signin__label" for="login">Login</label>
+    <mat-form-field class="form-group" appearance="fill">
+      <mat-label>Login</mat-label>
       <input
+        matInput
         placeholder="Enter Your Login"
-        class="signin__input form-control"
         type="text"
         name="login"
         [(ngModel)]="form.login"
         required
+        minlength="3"
+        maxlength="20"
         #login="ngModel"
       />
       <div
@@ -26,14 +28,14 @@
       >
         Login is required!
       </div>
-    </div>
-    <div class="signin__form-group form-group">
-      <label class="signin__label" for="password">Password</label>
+    </mat-form-field>
+    <mat-form-field class="form-group" appearance="fill">
+      <mat-label>Password</mat-label>
       <input
-        type="password"
-        class="signin__input form-control"
+        matInput
         placeholder="Enter Password"
         name="password"
+        type="password"
         [(ngModel)]="form.password"
         required
         minlength="6"
@@ -49,18 +51,16 @@
           Password must be at least 6 characters
         </div>
       </div>
-    </div>
+    </mat-form-field>
     <div class="form-group">
-      <button class="btn btn-primary btn-block signin__button">Sign In</button>
+      <button type="submit" mat-button>Sign In</button>
     </div>
-    <div class="form-group">
-      <div
-        class="alert alert-danger"
-        role="alert"
-        *ngIf="f.submitted && isLoginFailed"
-      >
-        Login failed: {{ errorMessage }}
-      </div>
+    <div
+      class="alert alert-danger"
+      role="alert"
+      *ngIf="f.submitted && isLoginFailed"
+    >
+      Login failed: {{ errorMessage }}
     </div>
   </form>
   <div class="alert alert-success" *ngIf="isLoggedIn">Logged in.</div>
