@@ -1,17 +1,56 @@
 .header {
+  width: 100%;
   position: sticky;
   top: 0;
 
-  &__space {
-    width: 50%;
+  &__menu {
+    &_large {
+      width: 100%;
+      cursor: pointer;
+      display: flex;
+      flex-direction: column;
+    }
+
+    @media (min-width: 800px) {
+      display: none;
+    }
   }
 
-  &__toolbar {
+  &__burger {
+    cursor: pointer;
+    padding-right: 30px;
+  }
+
+  &__button {
+    margin: 0 10px;
+
+    &_large {
+      width: 100%;
+      padding: 0;
+      text-align: left;
+    }
+  }
+
+  &__list {
+    display: flex;
+    list-style: none;
+
+    @media (max-width: 800px) {
+      display: none;
+    }
+  }
+
+  &__toolbar-row {
     display: flex;
     justify-content: space-between;
   }
 
   &__toggle {
     width: 70px;
+
+    &_large {
+      width: 100%;
+      text-align: left;
+    }
   }
 }

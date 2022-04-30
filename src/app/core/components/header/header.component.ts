@@ -8,19 +8,27 @@ import { TranslateService } from '@ngx-translate/core';
   styleUrls: ['./header.component.scss'],
 })
 export class HeaderComponent {
-  @Input() public authorized: boolean = true;
-
   @Input() public languageTitle: string = 'En';
+
+  @Input() public languageTitleLarge: string = 'English';
+
+  public isShowMenu: boolean = false;
 
   public constructor(public translate: TranslateService) {}
 
   @Input() public changeLanguage = (event: MatSlideToggleChange): void => {
     if (event.checked) {
       this.languageTitle = 'Ru';
+      this.languageTitleLarge = 'Russian';
       this.translate.use('ru');
     } else {
       this.languageTitle = 'En';
+      this.languageTitleLarge = 'English';
       this.translate.use('en');
     }
   };
+
+  public toggle(): void {
+    this.isShowMenu = !this.isShowMenu;
+  }
 }

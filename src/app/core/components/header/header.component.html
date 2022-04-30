@@ -1,20 +1,59 @@
 <header class="header">
-  <mat-toolbar class="header__toolbar" color="primary">
-    <span>{{ 'app.title' | translate | titlecase }}</span>
-    <div class="header__space"></div>
-    <button mat-flat-button>
-      {{ 'header.create-new-board' | translate | titlecase }}
-    </button>
-    <mat-slide-toggle
-      class="header__toggle"
-      (change)="changeLanguage($event)"
-      >{{ languageTitle }}</mat-slide-toggle
-    >
-    <button mat-flat-button>
-      {{ 'header.edit-profile' | translate | titlecase }}
-    </button>
-    <button mat-flat-button>
-      {{ 'header.logout' | translate | titlecase }}
-    </button>
+  <mat-toolbar color="primary">
+    <mat-toolbar-row class="header__toolbar-row">
+      <mat-icon class="header__menu header__burger" (click)="toggle()">{{
+        isShowMenu ? 'close' : 'menu'
+      }}</mat-icon>
+
+      <span>{{ 'app.title' | translate | titlecase }}</span>
+
+      <ul class="header__list">
+        <li>
+          <a class="header__button" mat-flat-button>
+            {{ 'header.create-new-board' | translate | titlecase }}
+          </a>
+        </li>
+        <li>
+          <a class="header__button" mat-flat-button>
+            {{ 'header.edit-profile' | translate | titlecase }}
+          </a>
+        </li>
+        <li>
+          <a class="header__button" mat-flat-button>
+            {{ 'header.logout' | translate | titlecase }}
+          </a>
+        </li>
+        <li>
+          <mat-slide-toggle
+            class="header__toggle"
+            (change)="changeLanguage($event)"
+            >{{ languageTitle }}</mat-slide-toggle
+          >
+        </li>
+      </ul>
+    </mat-toolbar-row>
+
+    <mat-toolbar-row class="header__menu header__menu_large" *ngIf="isShowMenu">
+      <button mat-button class="header__button_large">
+        {{ 'header.create-new-board' | translate | titlecase }}
+      </button>
+    </mat-toolbar-row>
+    <mat-toolbar-row class="header__menu header__menu_large" *ngIf="isShowMenu">
+      <mat-slide-toggle
+        class="header__toggle_large"
+        (change)="changeLanguage($event)"
+        >{{ languageTitleLarge }}</mat-slide-toggle
+      >
+    </mat-toolbar-row>
+    <mat-toolbar-row class="header__menu header__menu_large" *ngIf="isShowMenu">
+      <button mat-button class="header__button_large">
+        {{ 'header.edit-profile' | translate | titlecase }}
+      </button>
+    </mat-toolbar-row>
+    <mat-toolbar-row class="header__menu header__menu_large" *ngIf="isShowMenu">
+      <button mat-button class="header__button_large">
+        {{ 'header.logout' | translate | titlecase }}
+      </button>
+    </mat-toolbar-row>
   </mat-toolbar>
 </header>
