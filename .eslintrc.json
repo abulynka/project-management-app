@@ -150,7 +150,16 @@
         "no-redeclare": "error",
         "no-underscore-dangle": "off",
         "prefer-object-spread": "error",
-        "prefer-template": "error"
+        "prefer-template": "error",
+        "prettier/prettier": [
+          "error",
+          {
+            "trailingComma": "all",
+            "tabWidth": 2,
+            "semi": true,
+            "singleQuote": true
+          }
+        ]
       }
     },
     {
