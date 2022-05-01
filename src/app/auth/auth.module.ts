@@ -7,11 +7,9 @@ import { FormsModule } from '@angular/forms';
 
 import { AuthRoutingModule } from './auth-routing.module';
 import { LoginComponent } from './pages/login/login.component';
-import { SignUpFormComponent } from './components/sign-up-form/sign-up-form.component';
-import { SignInFormComponent } from './components/sign-in-form/sign-in-form.component';
 
 @NgModule({
-  declarations: [LoginComponent, SignInFormComponent, SignUpFormComponent],
+  declarations: [LoginComponent],
   imports: [
     CommonModule,
     AuthRoutingModule,
