@@ -1,6 +1,7 @@
 /* eslint-disable @typescript-eslint/comma-dangle */
 import { Component } from '@angular/core';
 import { AuthService } from '../../services/auth.service';
+import { SignUpData } from '../../models/authorization.model';
 
 @Component({
   selector: 'app-sign-up-form',
@@ -9,8 +10,8 @@ import { AuthService } from '../../services/auth.service';
 })
 export class SignUpFormComponent {
   public form: any = {
-    login: null,
     name: null,
+    login: null,
     password: null,
   };
 
@@ -23,16 +24,14 @@ export class SignUpFormComponent {
   public constructor(public authService: AuthService) {}
 
   public onSubmit(): void {
-    const { login, name, password }: any = this.form;
-    this.authService.signUp(login, name, password).subscribe({
-      next: (response: any) => {
-        console.log(response);
+    const { name, login, password }: SignUpData = this.form;
+    this.authService.signUp(name, login, password).subscribe({
+      next: () => {
         this.isSuccessful = true;
         this.isSignUpFailed = false;
       },
-      error: (error: any) => {
+      error: () => {
         this.isSignUpFailed = true;
-        console.log(error);
       },
     });
   }

@@ -13,11 +13,9 @@ const httpOptions: any = {
 export class AuthService {
   public apiRoot: string = 'http://localhost:4200/api';
 
-  public user: any;
-
   public constructor(public http: HttpClient) {}
 
-  public signIn(login: string, password: string): Observable<any> {
+  public signIn(login: string, password: string): Observable<ArrayBuffer> {
     return this.http.post(
       `${this.apiRoot}/signin`,
       {

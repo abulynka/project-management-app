@@ -3,7 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../../services/auth.service';
 import { TokenStorageService } from 'src/app/core/services/token-storage.service';
 import { UserService } from 'src/app/project-management/services/user.service';
-//import { SignInData } from '../../models/authorization.model';
+import { SignInData } from '../../models/authorization.model';
 
 @Component({
   selector: 'app-sign-in-form',
@@ -35,7 +35,7 @@ export class SignInFormComponent implements OnInit {
   }
 
   public onSubmit(): void {
-    const { login, password }: any = this.form;
+    const { login, password }: SignInData = this.form;
     this.authService.signIn(login, password).subscribe({
       next: (response: any) => {
         this.tokenStorage.saveToken(response.token);
@@ -43,11 +43,9 @@ export class SignInFormComponent implements OnInit {
         this.isLoginFailed = false;
         this.isLoggedIn = true;
         //this.reloadPage();
-        console.log(response);
       },
-      error: (error: any) => {
+      error: () => {
         this.isLoginFailed = true;
-        console.log(error);
       },
     });
   }
