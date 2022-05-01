@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { MatSlideToggleChange } from '@angular/material/slide-toggle';
 import { Lang, LangService } from '../../services/lang.service';
 import { LangTitleItem, langTitleMap } from './utils/languageTitleMap';
@@ -15,7 +15,7 @@ export class HeaderComponent implements OnInit {
 
   public constructor(private langService: LangService) {}
 
-  @Input() public changeLanguage = (event: MatSlideToggleChange): void => {
+  public changeLanguage = (event: MatSlideToggleChange): void => {
     if (event.checked) {
       this.setLanguageTitle('ru');
       this.langService.setLang('ru');
