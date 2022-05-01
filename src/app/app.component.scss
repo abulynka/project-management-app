@@ -1,0 +1,12 @@
+.header {
+  height: 64px;
+}
+
+.main {
+  height: calc(100% - 2 * 64px);
+  overflow-y: scroll;
+}
+
+.footer {
+  height: 64px;
+}
