@@ -6,5 +6,13 @@
     "create-new-board": "create new board",
     "edit-profile": "edit profile",
     "logout": "logout"
+  },
+  "not-found": {
+    "first-part": "We are searching for your page...",
+    "second-part": "...But we can not find it."
+  },
+  "not-found-board": {
+    "first-part": "We are searching for your board...",
+    "second-part": "...But we can not find it."
   }
 }
