@@ -36,5 +36,7 @@ export class BoardComponent implements OnInit {
     });
   }
 
-  private showBoard(): void {}
+  private showBoard(): void {
+    // todo: add show border logic
+  }
 }
