@@ -9,10 +9,10 @@ import { SignUpData } from '../../models/authorization.model';
   styleUrls: ['./sign-up-form.component.scss'],
 })
 export class SignUpFormComponent {
-  public form: any = {
-    name: null,
-    login: null,
-    password: null,
+  public form: SignUpData = {
+    name: '',
+    login: '',
+    password: '',
   };
 
   public isSuccessful: boolean = false;

@@ -34,3 +34,14 @@ export interface BoardResponse {
   id: string;
   title: string;
 }
+
+export interface NewColumn {
+  title: string;
+  order: number;
+}
+
+export interface ColumnResponse {
+  id: string;
+  title: string;
+  order: number;
+}

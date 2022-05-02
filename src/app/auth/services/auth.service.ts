@@ -2,6 +2,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { apiRoot } from 'src/environments/environment';
 
 const httpOptions: any = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
@@ -11,13 +12,11 @@ const httpOptions: any = {
   providedIn: 'root',
 })
 export class AuthService {
-  public apiRoot: string = 'http://localhost:4200/api';
-
   public constructor(public http: HttpClient) {}
 
   public signIn(login: string, password: string): Observable<ArrayBuffer> {
     return this.http.post(
-      `${this.apiRoot}/signin`,
+      `${apiRoot}/signin`,
       {
         login,
         password,
@@ -32,7 +31,7 @@ export class AuthService {
     password: string
   ): Observable<any> {
     return this.http.post(
-      `${this.apiRoot}/signup`,
+      `${apiRoot}/signup`,
       {
         name,
         login,

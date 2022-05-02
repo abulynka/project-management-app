@@ -11,9 +11,9 @@ import { SignInData } from '../../models/authorization.model';
   styleUrls: ['./sign-in-form.component.scss'],
 })
 export class SignInFormComponent implements OnInit {
-  public form: any = {
-    login: null,
-    password: null,
+  public form: SignInData = {
+    login: '',
+    password: '',
   };
 
   public isLoggedIn: boolean = false;
@@ -42,7 +42,6 @@ export class SignInFormComponent implements OnInit {
         this.tokenStorage.saveUser(response);
         this.isLoginFailed = false;
         this.isLoggedIn = true;
-        //this.reloadPage();
       },
       error: () => {
         this.isLoginFailed = true;
