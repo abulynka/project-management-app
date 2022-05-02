@@ -28,4 +28,10 @@ export class BoardsComponent {
       .navigate([this.selectedOptions[0]], { relativeTo: this.route })
       .then();
   }
+
+  public deleteBoard(event: MouseEvent, id: string): void {
+    event.stopPropagation();
+    // todo: add confirmation + delete board by id + remove console.log next line
+    console.log(id);
+  }
 }

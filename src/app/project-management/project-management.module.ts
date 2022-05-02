@@ -8,6 +8,7 @@ import { BoardsComponent } from './pages/boards/boards.component';
 import { NotFoundComponent } from './pages/not-found/not-found.component';
 import { MatListModule } from '@angular/material/list';
 import { BoardComponent } from './pages/board/board.component';
+import { MatIconModule } from '@angular/material/icon';
 
 @NgModule({
   declarations: [BoardsComponent, BoardComponent, NotFoundComponent],
@@ -16,6 +17,7 @@ import { BoardComponent } from './pages/board/board.component';
     CommonModule,
     ProjectManagementRoutingModule,
     MatListModule,
+    MatIconModule,
   ],
   exports: [BoardsComponent],
 })
