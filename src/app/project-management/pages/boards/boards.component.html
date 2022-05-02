@@ -1,1 +1,9 @@
-<p>boards works!</p>
+<mat-selection-list
+  [multiple]="false"
+  [(ngModel)]="selectedOptions"
+  (ngModelChange)="openBoard()"
+>
+  <mat-list-option *ngFor="let board of boards" [value]="board.id">
+    {{ board.title }}
+  </mat-list-option>
+</mat-selection-list>
