@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/comma-dangle */
 import { Component } from '@angular/core';
 
 @Component({

@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/comma-dangle */
 import { Component } from '@angular/core';
 import { AuthService } from '../../services/auth.service';
 import { SignUpData, SignUpResponse } from '../../models/authorization.model';
@@ -24,7 +23,7 @@ export class SignUpFormComponent {
 
   public constructor(
     public authService: AuthService,
-    public tokenStorage: TokenStorageService
+    public tokenStorage: TokenStorageService,
   ) {}
 
   public onSubmit(): void {

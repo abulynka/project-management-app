@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/comma-dangle */
 import { HttpEvent } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import {
@@ -15,7 +14,7 @@ export class AuthInterceptor implements HttpInterceptor {
 
   public intercept(
     req: HttpRequest<Record<string, string>>,
-    next: HttpHandler
+    next: HttpHandler,
   ): Observable<HttpEvent<Record<string, string>>> {
     let authReq: HttpRequest<Record<string, string>> = req;
     const token: string | null = this.token.getToken();

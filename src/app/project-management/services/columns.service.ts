@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/comma-dangle */
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
@@ -13,46 +12,46 @@ export class ColumnsService {
 
   public getAllColumns(boardId: string): Observable<ColumnResponse> {
     return this.http.get<ColumnResponse>(
-      `${apiRoot}/boards/${boardId}/columns`
+      `${apiRoot}/boards/${boardId}/columns`,
     );
   }
 
   public createColumn(
     boardId: string,
-    columnInfo: NewColumn
+    columnInfo: NewColumn,
   ): Observable<ColumnResponse> {
     return this.http.post<ColumnResponse>(
       `${apiRoot}/boards/${boardId}/columns`,
-      columnInfo
+      columnInfo,
     );
   }
 
   public getColumnById(
     boardId: string,
-    columnId: string
+    columnId: string,
   ): Observable<ColumnResponse> {
     return this.http.get<ColumnResponse>(
-      `${apiRoot}/boards/${boardId}/columns/${columnId}`
+      `${apiRoot}/boards/${boardId}/columns/${columnId}`,
     );
   }
 
   public deleteColumn(
     boardId: string,
-    columnId: string
+    columnId: string,
   ): Observable<ColumnResponse> {
     return this.http.delete<ColumnResponse>(
-      `${apiRoot}/boards/${boardId}/columns/${columnId}`
+      `${apiRoot}/boards/${boardId}/columns/${columnId}`,
     );
   }
 
   public updateColumn(
     boardId: string,
     columnId: string,
-    columnInfo: NewColumn
+    columnInfo: NewColumn,
   ): Observable<ColumnResponse> {
     return this.http.put<ColumnResponse>(
       `${apiRoot}/boards/${boardId}/columns/${columnId}`,
-      columnInfo
+      columnInfo,
     );
   }
 }

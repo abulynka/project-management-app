@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/comma-dangle */
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../../services/auth.service';
 import { TokenStorageService } from 'src/app/core/services/token-storage.service';
@@ -25,7 +24,7 @@ export class SignInFormComponent implements OnInit {
   public constructor(
     public authService: AuthService,
     public userService: UserService,
-    private tokenStorage: TokenStorageService
+    private tokenStorage: TokenStorageService,
   ) {}
 
   public ngOnInit(): void {
