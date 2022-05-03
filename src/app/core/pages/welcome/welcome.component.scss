@@ -1,0 +1,7 @@
+.welcome {
+  background-image: url("/assets/img/welcome/project-management.jpg");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  height: calc(100vh - var(--header-height) - var(--footer-height));
+}

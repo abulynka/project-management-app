@@ -5,7 +5,11 @@ import { NotFoundComponent } from './core/pages/not-found/not-found.component';
 const routes: Routes = [
   {
     path: '',
-    redirectTo: 'boards',
+    loadChildren: async () =>
+      // eslint-disable-next-line @typescript-eslint/typedef
+      import('./core/core.module').then((m) => {
+        return m.CoreModule;
+      }),
     pathMatch: 'full',
   },
   {
@@ -15,6 +19,7 @@ const routes: Routes = [
       import('./project-management/project-management.module').then((m) => {
         return m.ProjectManagementModule;
       }),
+    pathMatch: 'full',
   },
   {
     path: 'login',
@@ -23,6 +28,7 @@ const routes: Routes = [
       import('./auth/auth.module').then((m) => {
         return m.AuthModule;
       }),
+    pathMatch: 'full',
   },
   {
     path: '**',

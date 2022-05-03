@@ -9,9 +9,16 @@ import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { TranslateModule } from '@ngx-translate/core';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
+import { WelcomeComponent } from './pages/welcome/welcome.component';
+import { CoreRoutingModule } from './core-routing.module';
 
 @NgModule({
-  declarations: [HeaderComponent, FooterComponent, NotFoundComponent],
+  declarations: [
+    HeaderComponent,
+    FooterComponent,
+    NotFoundComponent,
+    WelcomeComponent,
+  ],
   imports: [
     CommonModule,
     MatToolbarModule,
@@ -19,7 +26,13 @@ import { MatButtonModule } from '@angular/material/button';
     TranslateModule,
     MatIconModule,
     MatButtonModule,
+    CoreRoutingModule,
   ],
-  exports: [HeaderComponent, FooterComponent, NotFoundComponent],
+  exports: [
+    HeaderComponent,
+    FooterComponent,
+    NotFoundComponent,
+    WelcomeComponent,
+  ],
 })
 export class CoreModule {}
