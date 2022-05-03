@@ -14,10 +14,10 @@ export class AuthInterceptor implements HttpInterceptor {
   public constructor(private token: TokenStorageService) {}
 
   public intercept(
-    req: HttpRequest<any>,
+    req: HttpRequest<Record<string, string>>,
     next: HttpHandler
-  ): Observable<HttpEvent<any>> {
-    let authReq: HttpRequest<any> = req;
+  ): Observable<HttpEvent<Record<string, string>>> {
+    let authReq: HttpRequest<Record<string, string>> = req;
     const token: string | null = this.token.getToken();
     if (token != null) {
       authReq = req.clone({

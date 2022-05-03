@@ -3,7 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../../services/auth.service';
 import { TokenStorageService } from 'src/app/core/services/token-storage.service';
 import { UserService } from 'src/app/project-management/services/user.service';
-import { SignInData } from '../../models/authorization.model';
+import { SignInData, SignInResponse } from '../../models/authorization.model';
 
 @Component({
   selector: 'app-sign-in-form',
@@ -37,9 +37,8 @@ export class SignInFormComponent implements OnInit {
   public onSubmit(): void {
     const { login, password }: SignInData = this.form;
     this.authService.signIn(login, password).subscribe({
-      next: (response: any) => {
-        this.tokenStorage.saveToken(response.token);
-        this.tokenStorage.saveUser(response);
+      next: (response: SignInResponse) => {
+        this.tokenStorage.saveToken(response);
         this.isLoginFailed = false;
         this.isLoggedIn = true;
       },

@@ -1,7 +1,8 @@
 /* eslint-disable @typescript-eslint/comma-dangle */
 import { Component } from '@angular/core';
 import { AuthService } from '../../services/auth.service';
-import { SignUpData } from '../../models/authorization.model';
+import { SignUpData, SignUpResponse } from '../../models/authorization.model';
+import { TokenStorageService } from 'src/app/core/services/token-storage.service';
 
 @Component({
   selector: 'app-sign-up-form',
@@ -21,12 +22,16 @@ export class SignUpFormComponent {
 
   public errorMessage: string = '';
 
-  public constructor(public authService: AuthService) {}
+  public constructor(
+    public authService: AuthService,
+    public tokenStorage: TokenStorageService
+  ) {}
 
   public onSubmit(): void {
     const { name, login, password }: SignUpData = this.form;
     this.authService.signUp(name, login, password).subscribe({
-      next: () => {
+      next: (response: SignUpResponse) => {
+        this.tokenStorage.saveUser(response);
         this.isSuccessful = true;
         this.isSignUpFailed = false;
       },

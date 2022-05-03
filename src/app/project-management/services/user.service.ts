@@ -1,13 +1,12 @@
 /* eslint-disable @typescript-eslint/comma-dangle */
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { SignUpData } from 'src/app/auth/models/authorization.model';
+import {
+  SignUpData,
+  SignUpResponse,
+} from 'src/app/auth/models/authorization.model';
 import { apiRoot } from 'src/environments/environment';
-
-const httpOptions: any = {
-  headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
-};
 
 @Injectable({
   providedIn: 'root',
@@ -15,19 +14,19 @@ const httpOptions: any = {
 export class UserService {
   public constructor(public http: HttpClient) {}
 
-  public getUsers(): Observable<any> {
-    return this.http.get(`${apiRoot}/users`, httpOptions);
+  public getUsers(): Observable<SignUpResponse[]> {
+    return this.http.get<SignUpResponse[]>(`${apiRoot}/users`);
   }
 
-  public getUserById(id: string): Observable<any> {
-    return this.http.get(`${apiRoot}/users/${id}`, httpOptions);
+  public getUserById(id: string): Observable<Response> {
+    return this.http.get<Response>(`${apiRoot}/users/${id}`);
   }
 
-  public updateUser(id: string, _userData: SignUpData): Observable<any> {
-    return this.http.put(`${apiRoot}/users/${id}`, _userData, httpOptions);
+  public updateUser(id: string, _userData: SignUpData): Observable<Response> {
+    return this.http.put<Response>(`${apiRoot}/users/${id}`, _userData);
   }
 
-  public deleteUser(id: string): Observable<any> {
-    return this.http.delete(`${apiRoot}/users/${id}`);
+  public deleteUser(id: string): Observable<Response> {
+    return this.http.delete<Response>(`${apiRoot}/users/${id}`);
   }
 }

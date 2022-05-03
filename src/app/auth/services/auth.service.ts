@@ -1,12 +1,9 @@
 /* eslint-disable @typescript-eslint/comma-dangle */
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { apiRoot } from 'src/environments/environment';
-
-const httpOptions: any = {
-  headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
-};
+import { SignInResponse, SignUpResponse } from '../models/authorization.model';
 
 @Injectable({
   providedIn: 'root',
@@ -14,30 +11,22 @@ const httpOptions: any = {
 export class AuthService {
   public constructor(public http: HttpClient) {}
 
-  public signIn(login: string, password: string): Observable<ArrayBuffer> {
-    return this.http.post(
-      `${apiRoot}/signin`,
-      {
-        login,
-        password,
-      },
-      httpOptions
-    );
+  public signIn(login: string, password: string): Observable<SignInResponse> {
+    return this.http.post<SignInResponse>(`${apiRoot}/signin`, {
+      login,
+      password,
+    });
   }
 
   public signUp(
     name: string,
     login: string,
     password: string
-  ): Observable<any> {
-    return this.http.post(
-      `${apiRoot}/signup`,
-      {
-        name,
-        login,
-        password,
-      },
-      httpOptions
-    );
+  ): Observable<SignUpResponse> {
+    return this.http.post<SignUpResponse>(`${apiRoot}/signup`, {
+      name,
+      login,
+      password,
+    });
   }
 }
