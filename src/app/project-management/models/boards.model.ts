@@ -45,3 +45,35 @@ export interface ColumnResponse {
   title: string;
   order: number;
 }
+
+export interface TaskResponse {
+  id: string;
+  title: string;
+  order: number;
+}
+
+export interface NewTask {
+  title: string;
+  order: number;
+  description: string;
+  userId: string;
+}
+
+export interface UpdateTask {
+  title: string;
+  order: number;
+  description: string;
+  userId: string;
+  columnId: string;
+  boardId: string;
+}
+
+export interface TaskByIdResponse {
+  id: string;
+  title: string;
+  order: number;
+  description: string;
+  userId: string;
+  columnId: string;
+  boardId: string;
+}
