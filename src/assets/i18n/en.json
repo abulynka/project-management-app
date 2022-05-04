@@ -6,5 +6,16 @@
     "create-new-board": "create new board",
     "edit-profile": "edit profile",
     "logout": "logout"
+  },
+  "welcome": {
+    "title": "project management",
+    "desc": "organize your time properly",
+    "features-desc": "with our application you will have more time for",
+    "features": [
+      "rest",
+      "favorite serial",
+      "family",
+      "just eat ice cream"
+    ]
   }
 }
