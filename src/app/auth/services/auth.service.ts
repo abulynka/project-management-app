@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/comma-dangle */
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
@@ -21,7 +20,7 @@ export class AuthService {
   public signUp(
     name: string,
     login: string,
-    password: string
+    password: string,
   ): Observable<SignUpResponse> {
     return this.http.post<SignUpResponse>(`${apiRoot}/signup`, {
       name,

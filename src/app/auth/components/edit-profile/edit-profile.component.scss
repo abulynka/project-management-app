@@ -1,0 +1,24 @@
+$login-bg-color: #F2F2F2;
+
+
+.edit-profile {
+  width: 350px;
+  height: 350px;
+  padding: 20px 20px;
+  background-color: $login-bg-color;
+  margin: 10px;
+  &__form {
+    display: flex;
+    flex-direction: column;
+    & > * {
+      margin-top: 8px;
+    }
+  }
+  &__title {
+    font-size: 18px;
+    font-weight: bold;
+  }
+  &__error {
+    color: red;
+  }
+}
