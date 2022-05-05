@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { MatSlideToggleChange } from '@angular/material/slide-toggle';
-import { AuthService } from 'src/app/auth/services/auth.service';
 import { Lang, LangService } from '../../services/lang.service';
 import { LangTitleItem, langTitleMap } from './utils/languageTitleMap';
 
@@ -14,14 +13,7 @@ export class HeaderComponent implements OnInit {
 
   public isShowMenu: boolean = false;
 
-  public constructor(
-    private langService: LangService,
-    private authService: AuthService,
-  ) {}
-
-  public openEditProfile(): void {
-    this.authService.openEditProfile();
-  }
+  public constructor(private langService: LangService) {}
 
   public changeLanguage = (event: MatSlideToggleChange): void => {
     if (event.checked) {

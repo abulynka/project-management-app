@@ -7,5 +7,7 @@ import { AuthService } from '../../services/auth.service';
   styleUrls: ['./login.component.scss'],
 })
 export class LoginComponent {
+  public isEditProfileOpen: boolean = this.authService.isEditProfileOpen;
+
   public constructor(public authService: AuthService) {}
 }

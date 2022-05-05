@@ -33,9 +33,7 @@ export class EditProfileComponent implements OnInit {
   public onSubmit(value: SignUpData): void {
     if (this.user.status === 'VALID') {
       this.userService.updateUser(this.userId as string, value).subscribe({
-        next: () => {
-          this.authService.hideEditProfile();
-        },
+        next: () => {},
       });
     } else {
       this.errorMessage = true;

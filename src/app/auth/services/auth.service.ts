@@ -30,12 +30,4 @@ export class AuthService {
       password,
     });
   }
-
-  public openEditProfile(): void {
-    this.isEditProfileOpen = true;
-  }
-
-  public hideEditProfile(): void {
-    this.isEditProfileOpen = false;
-  }
 }
