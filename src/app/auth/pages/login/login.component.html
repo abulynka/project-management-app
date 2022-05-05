@@ -1,2 +1,2 @@
 <p>login works!</p>
-<app-edit-profile></app-edit-profile>
+<app-edit-profile *ngIf="this.authService.isEditProfileOpen"></app-edit-profile>

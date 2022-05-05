@@ -8,6 +8,8 @@ import { SignInResponse, SignUpResponse } from '../models/authorization.model';
   providedIn: 'root',
 })
 export class AuthService {
+  public isEditProfileOpen: boolean = false;
+
   public constructor(public http: HttpClient) {}
 
   public signIn(login: string, password: string): Observable<SignInResponse> {
@@ -27,5 +29,13 @@ export class AuthService {
       login,
       password,
     });
+  }
+
+  public openEditProfile(): void {
+    this.isEditProfileOpen = true;
+  }
+
+  public hideEditProfile(): void {
+    this.isEditProfileOpen = false;
   }
 }

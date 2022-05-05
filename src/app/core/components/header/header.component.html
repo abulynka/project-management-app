@@ -13,7 +13,7 @@
             {{ 'header.create-new-board' | translate | titlecase }}
           </a>
         </li>
-        <li>
+        <li (click)="openEditProfile()">
           <a class="header__button" mat-flat-button>
             {{ 'header.edit-profile' | translate | titlecase }}
           </a>
@@ -46,7 +46,11 @@
       >
     </mat-toolbar-row>
     <mat-toolbar-row class="header__menu header__menu_large" *ngIf="isShowMenu">
-      <button mat-button class="header__button_large">
+      <button
+        mat-button
+        class="header__button_large"
+        (click)="openEditProfile()"
+      >
         {{ 'header.edit-profile' | translate | titlecase }}
       </button>
     </mat-toolbar-row>
