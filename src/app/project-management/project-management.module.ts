@@ -9,10 +9,18 @@ import { BoardComponent } from './pages/board/board.component';
 import { NotFoundComponent } from './pages/not-found/not-found.component';
 import { MatListModule } from '@angular/material/list';
 import { MatIconModule } from '@angular/material/icon';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { TranslateModule } from '@ngx-translate/core';
 
+import { FileUploadComponent } from '../core/components/file-upload/file-upload.component';
+
 @NgModule({
-  declarations: [BoardsComponent, BoardComponent, NotFoundComponent],
+  declarations: [
+    BoardsComponent,
+    BoardComponent,
+    NotFoundComponent,
+    FileUploadComponent,
+  ],
   imports: [
     FormsModule,
     CommonModule,
@@ -20,6 +28,7 @@ import { TranslateModule } from '@ngx-translate/core';
     TranslateModule,
     MatListModule,
     MatIconModule,
+    MatProgressBarModule,
   ],
   exports: [BoardsComponent],
 })

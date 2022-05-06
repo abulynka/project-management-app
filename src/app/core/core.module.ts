@@ -9,6 +9,7 @@ import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { TranslateModule } from '@ngx-translate/core';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
 
 @NgModule({
   declarations: [HeaderComponent, FooterComponent, NotFoundComponent],
@@ -19,6 +20,7 @@ import { MatButtonModule } from '@angular/material/button';
     TranslateModule,
     MatIconModule,
     MatButtonModule,
+    MatProgressBarModule,
   ],
   exports: [HeaderComponent, FooterComponent, NotFoundComponent],
 })
