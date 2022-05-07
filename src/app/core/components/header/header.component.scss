@@ -3,6 +3,10 @@
   position: sticky;
   top: 0;
 
+  &__title {
+    cursor: pointer;
+  }
+
   &__menu {
     &_large {
       width: 100%;
