@@ -22,13 +22,12 @@ const routes: Routes = [
     pathMatch: 'full',
   },
   {
-    path: 'login',
+    path: 'auth',
     loadChildren: async () =>
       // eslint-disable-next-line @typescript-eslint/typedef
       import('./auth/auth.module').then((m) => {
         return m.AuthModule;
       }),
-    pathMatch: 'full',
   },
   {
     path: '**',
