@@ -32,7 +32,8 @@ export class TokenStorageService {
     const user: string | null = sessionStorage.getItem(USER_KEY);
     if (user) {
       return JSON.parse(user);
+    } else {
+      return null;
     }
-    return null;
   }
 }
