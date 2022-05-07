@@ -1,15 +1,12 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { NotFoundComponent } from './core/pages/not-found/not-found.component';
+import { WelcomeComponent } from './core/pages/welcome/welcome.component';
 
 const routes: Routes = [
   {
     path: '',
-    loadChildren: async () =>
-      // eslint-disable-next-line @typescript-eslint/typedef
-      import('./core/core.module').then((m) => {
-        return m.CoreModule;
-      }),
+    component: WelcomeComponent,
     pathMatch: 'full',
   },
   {
