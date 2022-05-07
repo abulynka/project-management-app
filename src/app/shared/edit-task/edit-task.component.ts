@@ -6,7 +6,10 @@ import {
   AbstractControl,
 } from '@angular/forms';
 import { TokenStorageService } from 'src/app/core/services/token-storage.service';
-import { UpdateTask } from 'src/app/project-management/models/boards.model';
+import {
+  NewTask,
+  UpdateTask,
+} from 'src/app/project-management/models/boards.model';
 import { TasksService } from 'src/app/project-management/services/tasks.service';
 
 const MIN_LENGTH: number = 3;
@@ -19,7 +22,7 @@ const MIN_LENGTH: number = 3;
 export class EditTaskComponent implements OnInit {
   public errorMessage: boolean = false;
 
-  public formTitle: string = 'edit';
+  public formTitle?: string | null;
 
   public task!: FormGroup;
 
@@ -43,13 +46,19 @@ export class EditTaskComponent implements OnInit {
   }
 
   public ngOnInit(): void {
-    this.initEditTaskForm();
+    this.initEditTaskForm(null);
   }
 
   public onSubmit(): void {
-    const board: string = 'c45299bf-2fc8-46ff-8804-554a74b26435';
-    const column: string = 'a9feb3ee-0041-4689-8341-0409930ff715';
-    const taskId: string = 'fa6675ba-f976-46bf-a656-0abdf2c55772';
+    const board: string = '';
+    const column: string = '';
+    const taskId: string | null = null;
+    taskId
+      ? this.updateTask(board, column, taskId)
+      : this.createNewTask(board, column);
+  }
+
+  public updateTask(board: string, column: string, taskId: string): void {
     const body: UpdateTask = {
       title: this.title?.value,
       order: Number(this.order?.value),
@@ -60,16 +69,31 @@ export class EditTaskComponent implements OnInit {
     };
     if (this.task.status === 'VALID') {
       this.taskService.updateTask(board, column, taskId, body).subscribe({
-        next: (req: any) => {
-          console.log(req);
-        },
+        next: () => {},
       });
     } else {
       this.errorMessage = true;
     }
   }
 
-  public initEditTaskForm(): void {
+  public createNewTask(board: string, column: string): void {
+    const body: NewTask = {
+      title: this.title?.value,
+      order: Number(this.order?.value),
+      description: this.description?.value,
+      userId: this.userId as string,
+    };
+    if (this.task.status === 'VALID') {
+      this.taskService.createTask(board, column, body).subscribe({
+        next: () => {},
+      });
+    } else {
+      this.errorMessage = true;
+    }
+  }
+
+  public initEditTaskForm(taskId: string | null): void {
+    this.formTitle = taskId ? 'Edit' : 'Create';
     this.task = new FormGroup({
       title: new FormControl('', [
         Validators.required,
