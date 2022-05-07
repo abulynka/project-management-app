@@ -10,9 +10,15 @@ import { NotFoundComponent } from './pages/not-found/not-found.component';
 import { MatListModule } from '@angular/material/list';
 import { MatIconModule } from '@angular/material/icon';
 import { TranslateModule } from '@ngx-translate/core';
+import { TaskComponent } from './pages/task/task.component';
 
 @NgModule({
-  declarations: [BoardsComponent, BoardComponent, NotFoundComponent],
+  declarations: [
+    BoardsComponent,
+    BoardComponent,
+    NotFoundComponent,
+    TaskComponent,
+  ],
   imports: [
     FormsModule,
     CommonModule,
