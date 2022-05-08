@@ -14,6 +14,8 @@ import { TaskComponent } from './pages/task/task.component';
 import { EditTaskComponent } from './components/edit-task/edit-task.component';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { ReactiveFormsModule } from '@angular/forms';
+import { MatInputModule } from '@angular/material/input';
+import { MatButtonModule } from '@angular/material/button';
 
 @NgModule({
   declarations: [
@@ -32,6 +34,8 @@ import { ReactiveFormsModule } from '@angular/forms';
     MatIconModule,
     MatFormFieldModule,
     ReactiveFormsModule,
+    MatButtonModule,
+    MatInputModule,
   ],
   exports: [BoardsComponent],
 })

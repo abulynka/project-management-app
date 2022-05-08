@@ -92,7 +92,7 @@ export class EditTaskComponent implements OnInit {
     }
   }
 
-  public initEditTaskForm(taskId: string | null): void {
+  private initEditTaskForm(taskId: string | null): void {
     this.formTitle = taskId ? 'Edit' : 'Create';
     this.task = new FormGroup({
       title: new FormControl('', [
