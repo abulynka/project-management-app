@@ -10,9 +10,21 @@ import { NotFoundComponent } from './pages/not-found/not-found.component';
 import { MatListModule } from '@angular/material/list';
 import { MatIconModule } from '@angular/material/icon';
 import { TranslateModule } from '@ngx-translate/core';
+import { TaskComponent } from './pages/task/task.component';
+import { EditTaskComponent } from './components/edit-task/edit-task.component';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { ReactiveFormsModule } from '@angular/forms';
+import { MatInputModule } from '@angular/material/input';
+import { MatButtonModule } from '@angular/material/button';
 
 @NgModule({
-  declarations: [BoardsComponent, BoardComponent, NotFoundComponent],
+  declarations: [
+    BoardsComponent,
+    BoardComponent,
+    NotFoundComponent,
+    TaskComponent,
+    EditTaskComponent,
+  ],
   imports: [
     FormsModule,
     CommonModule,
@@ -20,6 +32,10 @@ import { TranslateModule } from '@ngx-translate/core';
     TranslateModule,
     MatListModule,
     MatIconModule,
+    MatFormFieldModule,
+    ReactiveFormsModule,
+    MatButtonModule,
+    MatInputModule,
   ],
   exports: [BoardsComponent],
 })

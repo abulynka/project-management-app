@@ -1,0 +1,36 @@
+$login-bg-color: #F2F2F2;
+
+
+.edit-task {
+  width: 350px;
+  height: 300px;
+  padding: 20px 20px;
+  background-color: $login-bg-color;
+  margin: 10px;
+  &__form {
+    display: flex;
+    flex-direction: column;
+    & > * {
+      margin-top: 8px;
+    }
+  }
+  &__title {
+    font-size: 18px;
+    font-weight: bold;
+  }
+  &__error {
+    color: red;
+  }
+}
+
+.alert div {
+  font-size: 10px;
+  background-color: #fed3d3;
+  color: #820000;
+  padding: 3px;
+  margin-bottom: 3px;
+}
+
+.form-group {
+  margin-bottom: 3px;
+}
