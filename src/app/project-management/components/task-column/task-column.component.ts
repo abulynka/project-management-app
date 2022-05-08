@@ -2,7 +2,7 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 import {
   CdkDragDrop,
   moveItemInArray,
-  transferArrayItem,
+  // transferArrayItem,
 } from '@angular/cdk/drag-drop';
 
 export interface Task {
@@ -33,12 +33,12 @@ export class TaskColumnComponent {
         event.currentIndex,
       );
     } else {
-      transferArrayItem(
-        event.previousContainer.data,
-        event.container.data,
-        event.previousIndex,
-        event.currentIndex,
-      );
+      // transferArrayItem(
+      //   event.previousContainer.data,
+      //   event.container.data,
+      //   event.previousIndex,
+      //   event.currentIndex,
+      // );
     }
   }
 
