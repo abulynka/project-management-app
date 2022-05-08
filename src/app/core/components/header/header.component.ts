@@ -15,10 +15,12 @@ export class HeaderComponent implements OnInit {
 
   public isShowMenu: boolean = false;
 
+  public authorized: boolean = false;
+
   public constructor(
     private langService: LangService,
-    public authService: AuthService,
-    public router: Router,
+    private authService: AuthService,
+    private router: Router,
   ) {}
 
   public changeLanguage = (event: MatSlideToggleChange): void => {
@@ -34,6 +36,10 @@ export class HeaderComponent implements OnInit {
   public ngOnInit(): void {
     const curLang: Lang = this.langService.getLang();
     this.setLanguageTitle(curLang);
+    this.authorized = this.authService.authorized();
+    this.authService.authorizeChangeStatus$.subscribe((authorized: boolean) => {
+      this.authorized = authorized;
+    });
   }
 
   public toggle(): void {

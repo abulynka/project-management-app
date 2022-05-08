@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { map, Observable } from 'rxjs';
+import { map, Observable, Subject } from 'rxjs';
 import { apiRoot } from 'src/environments/environment';
 import { SignInResponse, SignUpResponse } from '../models/authorization.model';
 import { TokenStorageService } from '../../core/services/token-storage.service';
@@ -9,6 +9,11 @@ import { TokenStorageService } from '../../core/services/token-storage.service';
   providedIn: 'root',
 })
 export class AuthService {
+  public authorizeChangeStatusSource: Subject<boolean> = new Subject<boolean>();
+
+  public authorizeChangeStatus$: Observable<boolean> =
+    this.authorizeChangeStatusSource.asObservable();
+
   public constructor(
     public http: HttpClient,
     public tokenStorage: TokenStorageService,
@@ -24,6 +29,7 @@ export class AuthService {
       .pipe(
         map((response: SignInResponse): void => {
           this.tokenStorage.saveToken(response);
+          this.authorizeChangeStatusSource.next(this.authorized());
         }),
       );
   }
@@ -42,5 +48,6 @@ export class AuthService {
 
   public logout(): void {
     this.tokenStorage.removeToken();
+    this.authorizeChangeStatusSource.next(this.authorized());
   }
 }

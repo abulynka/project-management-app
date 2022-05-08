@@ -15,7 +15,7 @@
       <ul class="header__list">
         <li>
           <a
-            *ngIf="this.authService.authorized()"
+            *ngIf="this.authorized"
             class="header__button"
             mat-flat-button
             (click)="boardsList()"
@@ -24,17 +24,13 @@
           </a>
         </li>
         <li>
-          <a
-            *ngIf="this.authService.authorized()"
-            class="header__button"
-            mat-flat-button
-          >
+          <a *ngIf="this.authorized" class="header__button" mat-flat-button>
             {{ 'header.create-new-board' | translate | titlecase }}
           </a>
         </li>
         <li>
           <a
-            *ngIf="this.authService.authorized()"
+            *ngIf="this.authorized"
             (click)="editProfile()"
             class="header__button"
             mat-flat-button
@@ -44,7 +40,7 @@
         </li>
         <li>
           <a
-            *ngIf="this.authService.authorized()"
+            *ngIf="this.authorized"
             (click)="logout()"
             class="header__button"
             mat-flat-button
@@ -52,7 +48,7 @@
             {{ 'header.logout' | translate | titlecase }}
           </a>
           <a
-            *ngIf="!this.authService.authorized()"
+            *ngIf="!this.authorized"
             (click)="loginSingIn()"
             class="header__button"
             mat-flat-button
@@ -72,7 +68,7 @@
 
     <mat-toolbar-row class="header__menu header__menu_large" *ngIf="isShowMenu">
       <button
-        *ngIf="this.authService.authorized()"
+        *ngIf="this.authorized"
         mat-button
         class="header__button_large"
         (click)="boardsList()"
@@ -81,11 +77,7 @@
       </button>
     </mat-toolbar-row>
     <mat-toolbar-row class="header__menu header__menu_large" *ngIf="isShowMenu">
-      <button
-        *ngIf="this.authService.authorized()"
-        mat-button
-        class="header__button_large"
-      >
+      <button *ngIf="this.authorized" mat-button class="header__button_large">
         {{ 'header.create-new-board' | translate | titlecase }}
       </button>
     </mat-toolbar-row>
@@ -98,7 +90,7 @@
     </mat-toolbar-row>
     <mat-toolbar-row class="header__menu header__menu_large" *ngIf="isShowMenu">
       <button
-        *ngIf="this.authService.authorized()"
+        *ngIf="this.authorized"
         (click)="editProfile()"
         mat-button
         class="header__button_large"
@@ -107,18 +99,10 @@
       </button>
     </mat-toolbar-row>
     <mat-toolbar-row class="header__menu header__menu_large" *ngIf="isShowMenu">
-      <button
-        *ngIf="!this.authService.authorized()"
-        mat-button
-        class="header__button_large"
-      >
+      <button *ngIf="!this.authorized" mat-button class="header__button_large">
         {{ 'header.login-sign-up' | translate | titlecase }}
       </button>
-      <button
-        *ngIf="this.authService.authorized()"
-        mat-button
-        class="header__button_large"
-      >
+      <button *ngIf="this.authorized" mat-button class="header__button_large">
         {{ 'header.logout' | translate | titlecase }}
       </button>
     </mat-toolbar-row>
