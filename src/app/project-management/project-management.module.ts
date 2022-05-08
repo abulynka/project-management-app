@@ -11,6 +11,9 @@ import { MatListModule } from '@angular/material/list';
 import { MatIconModule } from '@angular/material/icon';
 import { TranslateModule } from '@ngx-translate/core';
 import { TaskComponent } from './pages/task/task.component';
+import { EditTaskComponent } from './components/edit-task/edit-task.component';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -18,6 +21,7 @@ import { TaskComponent } from './pages/task/task.component';
     BoardComponent,
     NotFoundComponent,
     TaskComponent,
+    EditTaskComponent,
   ],
   imports: [
     FormsModule,
@@ -26,6 +30,8 @@ import { TaskComponent } from './pages/task/task.component';
     TranslateModule,
     MatListModule,
     MatIconModule,
+    MatFormFieldModule,
+    ReactiveFormsModule,
   ],
   exports: [BoardsComponent],
 })
