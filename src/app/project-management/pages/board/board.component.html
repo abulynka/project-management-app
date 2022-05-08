@@ -1,1 +1,25 @@
-<p>board works!</p>
+<div class="board">
+  <header class="board__header">
+    <h2 class="board__title">{{ title }}</h2>
+  </header>
+
+  <section
+    class="board__content drag-list"
+    cdkDropList
+    cdkDropListOrientation="horizontal"
+    [cdkDropListData]="columns"
+    (cdkDropListDropped)="drop($event)"
+  >
+    <app-task-column
+      *ngFor="let column of columns"
+      class="drag-el"
+      [title]="column.title"
+      [tasks]="column.tasks"
+      cdkDrag
+    ></app-task-column>
+
+    <button class="board__btn-add" mat-stroked-button (click)="onAddColumn()">
+      <mat-icon>add</mat-icon> <span>{{ 'board.btn-add' | translate }}</span>
+    </button>
+  </section>
+</div>

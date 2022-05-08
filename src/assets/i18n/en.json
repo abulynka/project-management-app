@@ -6,5 +6,11 @@
     "create-new-board": "create new board",
     "edit-profile": "edit profile",
     "logout": "logout"
+  },
+  "board": {
+    "column": {
+      "btn-add": "Add task"
+    },
+    "btn-add": "Add column"
   }
 }
