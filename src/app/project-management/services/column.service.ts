@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 import { Task } from '../components/task-column/task-column.component';
-import { ProjectManagementModule } from '../project-management.module';
 
 export interface TaskColumn {
   id: string;
@@ -11,7 +10,7 @@ export interface TaskColumn {
 }
 
 @Injectable({
-  providedIn: ProjectManagementModule,
+  providedIn: 'root',
 })
 export class ColumnService {
   private columnList: TaskColumn[] | [] = [];
