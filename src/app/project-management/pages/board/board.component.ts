@@ -1,7 +1,11 @@
 /* eslint-disable */
-
 import { Component, OnInit } from '@angular/core';
+
+import { ActivatedRoute, Router } from '@angular/router';
 import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
+
+import { BehaviorSubject } from 'rxjs';
+import { ColumnService, TaskColumn } from '../../services/column.service';
 
 const board = {
   id: '9a111e19-24ec-43e1-b8c4-13776842b8d5',
@@ -58,9 +62,6 @@ const board = {
     },
   ],
 };
-
-import { BehaviorSubject } from 'rxjs';
-import { ColumnService, TaskColumn } from '../../services/column.service';
 @Component({
   selector: 'app-board',
   templateUrl: './board.component.html',
@@ -75,10 +76,27 @@ export class BoardComponent implements OnInit {
 
   private columnList$: BehaviorSubject<[] | TaskColumn[]> | null = null;
 
-  public constructor(private columnService: ColumnService) {}
+  public constructor(
+    private columnService: ColumnService,
+    private route: ActivatedRoute,
+    private router: Router,
+  ) {}
 
   public ngOnInit(): void {
     // TODO: get boardData by boardID from route
+    // this.route.params.subscribe((params: Params) => {
+    //   const board: any | undefined = this.boardData.find((element: any) => {
+    //     return element.id === params['id'];
+    //   });
+    //   if (board) {
+    //     this.showBoard();
+    //   } else {
+    //     this.router
+    //       .navigate(['../not-found'], { relativeTo: this.route })
+    //       .then();
+    //   }
+    // });
+
     this.boardData = board;
     this.initColumnListStateObserver();
   }

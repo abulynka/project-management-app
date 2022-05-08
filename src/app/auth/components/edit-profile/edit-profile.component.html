@@ -1,0 +1,46 @@
+<div class="edit-profile">
+  <h4 class="edit-profile__title">Update</h4>
+  <form
+    class="edit-profile__form"
+    [formGroup]="user"
+    (ngSubmit)="onSubmit(user.value)"
+  >
+    <div *ngIf="user.invalid" class="edit-profile__error">
+      Something goes wrong
+    </div>
+    <mat-form-field class="form-group">
+      <mat-label for="login">Login</mat-label>
+      <input
+        formControlName="login"
+        id="login"
+        matInput
+        placeholder="Enter New Login"
+        type="text"
+        required
+      />
+    </mat-form-field>
+    <mat-form-field class="form-group">
+      <mat-label for="name">Name</mat-label>
+      <input
+        formControlName="name"
+        id="name"
+        matInput
+        placeholder="Enter New Name"
+        type="text"
+      />
+    </mat-form-field>
+    <mat-form-field class="form-group">
+      <mat-label for="password">Password</mat-label>
+      <input
+        formControlName="password"
+        id="password"
+        matInput
+        placeholder="Enter Password"
+        type="password"
+      />
+    </mat-form-field>
+    <div class="form-group">
+      <button type="submit" mat-button color="primary">Update</button>
+    </div>
+  </form>
+</div>

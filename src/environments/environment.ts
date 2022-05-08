@@ -20,6 +20,10 @@ export const environment: IEnvironment = {
   defaultLocale: 'en',
 };
 
+export const apiRoot: string = 'http://localhost:4200/api';
+export const TOKEN_KEY: string = 'auth-token';
+export const USER_KEY: string = 'auth-user';
+
 /*
  * For easier debugging in development mode, you can import the following file
  * to ignore zone related error stack frames such as `zone.run`, `zoneDelegate.invokeTask`.

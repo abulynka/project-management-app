@@ -1,0 +1,9 @@
+.boards {
+  height: 100%;
+  overflow: auto;
+
+  &__item {
+    display: flex;
+    align-items: center;
+  }
+}
