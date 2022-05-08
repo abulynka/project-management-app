@@ -19,6 +19,10 @@ export class TokenStorageService {
     sessionStorage.setItem(TOKEN_KEY, response.token);
   }
 
+  public removeToken(): void {
+    sessionStorage.removeItem(TOKEN_KEY);
+  }
+
   public getToken(): string | null {
     return sessionStorage.getItem(TOKEN_KEY);
   }

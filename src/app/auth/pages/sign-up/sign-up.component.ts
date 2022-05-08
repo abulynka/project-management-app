@@ -1,14 +1,14 @@
 import { Component } from '@angular/core';
-import { AuthService } from '../../services/auth.service';
 import { SignUpData, SignUpResponse } from '../../models/authorization.model';
-import { TokenStorageService } from 'src/app/core/services/token-storage.service';
+import { AuthService } from '../../services/auth.service';
+import { TokenStorageService } from '../../../core/services/token-storage.service';
 
 @Component({
-  selector: 'app-sign-up-form',
-  templateUrl: './sign-up-form.component.html',
-  styleUrls: ['./sign-up-form.component.scss'],
+  selector: 'app-sign-up',
+  templateUrl: './sign-up.component.html',
+  styleUrls: ['./sign-up.component.scss'],
 })
-export class SignUpFormComponent {
+export class SignUpComponent {
   public form: SignUpData = {
     name: '',
     login: '',
