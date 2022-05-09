@@ -1,11 +1,7 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-
-// todo: change it to the board service data source
-interface Board {
-  id: string;
-  title: string;
-}
+import { BoardsService } from '../../services/boards.service';
+import { BoardResponse, BoardShort } from '../../models/boards.model';
 
 @Component({
   selector: 'app-boards',
@@ -15,13 +11,17 @@ interface Board {
 export class BoardsComponent {
   public selectedOptions: string[] = [];
 
-  // todo: change it to the board service data source
-  public boards: Board[] = [
-    { id: '1', title: 'Board 1' },
-    { id: '2', title: 'Board 2' },
-  ];
+  public boards: BoardShort[] = [];
 
-  public constructor(private route: ActivatedRoute, private router: Router) {}
+  public constructor(
+    private route: ActivatedRoute,
+    private router: Router,
+    private boardsService: BoardsService,
+  ) {
+    this.boardsService.getBoards().subscribe((response: BoardResponse[]) => {
+      this.boards = response;
+    });
+  }
 
   public openBoard(): void {
     this.router
