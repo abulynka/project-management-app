@@ -7,10 +7,13 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { FormsModule } from '@angular/forms';
 import { AuthRoutingModule } from './auth-routing.module';
 import { LoginComponent } from './pages/login/login.component';
-import { EditProfileComponent } from './components/edit-profile/edit-profile.component';
+import { SignUpComponent } from './pages/sign-up/sign-up.component';
+import { EditProfileComponent } from './pages/edit-profile/edit-profile.component';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { TranslateModule } from '@ngx-translate/core';
 
 @NgModule({
-  declarations: [LoginComponent, EditProfileComponent],
+  declarations: [LoginComponent, SignUpComponent, EditProfileComponent],
   imports: [
     CommonModule,
     ReactiveFormsModule,
@@ -19,6 +22,8 @@ import { EditProfileComponent } from './components/edit-profile/edit-profile.com
     MatFormFieldModule,
     MatInputModule,
     MatButtonModule,
+    MatSnackBarModule,
+    TranslateModule,
   ],
   exports: [LoginComponent],
 })

@@ -5,22 +5,55 @@
         isShowMenu ? 'close' : 'menu'
       }}</mat-icon>
 
-      <span>{{ 'app.title' | translate | titlecase }}</span>
+      <span
+        class="header__title"
+        title="{{ 'app.home' | translate | titlecase }}"
+        (click)="home()"
+        >{{ 'app.title' | translate | titlecase }}</span
+      >
 
       <ul class="header__list">
         <li>
-          <a class="header__button" mat-flat-button>
+          <a
+            *ngIf="authorized"
+            class="header__button"
+            mat-flat-button
+            (click)="boardsList()"
+          >
+            {{ 'header.boards-list' | translate | titlecase }}
+          </a>
+        </li>
+        <li>
+          <a *ngIf="authorized" class="header__button" mat-flat-button>
             {{ 'header.create-new-board' | translate | titlecase }}
           </a>
         </li>
         <li>
-          <a class="header__button" mat-flat-button>
+          <a
+            *ngIf="authorized"
+            (click)="editProfile()"
+            class="header__button"
+            mat-flat-button
+          >
             {{ 'header.edit-profile' | translate | titlecase }}
           </a>
         </li>
         <li>
-          <a class="header__button" mat-flat-button>
+          <a
+            *ngIf="authorized"
+            (click)="logout()"
+            class="header__button"
+            mat-flat-button
+          >
             {{ 'header.logout' | translate | titlecase }}
+          </a>
+          <a
+            *ngIf="!authorized"
+            (click)="loginSingIn()"
+            class="header__button"
+            mat-flat-button
+          >
+            {{ 'header.login-sign-up' | translate | titlecase }}
           </a>
         </li>
         <li>
@@ -34,7 +67,17 @@
     </mat-toolbar-row>
 
     <mat-toolbar-row class="header__menu header__menu_large" *ngIf="isShowMenu">
-      <button mat-button class="header__button_large">
+      <button
+        *ngIf="authorized"
+        mat-button
+        class="header__button_large"
+        (click)="boardsList()"
+      >
+        {{ 'header.boards-list' | translate | titlecase }}
+      </button>
+    </mat-toolbar-row>
+    <mat-toolbar-row class="header__menu header__menu_large" *ngIf="isShowMenu">
+      <button *ngIf="authorized" mat-button class="header__button_large">
         {{ 'header.create-new-board' | translate | titlecase }}
       </button>
     </mat-toolbar-row>
@@ -46,12 +89,20 @@
       >
     </mat-toolbar-row>
     <mat-toolbar-row class="header__menu header__menu_large" *ngIf="isShowMenu">
-      <button mat-button class="header__button_large">
+      <button
+        *ngIf="authorized"
+        (click)="editProfile()"
+        mat-button
+        class="header__button_large"
+      >
         {{ 'header.edit-profile' | translate | titlecase }}
       </button>
     </mat-toolbar-row>
     <mat-toolbar-row class="header__menu header__menu_large" *ngIf="isShowMenu">
-      <button mat-button class="header__button_large">
+      <button *ngIf="!authorized" mat-button class="header__button_large">
+        {{ 'header.login-sign-up' | translate | titlecase }}
+      </button>
+      <button *ngIf="authorized" mat-button class="header__button_large">
         {{ 'header.logout' | translate | titlecase }}
       </button>
     </mat-toolbar-row>

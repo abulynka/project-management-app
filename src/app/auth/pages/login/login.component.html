@@ -1,1 +1,48 @@
-<p>login works!</p>
+<section class="signin">
+  <div class="signin__container">
+    <h4 class="signin__title">{{ 'auth.login' | translate | titlecase }}</h4>
+    <form [formGroup]="loginForm" class="signin__form">
+      <mat-form-field appearance="fill">
+        <mat-label>{{ 'auth.login' | translate | titlecase }}</mat-label>
+        <input
+          matInput
+          formControlName="login"
+          placeholder="{{ 'auth.enter-login' | translate | titlecase }}"
+        />
+        <small
+          class="signin__error"
+          *ngIf="loginForm.get('login')?.hasError('required')"
+        >
+          {{ 'auth.login-is-required' | translate | titlecase }}
+        </small>
+        <small
+          class="login__input-error"
+          *ngIf="loginForm.get('login')?.hasError('email')"
+        >
+          {{ 'auth.login-email-invalid' | translate | titlecase }}
+        </small>
+      </mat-form-field>
+      <mat-form-field appearance="fill">
+        <mat-label>{{ 'auth.password' | translate | titlecase }}</mat-label>
+        <input
+          matInput
+          type="password"
+          formControlName="password"
+          placeholder="{{ 'auth.enter-password' | translate | titlecase }}"
+        />
+        <small
+          class="login__input-error"
+          *ngIf="loginForm.get('password')?.hasError('required')"
+        >
+          {{ 'auth.enter-password' | translate | titlecase }}
+        </small>
+      </mat-form-field>
+      <button type="submit" (click)="onSubmit()" mat-button>
+        {{ 'auth.login' | translate | titlecase }}
+      </button>
+    </form>
+    <button mat-button (click)="onSignUp()">
+      {{ 'auth.sign-up' | translate | titlecase }}
+    </button>
+  </div>
+</section>

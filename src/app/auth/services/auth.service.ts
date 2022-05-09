@@ -1,22 +1,37 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { map, Observable, Subject } from 'rxjs';
 import { apiRoot } from 'src/environments/environment';
 import { SignInResponse, SignUpResponse } from '../models/authorization.model';
+import { TokenStorageService } from '../../core/services/token-storage.service';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthService {
-  public isEditProfileOpen: boolean = false;
+  public authorizeChangeStatusSource: Subject<boolean> = new Subject<boolean>();
 
-  public constructor(public http: HttpClient) {}
+  public authorizeChangeStatus$: Observable<boolean> =
+    this.authorizeChangeStatusSource.asObservable();
 
-  public signIn(login: string, password: string): Observable<SignInResponse> {
-    return this.http.post<SignInResponse>(`${apiRoot}/signin`, {
-      login,
-      password,
-    });
+  public constructor(
+    public http: HttpClient,
+    public tokenStorage: TokenStorageService,
+  ) {}
+
+  public authorized(): boolean {
+    return this.tokenStorage.getToken() !== null;
+  }
+
+  public signIn(login: string, password: string): Observable<void> {
+    return this.http
+      .post<SignInResponse>(`${apiRoot}/signin`, { login, password })
+      .pipe(
+        map((response: SignInResponse): void => {
+          this.tokenStorage.saveToken(response);
+          this.authorizeChangeStatusSource.next(this.authorized());
+        }),
+      );
   }
 
   public signUp(
@@ -29,5 +44,10 @@ export class AuthService {
       login,
       password,
     });
+  }
+
+  public logout(): void {
+    this.tokenStorage.removeToken();
+    this.authorizeChangeStatusSource.next(this.authorized());
   }
 }

@@ -1,11 +1,16 @@
 {
   "app": {
-    "title": "project management"
+    "title": "project management",
+    "home": "home"
   },
   "header": {
+    "boards-list":  "boards list",
     "create-new-board": "create new board",
     "edit-profile": "edit profile",
-    "logout": "logout"
+    "login-sign-up": "login / sign up",
+    "login": "login",
+    "logout": "logout",
+    "sign-up": "sign up"
   },
   "board": {
     "column": {
@@ -20,5 +25,29 @@
   "not-found-board": {
     "first-part": "We are searching for your board...",
     "second-part": "...But we can not find it."
+  },
+  "welcome": {
+    "title": "project management",
+    "desc": "organize your time properly",
+    "features-desc": "with our application you will have more time for",
+    "features": [
+      "rest",
+      "favorite serial",
+      "family",
+      "just eat ice cream"
+    ]
+  },
+  "dialog": {
+    "close": "close"
+  },
+  "auth": {
+    "user-not-found": "user not found",
+    "login": "login",
+    "enter-login": "please, enter your login",
+    "login-is-required": "login is required",
+    "login-email-invalid": "login email is invalid",
+    "password": "password",
+    "enter-password": "please, enter your password",
+    "sign-up": "sign up"
   }
 }
