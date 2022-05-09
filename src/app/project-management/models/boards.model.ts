@@ -8,6 +8,8 @@ export interface Board {
   columns: Column[];
 }
 
+export interface BoardShort extends BoardResponse {}
+
 export interface Column {
   id: string;
   title: string;
