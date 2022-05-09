@@ -17,6 +17,7 @@ import { NotFoundComponent } from './pages/not-found/not-found.component';
 import { TaskComponent } from './pages/task/task.component';
 import { TaskColumnComponent } from './components/task-column/task-column.component';
 import { EditTaskComponent } from './components/edit-task/edit-task.component';
+import { EditBoardComponent } from './components/edit-board/edit-board.component';
 
 @NgModule({
   declarations: [
@@ -26,6 +27,7 @@ import { EditTaskComponent } from './components/edit-task/edit-task.component';
     TaskComponent,
     EditTaskComponent,
     TaskColumnComponent,
+    EditBoardComponent,
   ],
   imports: [
     FormsModule,
