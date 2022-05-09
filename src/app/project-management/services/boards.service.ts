@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { BoardResponse, NewBoard } from '../models/boards.model';
+import { Board, BoardResponse, NewBoard } from '../models/boards.model';
 import { apiRoot } from 'src/environments/environment';
 
 @Injectable({
@@ -18,8 +18,8 @@ export class BoardsService {
     return this.http.post<BoardResponse>(`${apiRoot}/boards`, { title });
   }
 
-  public getBoardById(id: string): Observable<BoardResponse> {
-    return this.http.get<BoardResponse>(`${apiRoot}/boards/${id}`);
+  public getBoardById(id: string): Observable<Board> {
+    return this.http.get<Board>(`${apiRoot}/boards/${id}`);
   }
 
   public deleteBoard(id: string): Observable<BoardResponse> {
