@@ -16,7 +16,9 @@
     "column": {
       "btn-add": "Add task"
     },
-    "btn-add": "Add column"
+    "btn-add": "Add column",
+    "delete-title": "board",
+    "delete-message": "do you realy want to delete"
   },
   "not-found": {
     "first-part": "We are searching for your page...",
