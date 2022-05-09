@@ -12,17 +12,16 @@ const routes: Routes = [
   {
     path: 'boards',
     loadChildren: async () =>
-      // eslint-disable-next-line @typescript-eslint/typedef
-      import('./project-management/project-management.module').then((m) => {
-        return m.ProjectManagementModule;
-      }),
-    pathMatch: 'full',
+      import('./project-management/project-management.module').then(
+        (m: { ProjectManagementModule: any }) => {
+          return m.ProjectManagementModule;
+        },
+      ),
   },
   {
     path: 'auth',
     loadChildren: async () =>
-      // eslint-disable-next-line @typescript-eslint/typedef
-      import('./auth/auth.module').then((m) => {
+      import('./auth/auth.module').then((m: { AuthModule: any }) => {
         return m.AuthModule;
       }),
   },
