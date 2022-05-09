@@ -54,7 +54,7 @@ export class LoginComponent implements OnInit {
             errorMessage = 'auth.user-not-found';
             break;
           default:
-            errorMessage = response.error.message;
+            errorMessage = response.message;
             break;
         }
 
