@@ -10,12 +10,12 @@ const routes: Routes = [
     component: BoardsComponent,
   },
   {
-    path: 'not-found',
-    component: NotFoundComponent,
-  },
-  {
     path: ':id',
     component: BoardComponent,
+  },
+  {
+    path: 'not-found',
+    component: NotFoundComponent,
   },
 ];
 
