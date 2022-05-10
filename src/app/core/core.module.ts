@@ -11,6 +11,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { WelcomeComponent } from './pages/welcome/welcome.component';
 import { CoreRoutingModule } from './core-routing.module';
+import { MatDialogModule } from '@angular/material/dialog';
 
 @NgModule({
   declarations: [
@@ -27,6 +28,7 @@ import { CoreRoutingModule } from './core-routing.module';
     MatIconModule,
     MatButtonModule,
     CoreRoutingModule,
+    MatDialogModule,
   ],
   exports: [
     HeaderComponent,
