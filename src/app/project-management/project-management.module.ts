@@ -43,6 +43,6 @@ import { EditBoardComponent } from './components/edit-board/edit-board.component
     MatButtonModule,
     MatInputModule,
   ],
-  exports: [BoardsComponent],
+  exports: [BoardsComponent, EditBoardComponent],
 })
 export class ProjectManagementModule {}
