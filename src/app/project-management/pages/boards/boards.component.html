@@ -8,6 +8,7 @@
     <section class="boards__item">
       {{ board.title }}
       <mat-icon (click)="deleteBoard($event, board.id)">delete</mat-icon>
+      <mat-icon (click)="editBoard($event, board.id)">edit</mat-icon>
     </section>
   </mat-list-option>
 </mat-selection-list>
