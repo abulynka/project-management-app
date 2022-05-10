@@ -13,12 +13,15 @@
     "sign-up": "sign up"
   },
   "board": {
+    "new-board": "new board",
+    "title": "title",
     "column": {
       "btn-add": "Add task"
     },
     "btn-add": "Add column",
     "delete-title": "board",
-    "delete-message": "do you realy want to delete"
+    "delete-message": "do you realy want to delete",
+    "process": "process"
   },
   "not-found": {
     "first-part": "We are searching for your page...",
