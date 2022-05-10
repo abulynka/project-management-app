@@ -4,6 +4,8 @@ import { Lang, LangService } from '../../services/lang.service';
 import { LangTitleItem, langTitleMap } from './utils/languageTitleMap';
 import { AuthService } from '../../../auth/services/auth.service';
 import { Router } from '@angular/router';
+import { MatDialog } from '@angular/material/dialog';
+import { EditBoardComponent } from '../../../project-management/components/edit-board/edit-board.component';
 
 @Component({
   selector: 'app-header',
@@ -21,6 +23,7 @@ export class HeaderComponent implements OnInit {
     private langService: LangService,
     private authService: AuthService,
     private router: Router,
+    private dialog: MatDialog,
   ) {}
 
   public changeLanguage = (event: MatSlideToggleChange): void => {
@@ -65,6 +68,15 @@ export class HeaderComponent implements OnInit {
 
   public boardsList(): void {
     this.router.navigate(['boards']).then();
+  }
+
+  public createNewBoard(): void {
+    const component: EditBoardComponent =
+      this.dialog.open(EditBoardComponent).componentInstance;
+    component.boardProcessed$.subscribe((id: string) => {
+      this.dialog.closeAll();
+      this.router.navigate(['boards', id]).then();
+    });
   }
 
   private setLanguageTitle(lang: Lang): void {
