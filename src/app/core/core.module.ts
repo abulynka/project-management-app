@@ -12,6 +12,8 @@ import { MatButtonModule } from '@angular/material/button';
 import { WelcomeComponent } from './pages/welcome/welcome.component';
 import { CoreRoutingModule } from './core-routing.module';
 import { MatDialogModule } from '@angular/material/dialog';
+import { MatCardModule } from '@angular/material/card';
+import { MatListModule } from '@angular/material/list';
 
 @NgModule({
   declarations: [
@@ -28,6 +30,8 @@ import { MatDialogModule } from '@angular/material/dialog';
     MatIconModule,
     MatButtonModule,
     CoreRoutingModule,
+    MatCardModule,
+    MatListModule,
     MatDialogModule,
   ],
   exports: [
