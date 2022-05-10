@@ -12,6 +12,9 @@ import { MatButtonModule } from '@angular/material/button';
 import { WelcomeComponent } from './pages/welcome/welcome.component';
 import { CoreRoutingModule } from './core-routing.module';
 
+import { MatCardModule } from '@angular/material/card';
+import { MatListModule } from '@angular/material/list';
+
 @NgModule({
   declarations: [
     HeaderComponent,
@@ -27,6 +30,8 @@ import { CoreRoutingModule } from './core-routing.module';
     MatIconModule,
     MatButtonModule,
     CoreRoutingModule,
+    MatCardModule,
+    MatListModule,
   ],
   exports: [
     HeaderComponent,
