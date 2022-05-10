@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../../services/auth.service';
-import { UserService } from '../../../project-management/services/user.service';
 import { TokenStorageService } from '../../../core/services/token-storage.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { HttpErrorResponse } from '@angular/common/http';
@@ -23,7 +22,6 @@ export class LoginComponent implements OnInit {
 
   public constructor(
     public authService: AuthService,
-    public userService: UserService,
     private tokenStorage: TokenStorageService,
     private router: Router,
     private route: ActivatedRoute,
