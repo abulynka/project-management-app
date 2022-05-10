@@ -1,4 +1,4 @@
-<section class="welcome">
+<section class="welcome" *ngIf="translateData">
   <div class="welcome__title-container">
     <h2 class="welcome__title">
       {{ 'welcome.title' | translate | titlecase }}
@@ -13,17 +13,11 @@
       'welcome.features-desc' | translate
     }}</span>
     <ul class="welcome__features">
-      <li class="welcome__features-item">
-        {{ 'welcome.features.0' | translate }}
-      </li>
-      <li class="welcome__features-item">
-        {{ 'welcome.features.1' | translate }}
-      </li>
-      <li class="welcome__features-item">
-        {{ 'welcome.features.2' | translate }}
-      </li>
-      <li class="welcome__features-item">
-        {{ 'welcome.features.3' | translate }}
+      <li
+        *ngFor="let item of translateData.features"
+        class="welcome__features-item"
+      >
+        {{ item }}
       </li>
     </ul>
   </div>
@@ -37,52 +31,21 @@
   <div class="welcome__team-container">
     <h3 class="welcome__team-title">{{ 'welcome.team-title' | translate }}</h3>
     <ul class="welcome__team">
-      <li class="welcome__team-item">
+      <li
+        *ngFor="let item; index as i; of: translateData.team"
+        class="welcome__team-item"
+      >
         <mat-card class="welcome__team-card">
           <mat-card-header class="welcome__team-card-header">
-            <div mat-card-avatar class="welcome__team-card-image_0"></div>
+            <div mat-card-avatar class="welcome__team-card-image_{{ i }}"></div>
             <mat-card-title class="welcome__team-card-title">{{
-              'welcome.team.0' | translate
+              translateData.team[i]
             }}</mat-card-title>
             <mat-card-subtitle class="welcome__team-card-subtitle">{{
-              'welcome.position.0' | translate
+              translateData.position[i]
             }}</mat-card-subtitle>
           </mat-card-header>
-          <p class="welcome__team-card-content">
-            {{ 'welcome.role.0' | translate }}
-          </p>
-        </mat-card>
-      </li>
-      <li class="welcome__team-item">
-        <mat-card class="welcome__team-card">
-          <mat-card-header class="welcome__team-card-header">
-            <div mat-card-avatar class="welcome__team-card-image_1"></div>
-            <mat-card-title class="welcome__team-card-title">{{
-              'welcome.team.1' | translate
-            }}</mat-card-title>
-            <mat-card-subtitle class="welcome__team-card-subtitle">{{
-              'welcome.position.1' | translate
-            }}</mat-card-subtitle>
-          </mat-card-header>
-          <p class="welcome__team-card-content">
-            {{ 'welcome.role.1' | translate }}
-          </p>
-        </mat-card>
-      </li>
-      <li class="welcome__team-item">
-        <mat-card class="welcome__team-card">
-          <mat-card-header class="welcome__team-card-header">
-            <div mat-card-avatar class="welcome__team-card-image_2"></div>
-            <mat-card-title class="welcome__team-card-title">{{
-              'welcome.team.2' | translate
-            }}</mat-card-title>
-            <mat-card-subtitle class="welcome__team-card-subtitle">{{
-              'welcome.position.2' | translate
-            }}</mat-card-subtitle>
-          </mat-card-header>
-          <p class="welcome__team-card-content">
-            {{ 'welcome.role.2' | translate }}
-          </p>
+          <p class="welcome__team-card-content">{{ translateData.role[i] }}</p>
         </mat-card>
       </li>
     </ul>
