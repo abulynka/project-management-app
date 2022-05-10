@@ -1,48 +1,69 @@
-@mixin glass-container {
-  height: fit-content;
-  padding: 3%;
-  background: rgba(44, 24, 77, 0.14);
-  border-radius: 16px;
-  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
-  backdrop-filter: blur(10.9px);
-  -webkit-backdrop-filter: blur(10.9px);
-  border: 1px solid rgba(44, 24, 77, 0.24);
-}
+@import '../../../../styles/settings/mixins';
 
 .welcome {
   display: flex;
   align-items: center;
   justify-content: space-around;
-  flex-wrap: wrap;
+  flex-direction: column;
+  padding: 0 40px;
+  overflow-y: auto;
+  color: white;
 
-  @media (max-width: 800px) {
+  @include small-tablet {
     flex-direction: column;
+  }
+
+  @include smart {
+    padding: 0 10px;
   }
 
   background-image: url("/assets/img/welcome/project-management.jpg");
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
-  height: calc(100vh - var(--header-height) - var(--footer-height));
+  min-height: calc(100vh - var(--header-height) - var(--footer-height));
+
+  & > * {
+    margin: 30px;
+    max-width: 1200px;
+
+    @include smart {
+      margin: 20px 5px;
+    }
+  }
 
   &__title {
     font-size: 72px;
-    height: 80px;
+    line-height: 50px;
     word-wrap: break-word;
+
+    @include small-tablet {
+      font-size: 56px;
+    }
+
+    @include smart {
+      font-size: 40px;
+    }
 
     &-container {
       @include glass-container();
 
       display: flex;
       flex-direction: column;
-      color: white;
+      justify-content: space-between;
+      align-items: center;
       font-weight: 500;
-      text-shadow: #2c184d 1px 0 10px;
     }
 
     &-desc {
       font-size: 32px;
-      padding-left: 5%;
+      padding: 20px 10px 10px;
+      margin: 0;
+      line-height: 30px;
+
+      @include smart {
+        font-size: 18px;
+      }
     }
   }
 
@@ -52,10 +73,13 @@
 
       display: flex;
       flex-direction: column;
-      font-size: 30px;
-      color: white;
       font-weight: 500;
-      text-shadow: #2c184d 1px 0 10px;
+      font-size: 24px;
+      line-height: 30px;
+
+      @include smart {
+        font-size: 18px;
+      }
     }
 
     &-desc {
@@ -65,7 +89,95 @@
     }
 
     &-item {
-      height: 32px;
+      font-weight: 400;
+      font-size: 18px;
+    }
+  }
+
+  &__info {
+    @include glass-container;
+    font-size: 18px;
+    line-height: 30px;
+    max-width: 900px;
+  }
+
+  &__team {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    list-style-type: none;
+    padding: 0;
+
+    &-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    &-title {
+      @include glass-container();
+      text-transform: capitalize;
+      font-size: 56px;
+      font-weight: 500;
+      margin: 0;
+
+      @include small-tablet {
+        font-size: 56px;
+      }
+
+      @include smart {
+        font-size: 40px;
+      }
+    }
+
+    &-item {
+      border-radius: 20px;
+      margin: 30px;
+      width: 230px;
+
+      @include smart {
+        margin: 20px 10px;
+      }
+    }
+
+    &-card {
+      @include glass-container();
+      padding: 20px;
+      color: white;
+    }
+
+    &-card-title {
+      display: flex;
+      margin-bottom: 10px;
+      text-transform: capitalize;
+    }
+
+    &-card-subtitle {
+      text-transform: capitalize;
+    }
+
+    &-card-image_0 {
+      width: 70px;
+      height: 70px;
+      background-image: url('/assets/svg/avatar-aliaksandr.svg');
+    }
+
+    &-card-image_1 {
+      width: 70px;
+      height: 70px;
+      background-image: url('/assets/svg/avatar-aliona.svg');
+    }
+
+    &-card-image_2 {
+      width: 70px;
+      height: 70px;
+      background-image: url('/assets/svg/avatar-alexander.svg');
+    }
+
+    &-card-content {
+      padding: 20px 0 10px;
+      height: 200px;
+      line-height: 22px;
     }
   }
 }

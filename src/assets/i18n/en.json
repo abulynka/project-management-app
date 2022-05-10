@@ -35,6 +35,23 @@
       "favorite serial",
       "family",
       "just eat ice cream"
+    ],
+    "info": "This application is the final project created as part of the RS School 'Developing with Angular' course. 'Project Management' is another version of the implementation of programs that help manage projects based on the kanban method.",
+    "team-title": "our team",
+    "team": [
+      "aliaksandr",
+      "aliona",
+      "alexander"
+    ],
+    "position": [
+      "team lead",
+      "frontender",
+      "frontender"
+    ],
+    "role": [
+      "Teamlead, developed application architecture, routing, responsible for Husky, for the components: header, footer, main boards list, not found page, dialog box, edit task, welcome page. Added WebSockets support.",
+      "Responsible for the forms: authorization, registration, edit profile, edit task. Created backend services and modules. Optimization of welcome page.",
+      "Attended actively in application architecture development. Responsible for localization, story book, main board, shared components."
     ]
   },
   "dialog": {
