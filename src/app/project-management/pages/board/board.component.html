@@ -1,17 +1,17 @@
 <div class="board">
   <header class="board__header">
-    <h2 class="board__title">{{ title }}</h2>
+    <h2 class="board__title">{{ board.title }}</h2>
   </header>
 
   <section
     class="board__content drag-list"
     cdkDropList
     cdkDropListOrientation="horizontal"
-    [cdkDropListData]="columns"
+    [cdkDropListData]="board.columns"
     (cdkDropListDropped)="drop($event)"
   >
     <app-task-column
-      *ngFor="let column of columns"
+      *ngFor="let column of board.columns"
       class="drag-el"
       [title]="column.title"
       [tasks]="column.tasks"

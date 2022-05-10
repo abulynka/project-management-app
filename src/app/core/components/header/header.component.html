@@ -24,7 +24,12 @@
           </a>
         </li>
         <li>
-          <a *ngIf="authorized" class="header__button" mat-flat-button>
+          <a
+            *ngIf="authorized"
+            (click)="createNewBoard()"
+            class="header__button"
+            mat-flat-button
+          >
             {{ 'header.create-new-board' | translate | titlecase }}
           </a>
         </li>
@@ -77,7 +82,12 @@
       </button>
     </mat-toolbar-row>
     <mat-toolbar-row class="header__menu header__menu_large" *ngIf="isShowMenu">
-      <button *ngIf="authorized" mat-button class="header__button_large">
+      <button
+        *ngIf="authorized"
+        (click)="createNewBoard()"
+        mat-button
+        class="header__button_large"
+      >
         {{ 'header.create-new-board' | translate | titlecase }}
       </button>
     </mat-toolbar-row>

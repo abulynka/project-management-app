@@ -11,7 +11,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { WelcomeComponent } from './pages/welcome/welcome.component';
 import { CoreRoutingModule } from './core-routing.module';
-
+import { MatDialogModule } from '@angular/material/dialog';
 import { MatCardModule } from '@angular/material/card';
 import { MatListModule } from '@angular/material/list';
 
@@ -32,6 +32,7 @@ import { MatListModule } from '@angular/material/list';
     CoreRoutingModule,
     MatCardModule,
     MatListModule,
+    MatDialogModule,
   ],
   exports: [
     HeaderComponent,

@@ -1,0 +1,21 @@
+<section class="edit-board">
+  <div class="edit-board__container">
+    <h4 class="edit-board__title">
+      {{ 'board.title' | translate | titlecase }}
+    </h4>
+    <form [formGroup]="boardForm" class="edit-board__form">
+      <mat-form-field appearance="fill">
+        <mat-label>{{ 'board.title' | translate | titlecase }}</mat-label>
+        <input
+          matInput
+          formControlName="title"
+          placeholder="{{ 'board.title' | translate | titlecase }}"
+        />
+      </mat-form-field>
+
+      <button type="submit" (click)="onSubmit()" mat-button>
+        {{ 'board.process' | translate | titlecase }}
+      </button>
+    </form>
+  </div>
+</section>
