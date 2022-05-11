@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 import { Column } from '../models/boards.model';
+import { TaskService } from './task/task.service';
 
 @Injectable({
   providedIn: 'root',
@@ -11,6 +12,8 @@ export class ColumnService {
   private columnList$: BehaviorSubject<[] | Column[]> = new BehaviorSubject(
     this.columnList,
   );
+
+  public constructor(private taskService: TaskService) {}
 
   public getState(): BehaviorSubject<[] | Column[]> {
     return this.columnList$;

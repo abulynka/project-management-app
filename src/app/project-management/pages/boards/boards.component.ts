@@ -88,6 +88,8 @@ export class BoardsComponent implements OnInit {
   }
 
   private refreshBoardsList(): void {
+    console.log('refresh');
+
     this.boardsService.getBoards().subscribe((response: BoardResponse[]) => {
       this.boards = response.sort(
         (item1: BoardResponse, item2: BoardResponse) => {

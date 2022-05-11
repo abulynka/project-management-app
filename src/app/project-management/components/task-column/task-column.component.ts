@@ -1,14 +1,11 @@
+/* eslint-disable @typescript-eslint/indent */
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import {
   CdkDragDrop,
   moveItemInArray,
   // transferArrayItem,
 } from '@angular/cdk/drag-drop';
-
-export interface Task {
-  id: string;
-  title: string;
-}
+import { Task } from '../../models/boards.model';
 
 @Component({
   selector: 'app-task-column',
@@ -16,12 +13,13 @@ export interface Task {
   styleUrls: ['./task-column.component.scss'],
 })
 export class TaskColumnComponent {
-  @Input() public title: string = 'unknown';
+  @Input() public title!: string;
 
   @Input() public tasks!: Task[];
 
-  @Output() public newTaskEvent: EventEmitter<string> =
-    new EventEmitter<string>();
+  // @Output() public updateTasksEvent: EventEmitter<Task[]> = new EventEmitter<
+  //   Task[]
+  // >();
 
   public drop(event: CdkDragDrop<any[]>): void {
     console.log({ event });
@@ -43,6 +41,6 @@ export class TaskColumnComponent {
   }
 
   public onAddTask(title: string = 'default'): void {
-    this.newTaskEvent.emit(title);
+    // this.newTaskEvent.emit(title);
   }
 }
