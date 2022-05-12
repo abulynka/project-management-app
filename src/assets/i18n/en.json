@@ -23,6 +23,14 @@
     "delete-message": "do you realy want to delete",
     "process": "process"
   },
+  "task": {
+    "task-create": "create task",
+    "task-update": "update task",
+    "title": "title",
+    "order": "order",
+    "description": "description",
+    "process": "process"
+  },
   "not-found": {
     "first-part": "We are searching for your page...",
     "second-part": "...But we can not find it."
@@ -71,5 +79,10 @@
     "password": "password",
     "enter-password": "please, enter your password",
     "sign-up": "sign up"
+  },
+  "validation": {
+    "required": "Data is required",
+    "min-length": "Data must be at least 3 characters long",
+    "number": "Data must be a number"
   }
 }

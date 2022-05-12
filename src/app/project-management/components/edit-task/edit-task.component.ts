@@ -22,9 +22,9 @@ const MIN_LENGTH: number = 3;
 export class EditTaskComponent implements OnInit {
   public errorMessage: boolean = false;
 
-  public formTitle?: string | null;
-
   public task!: FormGroup;
+
+  public taskId: string | null = null;
 
   public userId?: string | null = this.storageService.getUser()?.id;
 
@@ -46,15 +46,14 @@ export class EditTaskComponent implements OnInit {
   }
 
   public ngOnInit(): void {
-    this.initEditTaskForm(null);
+    this.initEditTaskForm();
   }
 
   public onSubmit(): void {
     const board: string = '';
     const column: string = '';
-    const taskId: string | null = null;
-    taskId
-      ? this.updateTask(board, column, taskId)
+    this.taskId
+      ? this.updateTask(board, column, this.taskId)
       : this.createNewTask(board, column);
   }
 
@@ -92,8 +91,7 @@ export class EditTaskComponent implements OnInit {
     }
   }
 
-  private initEditTaskForm(taskId: string | null): void {
-    this.formTitle = taskId ? 'Edit' : 'Create';
+  private initEditTaskForm(): void {
     this.task = new FormGroup({
       title: new FormControl('', [
         Validators.required,
