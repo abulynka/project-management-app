@@ -3,7 +3,6 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { TokenStorageService } from 'src/app/core/services/token-storage.service';
 import { UserService } from 'src/app/project-management/services/user.service';
 import { SignUpData } from '../../models/authorization.model';
-import { AuthService } from '../../services/auth.service';
 
 const MIN_LENGTH: number = 3;
 const PASS_LENGTH: number = 6;
@@ -23,7 +22,6 @@ export class EditProfileComponent implements OnInit {
   public constructor(
     public userService: UserService,
     public storageService: TokenStorageService,
-    public authService: AuthService,
   ) {}
 
   public ngOnInit(): void {
