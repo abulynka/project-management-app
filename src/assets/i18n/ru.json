@@ -15,6 +15,7 @@
   "board": {
     "new-board": "создать доску",
     "title": "имя",
+    "description": "описание",
     "column": {
       "btn-add": "Добавить задачу"
     },

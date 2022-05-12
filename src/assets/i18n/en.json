@@ -15,6 +15,7 @@
   "board": {
     "new-board": "new board",
     "title": "title",
+    "description": "description",
     "column": {
       "btn-add": "Add task"
     },

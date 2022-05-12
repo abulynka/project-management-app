@@ -6,6 +6,7 @@ import { FormControl, FormGroup } from '@angular/forms';
 import { select, Store } from '@ngrx/store';
 import { ProjectManagementState } from '../../../redux/state.models';
 import {
+  createdBoard,
   ProjectManagementActionType,
   updatedBoard,
 } from '../../../redux/actions/project-management.action';
@@ -18,6 +19,7 @@ import {
 export class EditBoardComponent implements OnDestroy {
   public boardForm: FormGroup = new FormGroup({
     title: new FormControl(),
+    description: new FormControl(),
   });
 
   public board: Board | BoardShort | undefined;
@@ -37,6 +39,7 @@ export class EditBoardComponent implements OnDestroy {
     if (data) {
       this.board = data.board;
       this.boardForm.get('title')?.setValue(this.board?.title);
+      this.boardForm.get('description')?.setValue(this.board?.description);
     }
   }
 
@@ -47,8 +50,10 @@ export class EditBoardComponent implements OnDestroy {
         payload: {
           id: this.board.id,
           title: this.boardForm.get('title')?.value,
+          description: this.boardForm.get('description')?.value,
         },
       });
+
       this.store
         .pipe(select(updatedBoard), takeUntil(this.destroy$))
         .subscribe(() => {
@@ -57,8 +62,19 @@ export class EditBoardComponent implements OnDestroy {
     } else {
       this.store.dispatch({
         type: ProjectManagementActionType.CreateBoard,
-        payload: this.boardForm.get('title')?.value,
+        payload: {
+          title: this.boardForm.get('title')?.value,
+          description: this.boardForm.get('description')?.value,
+        },
       });
+
+      this.store
+        .pipe(select(createdBoard), takeUntil(this.destroy$))
+        .subscribe((value: any) => {
+          this.boardProcessedSource.next(
+            value.projectManagement.createdBoard.id,
+          );
+        });
     }
   }
 

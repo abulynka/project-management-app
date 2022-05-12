@@ -1,6 +1,7 @@
 export interface Board {
   id: string;
   title: string;
+  description: string;
   columns: Column[];
 }
 
@@ -31,6 +32,7 @@ export interface File {
 export interface BoardResponse {
   id: string;
   title: string;
+  description: string;
 }
 
 export interface NewColumn {
