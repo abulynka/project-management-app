@@ -24,8 +24,6 @@ export class TaskColumnComponent {
     new EventEmitter<string>();
 
   public drop(event: CdkDragDrop<any[]>): void {
-    console.log({ event });
-
     if (event.previousContainer === event.container) {
       moveItemInArray(
         event.container.data,
