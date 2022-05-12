@@ -28,7 +28,7 @@ export class WelcomeComponent implements OnInit {
   }
 
   private initTranslateDataObserver(): void {
-    this.translate.get('welcome').subscribe((data) => {
+    this.translate.get('welcome').subscribe((data: translateData) => {
       this.translateData = data;
     });
   }
