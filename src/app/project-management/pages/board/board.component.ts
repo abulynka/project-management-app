@@ -5,8 +5,9 @@ import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 import { BehaviorSubject, Subject, takeUntil } from 'rxjs';
 
 import { ColumnService } from '../../services/column.service';
-import { Board, Column } from '../../models/boards.model';
+import { Board, Column, Task } from '../../models/boards.model';
 import { BoardsService } from '../../services/boards.service';
+import { TaskService } from '../../services/task/task.service';
 
 @Component({
   selector: 'app-board',
@@ -24,6 +25,7 @@ export class BoardComponent implements OnInit {
     private columnService: ColumnService,
     private route: ActivatedRoute,
     private boardsService: BoardsService,
+    private taskService: TaskService,
   ) {}
 
   public ngOnInit(): void {
@@ -45,17 +47,25 @@ export class BoardComponent implements OnInit {
     this.columnService.add(title);
   }
 
-  public drop(event: CdkDragDrop<any[]>): void {
-    moveItemInArray(
-      event.container.data,
-      event.previousIndex,
-      event.currentIndex,
-    );
-    this.columnService.updateOrder(
-      this.board.columns,
-      event.previousIndex,
-      event.currentIndex,
-    );
+  public dropColumn(event: CdkDragDrop<any[]>): void {
+    console.log({ event });
+    if (event.previousContainer === event.container) {
+      moveItemInArray(
+        event.container.data,
+        event.previousIndex,
+        event.currentIndex,
+      );
+      this.columnService.updateOrder(
+        this.board.columns,
+        event.previousIndex,
+        event.currentIndex,
+      );
+    }
+  }
+
+  public addNewTaskInColumn(event: Task['title'], columnId: Column['id']) {
+    const newTask = this.taskService.create(event);
+    this.columnService.addTask(newTask, columnId);
   }
 
   private initColumnListStateObserver(): void {

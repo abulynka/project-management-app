@@ -4,22 +4,25 @@
   </header>
 
   <section
-    class="board__content drag-list"
     cdkDropList
     cdkDropListOrientation="horizontal"
     [cdkDropListData]="board.columns"
-    (cdkDropListDropped)="drop($event)"
+    (cdkDropListDropped)="dropColumn($event)"
   >
-    <app-task-column
-      *ngFor="let column of board.columns"
-      class="drag-el"
-      [title]="column.title"
-      [tasks]="column.tasks"
-      cdkDrag
-    ></app-task-column>
+    <div cdkDropListGroup class="board__content drag-list">
+      <app-task-column
+        *ngFor="let column of board.columns"
+        class="drag-el"
+        [title]="column.title"
+        [tasks]="column.tasks"
+        (newTaskEvent)="addNewTaskInColumn($event, column.id)"
+        cdkDrag
+      >
+      </app-task-column>
 
-    <button class="board__btn-add" mat-stroked-button (click)="onAddColumn()">
-      <mat-icon>add</mat-icon> <span>{{ 'board.btn-add' | translate }}</span>
-    </button>
+      <button class="board__btn-add" mat-stroked-button (click)="onAddColumn()">
+        <mat-icon>add</mat-icon> <span>{{ 'board.btn-add' | translate }}</span>
+      </button>
+    </div>
   </section>
 </div>
