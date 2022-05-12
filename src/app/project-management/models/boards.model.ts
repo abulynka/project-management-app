@@ -1,7 +1,3 @@
-export interface NewBoard {
-  title: string;
-}
-
 export interface Board {
   id: string;
   title: string;
