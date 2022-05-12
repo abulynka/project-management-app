@@ -6,7 +6,7 @@
 
   &__container {
     width: 350px;
-    height: 350px;
+    height: 380px;
     padding: 20px 20px;
     background-color: var(--login-bg-color);
     margin: 10px;
@@ -24,4 +24,11 @@
     font-size: 18px;
     font-weight: bold;
   }
+}
+
+.alert-danger {
+  font-size: 10px;
+  color:  var(--error-color);
+  padding: 3px;
+  margin-bottom: 3px;
 }

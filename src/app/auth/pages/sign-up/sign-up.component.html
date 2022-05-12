@@ -1,6 +1,8 @@
 <section class="signup">
   <div class="signup__container">
-    <h4 class="signup__title">Register</h4>
+    <h4 class="signup__title">
+      {{ 'auth.sign-up' | translate | titlecase }}
+    </h4>
     <form
       class="signup__form"
       *ngIf="!isSuccessful"
@@ -10,7 +12,7 @@
       novalidate
     >
       <mat-form-field class="form-group" appearance="fill">
-        <mat-label>Login</mat-label>
+        <mat-label> {{ 'auth.login' | translate | titlecase }}</mat-label>
         <input
           matInput
           placeholder="Enter Your Login"
@@ -23,17 +25,19 @@
           #login="ngModel"
         />
         <div class="alert-danger" *ngIf="login.errors && f.submitted">
-          <div *ngIf="login?.errors?.['required']">Login is required</div>
+          <div *ngIf="login?.errors?.['required']">
+            {{ 'validation.required' | translate }}
+          </div>
           <div *ngIf="login?.errors?.['minlength']">
-            Login must be at least 3 characters
+            {{ 'validation.min-length' | translate }}
           </div>
           <div *ngIf="login?.errors?.['maxlength']">
-            Login must be at most 20 characters
+            {{ 'validation.max-length' | translate }}s
           </div>
         </div>
       </mat-form-field>
       <mat-form-field class="form-group" appearance="fill">
-        <mat-label>Name</mat-label>
+        <mat-label>{{ 'auth.name' | translate | titlecase }}</mat-label>
         <input
           matInput
           placeholder="Enter Your Name"
@@ -46,17 +50,19 @@
           #name="ngModel"
         />
         <div class="alert-danger" *ngIf="name.errors && f.submitted">
-          <div *ngIf="name?.errors?.['required']">Name is required</div>
+          <div *ngIf="name?.errors?.['required']">
+            {{ 'validation.required' | translate }}
+          </div>
           <div *ngIf="name?.errors?.['minlength']">
-            Name must be at least 3 characters
+            {{ 'validation.min-length' | translate }}
           </div>
           <div *ngIf="name?.errors?.['maxlength']">
-            Name must be at most 20 characters
+            {{ 'validation.max-length' | translate }}
           </div>
         </div>
       </mat-form-field>
       <mat-form-field class="form-group" appearance="fill">
-        <mat-label>Password</mat-label>
+        <mat-label>{{ 'auth.password' | translate | titlecase }}</mat-label>
         <input
           matInput
           placeholder="Enter Password"
@@ -68,21 +74,25 @@
           #password="ngModel"
         />
         <div class="alert-danger" *ngIf="password.errors && f.submitted">
-          <div *ngIf="password?.errors?.['required']">Password is required</div>
+          <div *ngIf="password?.errors?.['required']">
+            {{ 'validation.required' | translate }}
+          </div>
           <div *ngIf="password?.errors?.['minlength']">
-            Password must be at least 6 characters
+            {{ 'validation.password-length' | translate }}
           </div>
         </div>
       </mat-form-field>
       <div class="form-group">
-        <button type="submit" mat-button>Sign Up</button>
+        <button type="submit" mat-button>
+          {{ 'auth.sign-up' | translate | titlecase }}
+        </button>
       </div>
       <div class="alert alert-warning" *ngIf="f.submitted && isSignUpFailed">
-        Signup failed!<br />{{ errorMessage }}
+        {{ 'auth.fail' | translate }}<br />{{ errorMessage }}
       </div>
     </form>
     <div class="alert alert-success" *ngIf="isSuccessful">
-      Your registration is successful!
+      {{ 'auth.success' | translate }}
     </div>
   </div>
 </section>
