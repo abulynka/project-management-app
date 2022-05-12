@@ -14,13 +14,18 @@ import {
 const initialState: ProjectManagementState = {
   boards: [],
   boardsShort: [],
+  createdBoard: null,
 };
 
 export const reducer: ActionReducer<any> = createReducer(
   initialState,
 
   on(createdBoard, (state: any, action: any): ProjectManagementState => {
-    return { ...state, boards: [...state.boards, action.payload] };
+    return {
+      boards: [...state.boards, action.payload],
+      boardsShort: [...state.boardsShort, action.payload],
+      createdBoard: action.payload,
+    };
   }),
 
   on(updatedBoard, (state: any, action: any): ProjectManagementState => {
@@ -37,6 +42,7 @@ export const reducer: ActionReducer<any> = createReducer(
         }
         return board;
       }),
+      createdBoard: null,
     };
   }),
 
@@ -48,6 +54,7 @@ export const reducer: ActionReducer<any> = createReducer(
       boardsShort: state.boards.filter((board: BoardShort) => {
         return board.id !== action.payload;
       }),
+      createdBoard: null,
     };
   }),
 

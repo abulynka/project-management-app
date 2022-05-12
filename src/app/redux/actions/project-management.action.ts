@@ -14,7 +14,10 @@ export enum ProjectManagementActionType {
 
 export const createdBoard: ActionCreator<any> = createAction(
   ProjectManagementActionType.CreatedBoard,
-  props<{ payload: BoardResponse }>(),
+  props<{
+    action: ProjectManagementActionType.CreatedBoard;
+    payload: BoardResponse;
+  }>(),
 );
 
 export const updatedBoard: ActionCreator<any> = createAction(
