@@ -3,7 +3,14 @@ import { BoardsService } from '../../services/boards.service';
 import { Board, BoardResponse, BoardShort } from '../../models/boards.model';
 import { Observable, Subject } from 'rxjs';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { FormControl, FormGroup } from '@angular/forms';
+import {
+  FormControl,
+  FormGroup,
+  AbstractControl,
+  Validators,
+} from '@angular/forms';
+
+const MIN_LENGTH: number = 3;
 
 @Component({
   selector: 'app-edit-board',
@@ -11,8 +18,13 @@ import { FormControl, FormGroup } from '@angular/forms';
   styleUrls: ['./edit-board.component.scss'],
 })
 export class EditBoardComponent {
+  public errorMessage: boolean = false;
+
   public boardForm: FormGroup = new FormGroup({
-    title: new FormControl(),
+    title: new FormControl('', [
+      Validators.required,
+      Validators.minLength(MIN_LENGTH),
+    ]),
   });
 
   public board: Board | BoardShort | undefined;
@@ -33,21 +45,28 @@ export class EditBoardComponent {
     }
   }
 
+  public get title(): AbstractControl | null {
+    return this.boardForm.get('title');
+  }
+
   public onSubmit(): void {
     let afterProcess: Observable<BoardResponse>;
-    if (this.board) {
-      afterProcess = this.boardsService.updateBoard(
-        this.board.id,
-        this.boardForm.get('title')?.value,
-      );
+    if (this.boardForm.status === 'VALID') {
+      if (this.board) {
+        afterProcess = this.boardsService.updateBoard(
+          this.board.id,
+          this.boardForm.get('title')?.value,
+        );
+      } else {
+        afterProcess = this.boardsService.createBoard(
+          this.boardForm.get('title')?.value,
+        );
+      }
+      afterProcess.subscribe((response: BoardResponse) => {
+        this.boardProcessedSource.next(response.id);
+      });
     } else {
-      afterProcess = this.boardsService.createBoard(
-        this.boardForm.get('title')?.value,
-      );
+      this.errorMessage = true;
     }
-
-    afterProcess.subscribe((response: BoardResponse) => {
-      this.boardProcessedSource.next(response.id);
-    });
   }
 }
