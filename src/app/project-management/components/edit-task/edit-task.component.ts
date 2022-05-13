@@ -50,8 +50,8 @@ export class EditTaskComponent implements OnInit {
   }
 
   public onSubmit(): void {
-    const board: string = '2452d0a3-4448-4a6b-b101-71114b245bf7';
-    const column: string = '3d2c6204-b5b4-4c1e-a9ae-ea25cc5d143e';
+    const board: string = '';
+    const column: string = '';
     this.taskId
       ? this.updateTask(board, column, this.taskId)
       : this.createNewTask(board, column);
