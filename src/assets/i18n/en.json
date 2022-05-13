@@ -91,5 +91,8 @@
     "min-length": "Data must be at least 3 characters long",
     "number": "Data must be a number",
     "password-length": "Password must be at least 6 characters"
+  },
+  "edit": {
+    "update": "update"
   }
 }

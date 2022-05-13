@@ -35,11 +35,7 @@ export class SignUpComponent implements OnInit {
   ) {}
 
   public ngOnInit(): void {
-    this.signUpForm = this.formBuilder.group({
-      login: new FormControl(null, [Validators.required, Validators.email]),
-      name: new FormControl(null, [Validators.required]),
-      password: new FormControl(null, [Validators.required]),
-    });
+    this.initSignUpForm();
   }
 
   public onSubmit(): void {
@@ -73,6 +69,14 @@ export class SignUpComponent implements OnInit {
             });
           });
       },
+    });
+  }
+
+  public initSignUpForm(): void {
+    this.signUpForm = this.formBuilder.group({
+      login: new FormControl(null, [Validators.required, Validators.email]),
+      name: new FormControl(null, [Validators.required]),
+      password: new FormControl(null, [Validators.required]),
     });
   }
 }
