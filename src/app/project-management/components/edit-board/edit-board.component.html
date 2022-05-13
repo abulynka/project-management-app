@@ -8,22 +8,18 @@
         <mat-label for="title">{{
           'board.title' | translate | titlecase
         }}</mat-label>
-        <div
-          *ngIf="title?.invalid && (title?.dirty || title?.touched)"
-          class="alert alert-danger"
-        >
-          <div *ngIf="title?.errors?.['required']">Title is required.</div>
-          <div *ngIf="title?.errors?.['minlength']">
-            Title must be at least 3 characters long.
-          </div>
-        </div>
         <input
           matInput
           formControlName="title"
           placeholder="{{ 'value' | translate | titlecase }}"
           type="text"
-          required
         />
+        <small
+          class="edit-task__error"
+          *ngIf="boardForm.get('title')?.hasError('required')"
+        >
+          {{ 'validation.required' | translate }}
+        </small>
       </mat-form-field>
 
       <button type="submit" (click)="onSubmit()" mat-button>

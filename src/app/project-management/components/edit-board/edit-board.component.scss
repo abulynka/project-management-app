@@ -4,11 +4,8 @@
     display: flex;
     flex-direction: column;
   }
-}
 
-.alert div {
-  font-size: 10px;
-  color:  var(--error-color);
-  padding: 3px;
-  margin-bottom: 3px;
+  &__error {
+    color: var(--login-error);
+  }
 }

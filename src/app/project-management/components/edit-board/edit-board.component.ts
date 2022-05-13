@@ -1,4 +1,4 @@
-import { Component, Inject } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
 import { BoardsService } from '../../services/boards.service';
 import { Board, BoardResponse, BoardShort } from '../../models/boards.model';
 import { Observable, Subject } from 'rxjs';
@@ -8,24 +8,18 @@ import {
   FormGroup,
   AbstractControl,
   Validators,
+  FormBuilder,
 } from '@angular/forms';
-
-const MIN_LENGTH: number = 3;
 
 @Component({
   selector: 'app-edit-board',
   templateUrl: './edit-board.component.html',
   styleUrls: ['./edit-board.component.scss'],
 })
-export class EditBoardComponent {
+export class EditBoardComponent implements OnInit {
   public errorMessage: boolean = false;
 
-  public boardForm: FormGroup = new FormGroup({
-    title: new FormControl('', [
-      Validators.required,
-      Validators.minLength(MIN_LENGTH),
-    ]),
-  });
+  public boardForm: FormGroup = {} as FormGroup;
 
   public board: Board | BoardShort | undefined;
 
@@ -35,18 +29,22 @@ export class EditBoardComponent {
     this.boardProcessedSource.asObservable();
 
   public constructor(
+    private formBuilder: FormBuilder,
     private boardsService: BoardsService,
     @Inject(MAT_DIALOG_DATA)
     public data: { board: BoardShort | Board | undefined },
   ) {
     if (data) {
       this.board = data.board;
-      this.boardForm.get('title')?.setValue(this.board?.title);
     }
   }
 
   public get title(): AbstractControl | null {
     return this.boardForm.get('title');
+  }
+
+  public ngOnInit(): void {
+    this.initEditBoardForm();
   }
 
   public onSubmit(): void {
@@ -68,5 +66,12 @@ export class EditBoardComponent {
     } else {
       this.errorMessage = true;
     }
+  }
+
+  private initEditBoardForm(): void {
+    this.boardForm = this.formBuilder.group({
+      title: new FormControl('', [Validators.required]),
+    });
+    this.boardForm.get('title')?.setValue(this.board?.title);
   }
 }
