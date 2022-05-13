@@ -27,8 +27,11 @@
     "task-create": "create task",
     "task-update": "update task",
     "title": "title",
+    "enter-title": "enter title",
     "order": "order",
+    "enter-order": "enter order",
     "description": "description",
+    "enter-desc": "enter description",
     "process": "process"
   },
   "not-found": {

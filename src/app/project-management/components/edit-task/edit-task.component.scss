@@ -1,11 +1,8 @@
-$login-bg-color: #F2F2F2;
-
-
 .edit-task {
   width: 350px;
   height: 340px;
   padding: 20px 20px;
-  background-color: $login-bg-color;
+  background-color: var(--login-bg-color);
   margin: 10px;
   &__form {
     display: flex;
@@ -19,7 +16,7 @@ $login-bg-color: #F2F2F2;
     font-weight: bold;
   }
   &__error {
-    color: red;
+    color: var(--login-error);
   }
 }
 
@@ -27,9 +24,5 @@ $login-bg-color: #F2F2F2;
   font-size: 10px;
   color:  var(--error-color);
   padding: 3px;
-  margin-bottom: 3px;
-}
-
-.form-group {
   margin-bottom: 3px;
 }

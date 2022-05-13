@@ -26,9 +26,12 @@
   "task": {
     "task-create": "создать задание",
     "task-update": "изменить задание",
-    "title": "имя",
+    "title": "название",
+    "enter-title": "введите название",
     "order": "порядок",
+    "enter-order": "введите порядок",
     "description": "описание",
+    "enter-desc": "введите описание",
     "process": "обработать"
   },
   "not-found": {

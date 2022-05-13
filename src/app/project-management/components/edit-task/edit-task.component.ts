@@ -4,6 +4,7 @@ import {
   FormControl,
   Validators,
   AbstractControl,
+  FormBuilder,
 } from '@angular/forms';
 import { TokenStorageService } from 'src/app/core/services/token-storage.service';
 import {
@@ -11,8 +12,6 @@ import {
   UpdateTask,
 } from 'src/app/project-management/models/boards.model';
 import { TasksService } from 'src/app/project-management/services/tasks.service';
-
-const MIN_LENGTH: number = 3;
 
 @Component({
   selector: 'app-edit-task',
@@ -22,7 +21,7 @@ const MIN_LENGTH: number = 3;
 export class EditTaskComponent implements OnInit {
   public errorMessage: boolean = false;
 
-  public task!: FormGroup;
+  public task: FormGroup = {} as FormGroup;
 
   public taskId: string | null = null;
 
@@ -31,6 +30,7 @@ export class EditTaskComponent implements OnInit {
   public constructor(
     public storageService: TokenStorageService,
     public taskService: TasksService,
+    private formBuilder: FormBuilder,
   ) {}
 
   public get title(): AbstractControl | null {
@@ -50,8 +50,8 @@ export class EditTaskComponent implements OnInit {
   }
 
   public onSubmit(): void {
-    const board: string = '';
-    const column: string = '';
+    const board: string = '2452d0a3-4448-4a6b-b101-71114b245bf7';
+    const column: string = '3d2c6204-b5b4-4c1e-a9ae-ea25cc5d143e';
     this.taskId
       ? this.updateTask(board, column, this.taskId)
       : this.createNewTask(board, column);
@@ -92,19 +92,13 @@ export class EditTaskComponent implements OnInit {
   }
 
   private initEditTaskForm(): void {
-    this.task = new FormGroup({
-      title: new FormControl('', [
-        Validators.required,
-        Validators.minLength(MIN_LENGTH),
-      ]),
+    this.task = this.formBuilder.group({
+      title: new FormControl('', [Validators.required]),
       order: new FormControl('', [
         Validators.required,
         Validators.pattern('^[0-9]*$'),
       ]),
-      description: new FormControl('', [
-        Validators.required,
-        Validators.minLength(MIN_LENGTH),
-      ]),
+      description: new FormControl('', [Validators.required]),
     });
   }
 }
