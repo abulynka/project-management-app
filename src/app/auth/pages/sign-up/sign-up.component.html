@@ -4,85 +4,65 @@
       {{ 'auth.sign-up' | translate | titlecase }}
     </h4>
     <form
+      [formGroup]="signUpForm"
       class="signup__form"
       *ngIf="!isSuccessful"
       name="form"
       (ngSubmit)="f.form.valid && onSubmit()"
       #f="ngForm"
-      novalidate
     >
-      <mat-form-field class="form-group" appearance="fill">
+      <mat-form-field appearance="fill">
         <mat-label> {{ 'auth.login' | translate | titlecase }}</mat-label>
         <input
           matInput
-          placeholder="Enter Your Login"
+          placeholder="{{ 'auth.enter-login' | translate | titlecase }}"
           type="text"
-          name="login"
-          [(ngModel)]="form.login"
-          required
-          minlength="3"
-          maxlength="20"
-          #login="ngModel"
+          formControlName="login"
         />
-        <div class="alert-danger" *ngIf="login.errors && f.submitted">
-          <div *ngIf="login?.errors?.['required']">
-            {{ 'validation.required' | translate }}
-          </div>
-          <div *ngIf="login?.errors?.['minlength']">
-            {{ 'validation.min-length' | translate }}
-          </div>
-          <div *ngIf="login?.errors?.['maxlength']">
-            {{ 'validation.max-length' | translate }}s
-          </div>
-        </div>
+        <small
+          class="signup__error"
+          *ngIf="signUpForm.get('login')?.hasError('required')"
+        >
+          {{ 'auth.login-is-required' | translate | titlecase }}
+        </small>
+        <small
+          class="login__input-error"
+          *ngIf="signUpForm.get('login')?.hasError('email')"
+        >
+          {{ 'auth.login-email-invalid' | translate | titlecase }}
+        </small>
       </mat-form-field>
-      <mat-form-field class="form-group" appearance="fill">
+      <mat-form-field appearance="fill">
         <mat-label>{{ 'auth.name' | translate | titlecase }}</mat-label>
         <input
           matInput
-          placeholder="Enter Your Name"
+          placeholder="{{ 'auth.enter-name' | translate | titlecase }}"
           type="text"
-          name="name"
-          [(ngModel)]="form.name"
-          required
-          minlength="3"
-          maxlength="20"
-          #name="ngModel"
+          formControlName="name"
         />
-        <div class="alert-danger" *ngIf="name.errors && f.submitted">
-          <div *ngIf="name?.errors?.['required']">
-            {{ 'validation.required' | translate }}
-          </div>
-          <div *ngIf="name?.errors?.['minlength']">
-            {{ 'validation.min-length' | translate }}
-          </div>
-          <div *ngIf="name?.errors?.['maxlength']">
-            {{ 'validation.max-length' | translate }}
-          </div>
-        </div>
+        <small
+          class="signup__error"
+          *ngIf="signUpForm.get('name')?.hasError('required')"
+        >
+          {{ 'auth.name-is-required' | translate | titlecase }}
+        </small>
       </mat-form-field>
-      <mat-form-field class="form-group" appearance="fill">
+      <mat-form-field appearance="fill">
         <mat-label>{{ 'auth.password' | translate | titlecase }}</mat-label>
         <input
           matInput
-          placeholder="Enter Password"
-          name="password"
+          placeholder="{{ 'auth.enter-password' | translate | titlecase }}"
+          formControlName="password"
           type="password"
-          [(ngModel)]="form.password"
-          required
-          minlength="6"
-          #password="ngModel"
         />
-        <div class="alert-danger" *ngIf="password.errors && f.submitted">
-          <div *ngIf="password?.errors?.['required']">
-            {{ 'validation.required' | translate }}
-          </div>
-          <div *ngIf="password?.errors?.['minlength']">
-            {{ 'validation.password-length' | translate }}
-          </div>
-        </div>
+        <small
+          class="login__input-error"
+          *ngIf="signUpForm.get('password')?.hasError('required')"
+        >
+          {{ 'auth.enter-password' | translate | titlecase }}
+        </small>
       </mat-form-field>
-      <div class="form-group">
+      <div>
         <button type="submit" mat-button>
           {{ 'auth.sign-up' | translate | titlecase }}
         </button>

@@ -24,6 +24,10 @@
     font-size: 18px;
     font-weight: bold;
   }
+
+  &__error {
+    color: var(--login-error);
+  }
 }
 
 .alert-danger {

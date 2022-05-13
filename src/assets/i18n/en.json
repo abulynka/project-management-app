@@ -79,6 +79,8 @@
     "password": "password",
     "enter-password": "please, enter your password",
     "name": "name",
+    "enter-name": "please, enter your name",
+    "name-is-required": "name is required",
     "sign-up": "sign up",
     "fail": "Signup failed!",
     "success": " Your registration is successful!"
