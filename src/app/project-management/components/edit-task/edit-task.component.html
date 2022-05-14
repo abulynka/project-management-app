@@ -55,7 +55,7 @@
       </small>
     </mat-form-field>
     <div class="form-group">
-      <button type="submit" mat-button color="primary">
+      <button type="submit" mat-button [disabled]="task.invalid">
         {{ 'task-form.process' | translate | titlecase }}
       </button>
     </div>

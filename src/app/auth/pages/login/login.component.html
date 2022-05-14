@@ -37,7 +37,12 @@
           {{ 'auth.enter-password' | translate | titlecase }}
         </small>
       </mat-form-field>
-      <button type="submit" (click)="onSubmit()" mat-button>
+      <button
+        type="submit"
+        (click)="onSubmit()"
+        mat-button
+        [disabled]="loginForm.invalid"
+      >
         {{ 'auth.login' | translate | titlecase }}
       </button>
     </form>

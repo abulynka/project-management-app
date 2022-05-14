@@ -54,7 +54,7 @@
         </small>
       </mat-form-field>
       <div>
-        <button type="submit" mat-button>
+        <button type="submit" mat-button [disabled]="signUpForm.invalid">
           {{ 'auth.sign-up' | translate | titlecase }}
         </button>
       </div>
