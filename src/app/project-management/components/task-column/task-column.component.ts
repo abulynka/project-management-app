@@ -2,13 +2,9 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 import {
   CdkDragDrop,
   moveItemInArray,
-  // transferArrayItem,
+  transferArrayItem,
 } from '@angular/cdk/drag-drop';
-
-export interface Task {
-  id: string;
-  title: string;
-}
+import { Task } from '../../models/boards.model';
 
 @Component({
   selector: 'app-task-column',
@@ -16,12 +12,13 @@ export interface Task {
   styleUrls: ['./task-column.component.scss'],
 })
 export class TaskColumnComponent {
-  @Input() public title: string = 'unknown';
+  @Input() public title!: string;
 
   @Input() public tasks!: Task[];
 
-  @Output() public newTaskEvent: EventEmitter<string> =
-    new EventEmitter<string>();
+  @Output() public newTaskEvent: EventEmitter<Task['title']> = new EventEmitter<
+    Task['title']
+  >();
 
   public drop(event: CdkDragDrop<any[]>): void {
     if (event.previousContainer === event.container) {
@@ -31,16 +28,16 @@ export class TaskColumnComponent {
         event.currentIndex,
       );
     } else {
-      // transferArrayItem(
-      //   event.previousContainer.data,
-      //   event.container.data,
-      //   event.previousIndex,
-      //   event.currentIndex,
-      // );
+      transferArrayItem(
+        event.previousContainer.data,
+        event.container.data,
+        event.previousIndex,
+        event.currentIndex,
+      );
     }
   }
 
   public onAddTask(title: string = 'default'): void {
-    this.newTaskEvent.emit(title);
+    this.newTaskEvent.emit(title + this.tasks.length);
   }
 }

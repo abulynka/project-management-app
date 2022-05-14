@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
-import { Column } from '../models/boards.model';
+import { Column, Task } from '../models/boards.model';
 
 @Injectable({
   providedIn: 'root',
@@ -34,12 +34,51 @@ export class ColumnService {
     this.columnList$.next(list);
   }
 
+  public addTask(task: Task, columnId: Column['id']): void {
+    const columnIndex: number = this.columnList.findIndex(
+      (column: Column) => column.id === columnId,
+    );
+    const selectedColumn: Column = this.columnList[columnIndex];
+    selectedColumn.tasks = [...selectedColumn.tasks, task];
+
+    this.columnList$.next(this.columnList);
+  }
+
   private newColumn(title: string): Column {
     return {
       id: String(this.columnList.length + 1),
       title,
       order: this.columnList.length + 1,
-      tasks: [],
+      tasks: [
+        {
+          id: '6e3abe9c-ceb1-40fa-9a04-eb2b2184daf9',
+          title: 'Task: pet the cat',
+          order: 1,
+          done: false,
+          description: 'Domestic cat needs to be stroked gently',
+          userId: 'b2d92061-7d23-4641-af52-dd39f95b99f8',
+          files: [
+            {
+              filename: 'foto.jpg',
+              fileSize: 6105000,
+            },
+          ],
+        },
+        {
+          id: '6e3abe9c-ceb1-40fa-9a04-eb2b2184daf9',
+          title: 'Task: pet the cat',
+          order: 1,
+          done: false,
+          description: 'Domestic cat needs to be stroked gently',
+          userId: 'b2d92061-7d23-4641-af52-dd39f95b99f8',
+          files: [
+            {
+              filename: 'foto.jpg',
+              fileSize: 6105000,
+            },
+          ],
+        },
+      ],
     };
   }
 

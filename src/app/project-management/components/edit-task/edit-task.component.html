@@ -1,68 +1,61 @@
 <div class="edit-task">
-  <h4 class="edit-task__title">{{ formTitle }}</h4>
+  <h4 class="edit-task__title">
+    {{
+      taskId
+        ? ('task.task-update' | translate | titlecase)
+        : ('task.task-create' | translate | titlecase)
+    }}
+  </h4>
   <form class="edit-task__form" [formGroup]="task" (ngSubmit)="onSubmit()">
-    <mat-form-field class="form-group">
-      <mat-label for="title">Title</mat-label>
-      <div
-        *ngIf="title?.invalid && (title?.dirty || title?.touched)"
-        class="alert alert-danger"
-      >
-        <div *ngIf="title?.errors?.['required']">Title is required.</div>
-        <div *ngIf="title?.errors?.['minlength']">
-          Title must be at least 3 characters long.
-        </div>
-      </div>
+    <mat-form-field>
+      <mat-label>{{ 'task.title' | translate | titlecase }}</mat-label>
       <input
         formControlName="title"
-        id="title"
         matInput
-        placeholder="Enter Title"
+        placeholder="{{ 'task.enter-title' | translate | titlecase }}"
         type="text"
-        required
       />
-    </mat-form-field>
-    <mat-form-field class="form-group">
-      <mat-label for="order">Order</mat-label>
-      <div
-        *ngIf="order?.invalid && (order?.dirty || order?.touched)"
-        class="alert alert-danger"
+      <small
+        class="edit-task__error"
+        *ngIf="task.get('title')?.hasError('required')"
       >
-        <div *ngIf="order?.errors?.['required']">Order is required.</div>
-        <div *ngIf="order?.errors?.['pattern']">Title must be a number.</div>
-      </div>
+        {{ 'validation.required' | translate }}
+      </small>
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>{{ 'task.order' | translate | titlecase }}</mat-label>
       <input
         formControlName="order"
-        id="order"
         matInput
-        placeholder="Enter Order"
+        placeholder="{{ 'task.enter-order' | translate | titlecase }}"
         type="text"
-        required
       />
-    </mat-form-field>
-    <mat-form-field class="form-group">
-      <mat-label for="description">Description</mat-label>
-      <div
-        *ngIf="
-          description?.invalid && (description?.dirty || description?.touched)
-        "
-        class="alert alert-danger"
+      <small
+        class="edit-task__error"
+        *ngIf="task.get('order')?.hasError('required')"
       >
-        <div *ngIf="description?.errors?.['required']">Name is required.</div>
-        <div *ngIf="description?.errors?.['minlength']">
-          Description must be at least 3 characters long.
-        </div>
-      </div>
+        {{ 'validation.required' | translate }}
+      </small>
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>{{ 'task.description' | translate | titlecase }}</mat-label>
       <input
         formControlName="description"
-        id="description"
         matInput
-        placeholder="Enter Description"
+        placeholder="{{ 'task.enter-desc' | translate | titlecase }}"
         type="text"
-        required
       />
+      <small
+        class="edit-task__error"
+        *ngIf="task.get('order')?.hasError('required')"
+      >
+        {{ 'validation.required' | translate }}
+      </small>
     </mat-form-field>
     <div class="form-group">
-      <button type="submit" mat-button color="primary">Save</button>
+      <button type="submit" mat-button color="primary">
+        {{ 'task.process' | translate | titlecase }}
+      </button>
     </div>
   </form>
 </div>
