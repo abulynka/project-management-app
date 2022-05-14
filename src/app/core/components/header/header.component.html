@@ -1,9 +1,13 @@
-<header class="header">
+<header
+  class="header"
+  (scroll)="onscroll()"
+  [ngClass]="isAnimationOn ? 'shrink' : 'no-shrink'"
+>
   <mat-toolbar color="primary">
     <mat-toolbar-row class="header__toolbar-row">
-      <mat-icon class="header__menu header__burger" (click)="toggle()">{{
-        isShowMenu ? 'close' : 'menu'
-      }}</mat-icon>
+      <mat-icon class="header__menu header__burger" (click)="toggle()">
+        {{ isShowMenu ? 'close' : 'menu' }}
+      </mat-icon>
 
       <span
         class="header__title"

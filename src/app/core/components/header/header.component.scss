@@ -59,3 +59,15 @@
     }
   }
 }
+
+
+.no-shrink {
+  height: 64px;
+  transition: 0.5s linear;
+}
+
+.shrink {
+  height: 75px;
+  background-color: green;
+  transition: 0.5s linear;
+}

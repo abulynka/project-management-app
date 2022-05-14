@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, HostListener, OnDestroy, OnInit } from '@angular/core';
 import { MatSlideToggleChange } from '@angular/material/slide-toggle';
 import { Lang, LangService } from '../../services/lang.service';
 import { LangTitleItem, langTitleMap } from './utils/languageTitleMap';
@@ -8,12 +8,16 @@ import { MatDialog } from '@angular/material/dialog';
 import { EditBoardComponent } from '../../../project-management/components/edit-board/edit-board.component';
 import { Subject, takeUntil } from 'rxjs';
 
+const HEIGHT: number = 100;
+
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.scss'],
 })
 export class HeaderComponent implements OnInit, OnDestroy {
+  public isAnimationOn: boolean = false;
+
   public langTitle!: LangTitleItem;
 
   public isShowMenu: boolean = false;
@@ -30,6 +34,15 @@ export class HeaderComponent implements OnInit, OnDestroy {
     private router: Router,
     private dialog: MatDialog,
   ) {}
+
+  @HostListener('window:scroll', ['$event']) public onscroll(): void {
+    if (window.scrollY > HEIGHT) {
+      console.log(window.scrollY);
+      this.isAnimationOn = true;
+    } else {
+      this.isAnimationOn = false;
+    }
+  }
 
   public ngOnInit(): void {
     const curLang: Lang = this.langService.getLang();
