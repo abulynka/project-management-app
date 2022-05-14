@@ -9,13 +9,18 @@
     [cdkDropListData]="tasks"
     (cdkDropListDropped)="drop($event)"
   >
-    <div *ngFor="let task of tasks" class="column__task drag-el" cdkDrag>
+    <div
+      *ngFor="let task of tasks"
+      class="column__task drag-el"
+      cdkDrag
+      [cdkDragData]="task"
+    >
       <h3>{{ task.title }}</h3>
     </div>
-
-    <button class="board__btn-add" mat-stroked-button (click)="onAddTask()">
-      <mat-icon>add</mat-icon>
-      <span>{{ 'board.column.btn-add' | translate }}</span>
-    </button>
   </div>
+
+  <button class="board__btn-add" mat-stroked-button (click)="onAddTask()">
+    <mat-icon>add</mat-icon>
+    <span>{{ 'board.column.btn-add' | translate }}</span>
+  </button>
 </div>
