@@ -1,11 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { BoardsService } from '../../services/boards.service';
 import { BoardResponse, BoardShort } from '../../models/boards.model';
 import { TranslateService } from '@ngx-translate/core';
 import { MatDialog } from '@angular/material/dialog';
 import { ConfirmationModalComponent } from '../../../shared/confirmation-modal/confirmation-modal.component';
 import { EditBoardComponent } from '../../components/edit-board/edit-board.component';
+import { select, Store } from '@ngrx/store';
+import { ProjectManagementState } from '../../../redux/state.models';
+import { getBoards } from '../../../redux/selectors/project-management.selector';
+import { ProjectManagementActionType } from '../../../redux/actions/project-management.action';
 
 @Component({
   selector: 'app-boards',
@@ -20,20 +23,28 @@ export class BoardsComponent implements OnInit {
   public constructor(
     private route: ActivatedRoute,
     private router: Router,
-    private boardsService: BoardsService,
     private dialog: MatDialog,
     private translateService: TranslateService,
-  ) {
-    this.refreshBoardsList();
-  }
+    private store: Store<ProjectManagementState>,
+  ) {}
 
   private static capitalizeFirstLetter(message: string): string {
     return message.charAt(0).toUpperCase() + message.slice(1);
   }
 
   public ngOnInit(): void {
-    this.boardsService.boardProcessed$.subscribe(() => {
-      this.refreshBoardsList();
+    this.store.pipe(select(getBoards)).subscribe((boards: BoardResponse[]) => {
+      this.boards = [...boards].sort(
+        (item1: BoardResponse, item2: BoardResponse) => {
+          if (item1.title < item2.title) {
+            return -1;
+          } else if (item1.title === item2.title) {
+            return 0;
+          } else {
+            return 1;
+          }
+        },
+      );
     });
   }
 
@@ -65,8 +76,9 @@ export class BoardsComponent implements OnInit {
           .afterClosed()
           .subscribe((result: boolean) => {
             if (result) {
-              this.boardsService.deleteBoard(id).subscribe(() => {
-                this.refreshBoardsList();
+              this.store.dispatch({
+                type: ProjectManagementActionType.DeleteBoard,
+                payload: id,
               });
             }
           });
@@ -85,24 +97,6 @@ export class BoardsComponent implements OnInit {
       .componentInstance.boardProcessed$.subscribe(() => {
         this.dialog.closeAll();
       });
-  }
-
-  private refreshBoardsList(): void {
-    console.log('refresh');
-
-    this.boardsService.getBoards().subscribe((response: BoardResponse[]) => {
-      this.boards = response.sort(
-        (item1: BoardResponse, item2: BoardResponse) => {
-          if (item1.title < item2.title) {
-            return -1;
-          } else if (item1.title === item2.title) {
-            return 0;
-          } else {
-            return 1;
-          }
-        },
-      );
-    });
   }
 
   private getBoardTitle(id: string): string | undefined {

@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 import { Column, Task } from '../models/boards.model';
-import { TaskService } from './task/task.service';
 
 @Injectable({
   providedIn: 'root',
@@ -12,8 +11,6 @@ export class ColumnService {
   private columnList$: BehaviorSubject<[] | Column[]> = new BehaviorSubject(
     this.columnList,
   );
-
-  public constructor(private taskService: TaskService) {}
 
   public getState(): BehaviorSubject<[] | Column[]> {
     return this.columnList$;
@@ -35,6 +32,16 @@ export class ColumnService {
 
     this.columnList = list;
     this.columnList$.next(list);
+  }
+
+  public addTask(task: Task, columnId: Column['id']): void {
+    const columnIndex: number = this.columnList.findIndex(
+      (column: Column) => column.id === columnId,
+    );
+    const selectedColumn: Column = this.columnList[columnIndex];
+    selectedColumn.tasks = [...selectedColumn.tasks, task];
+
+    this.columnList$.next(this.columnList);
   }
 
   private newColumn(title: string): Column {
@@ -77,15 +84,5 @@ export class ColumnService {
 
   private pushNewItem(item: Column): Column[] {
     return (this.columnList = [...this.columnList, item]);
-  }
-
-  public addTask(task: Task, columnId: Column['id']): void {
-    const columnIndex = this.columnList.findIndex(
-      (column) => column.id === columnId,
-    );
-    const selectedColumn = this.columnList[columnIndex];
-    selectedColumn.tasks = [...selectedColumn.tasks, task];
-
-    this.columnList$.next(this.columnList);
   }
 }

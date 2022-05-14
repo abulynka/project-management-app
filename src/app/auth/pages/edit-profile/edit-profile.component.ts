@@ -8,7 +8,6 @@ import {
 import { TokenStorageService } from 'src/app/core/services/token-storage.service';
 import { UserService } from 'src/app/project-management/services/user.service';
 import { SignUpData } from '../../models/authorization.model';
-import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-edit-profile',
@@ -18,14 +17,11 @@ import { AuthService } from '../../services/auth.service';
 export class EditProfileComponent implements OnInit {
   public updateForm: FormGroup = {} as FormGroup;
 
-  public errorMessage: boolean = false;
-
   public userId: string | undefined = this.storageService.getUser()?.id;
 
   public constructor(
     public userService: UserService,
     public storageService: TokenStorageService,
-    public authService: AuthService,
     private formBuilder: FormBuilder,
   ) {}
 
@@ -38,8 +34,6 @@ export class EditProfileComponent implements OnInit {
       this.userService.updateUser(this.userId as string, value).subscribe({
         next: () => {},
       });
-    } else {
-      this.errorMessage = true;
     }
   }
 

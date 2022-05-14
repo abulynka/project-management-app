@@ -5,9 +5,7 @@
     </h4>
     <form [formGroup]="boardForm" class="edit-board__form">
       <mat-form-field appearance="fill">
-        <mat-label for="title">{{
-          'board.title' | translate | titlecase
-        }}</mat-label>
+        <mat-label>{{ 'board.title' | translate | titlecase }}</mat-label>
         <input
           matInput
           formControlName="title"
@@ -20,6 +18,15 @@
         >
           {{ 'validation.required' | translate }}
         </small>
+      </mat-form-field>
+
+      <mat-form-field appearance="fill">
+        <mat-label>{{ 'board.description' | translate | titlecase }}</mat-label>
+        <input
+          matInput
+          formControlName="description"
+          placeholder="{{ 'board.description' | translate | titlecase }}"
+        />
       </mat-form-field>
 
       <button type="submit" (click)="onSubmit()" mat-button>

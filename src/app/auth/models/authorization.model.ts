@@ -1,8 +1,3 @@
-export interface SignInData {
-  login: string;
-  password: string;
-}
-
 export interface SignInResponse {
   token: string;
 }

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 
 import { ActivatedRoute } from '@angular/router';
 import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
@@ -6,7 +6,10 @@ import { BehaviorSubject, Subject, takeUntil } from 'rxjs';
 
 import { ColumnService } from '../../services/column.service';
 import { Board, Column, Task } from '../../models/boards.model';
-import { BoardsService } from '../../services/boards.service';
+import { select, Store } from '@ngrx/store';
+import { ProjectManagementState } from '../../../redux/state.models';
+import { getBoardById } from '../../../redux/selectors/project-management.selector';
+
 import { TaskService } from '../../services/task/task.service';
 
 @Component({
@@ -14,7 +17,7 @@ import { TaskService } from '../../services/task/task.service';
   templateUrl: './board.component.html',
   styleUrls: ['./board.component.scss'],
 })
-export class BoardComponent implements OnInit {
+export class BoardComponent implements OnInit, OnDestroy {
   public board: Board = {} as Board;
 
   public columnList$: BehaviorSubject<[] | Column[]> | null = null;
@@ -24,23 +27,27 @@ export class BoardComponent implements OnInit {
   public constructor(
     private columnService: ColumnService,
     private route: ActivatedRoute,
-    private boardsService: BoardsService,
+    private store: Store<ProjectManagementState>,
     private taskService: TaskService,
   ) {}
 
   public ngOnInit(): void {
-    this.route.params.subscribe((params: any) => {
-      const boardId: string = params?.id;
-      if (boardId) {
-        this.boardsService
-          .getBoardById(boardId)
-          .pipe(takeUntil(this.destroy$))
-          .subscribe((board: Board) => {
-            this.board = board;
-            this.initColumnListStateObserver();
-          });
-      }
-    });
+    this.store
+      .pipe(
+        select(getBoardById(this.route.snapshot.params['id'])),
+        takeUntil(this.destroy$),
+      )
+      .subscribe((board: Board | undefined) => {
+        if (board) {
+          this.board = board;
+          this.initColumnListStateObserver();
+        }
+      });
+  }
+
+  public ngOnDestroy(): void {
+    this.destroy$.next();
+    this.destroy$.complete();
   }
 
   public onAddColumn(title: string = 'default'): void {
@@ -48,7 +55,6 @@ export class BoardComponent implements OnInit {
   }
 
   public dropColumn(event: CdkDragDrop<any[]>): void {
-    console.log({ event });
     if (event.previousContainer === event.container) {
       moveItemInArray(
         event.container.data,
@@ -63,8 +69,11 @@ export class BoardComponent implements OnInit {
     }
   }
 
-  public addNewTaskInColumn(event: Task['title'], columnId: Column['id']) {
-    const newTask = this.taskService.create(event);
+  public addNewTaskInColumn(
+    event: Task['title'],
+    columnId: Column['id'],
+  ): void {
+    const newTask: Task = this.taskService.create(event);
     this.columnService.addTask(newTask, columnId);
   }
 

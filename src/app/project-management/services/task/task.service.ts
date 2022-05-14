@@ -5,16 +5,15 @@ import { Task } from '../../models/boards.model';
   providedIn: 'root',
 })
 export class TaskService {
-  private newTaskDefaultData = {
+  private newTaskDefaultData: Task = {
     id: String(Math.random()),
+    title: '',
     order: 1,
     done: false,
     description: 'string',
     userId: 'userId',
     files: [],
   };
-
-  public constructor() {}
 
   public create(title: string): Task {
     return { ...this.newTaskDefaultData, title };

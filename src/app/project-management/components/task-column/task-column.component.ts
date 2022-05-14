@@ -1,10 +1,8 @@
-/* eslint-disable @typescript-eslint/indent */
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import {
   CdkDragDrop,
   moveItemInArray,
   transferArrayItem,
-  // transferArrayItem,
 } from '@angular/cdk/drag-drop';
 import { Task } from '../../models/boards.model';
 
@@ -23,8 +21,6 @@ export class TaskColumnComponent {
   >();
 
   public drop(event: CdkDragDrop<any[]>): void {
-    console.log({event});
-    
     if (event.previousContainer === event.container) {
       moveItemInArray(
         event.container.data,

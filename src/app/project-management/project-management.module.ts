@@ -20,6 +20,9 @@ import { TaskColumnComponent } from './components/task-column/task-column.compon
 import { EditTaskComponent } from './components/edit-task/edit-task.component';
 import { EditBoardComponent } from './components/edit-board/edit-board.component';
 import { ConfirmationModalModule } from '../shared/confirmation-modal/confirmation-modal.module';
+import { Store } from '@ngrx/store';
+import { ProjectManagementState } from '../redux/state.models';
+import { ProjectManagementActionType } from '../redux/actions/project-management.action';
 
 @NgModule({
   declarations: [
@@ -49,4 +52,8 @@ import { ConfirmationModalModule } from '../shared/confirmation-modal/confirmati
   ],
   exports: [BoardsComponent, EditBoardComponent],
 })
-export class ProjectManagementModule {}
+export class ProjectManagementModule {
+  public constructor(private store: Store<ProjectManagementState>) {
+    this.store.dispatch({ type: ProjectManagementActionType.LoadBoards });
+  }
+}
