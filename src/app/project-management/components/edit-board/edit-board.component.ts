@@ -51,6 +51,10 @@ export class EditBoardComponent implements OnInit, OnDestroy {
     return this.boardForm.get('title');
   }
 
+  /*public get description(): AbstractControl | null {
+    return this.boardForm.get('description');
+  }
+*/
   public ngOnInit(): void {
     this.initEditBoardForm();
   }
