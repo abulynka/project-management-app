@@ -22,7 +22,7 @@ import {
   styleUrls: ['./edit-board.component.scss'],
 })
 export class EditBoardComponent implements OnInit, OnDestroy {
-  public boardForm: FormGroup = {} as FormGroup;
+  public boardForm!: FormGroup;
 
   public board: Board | BoardShort | undefined;
 
@@ -46,11 +46,11 @@ export class EditBoardComponent implements OnInit, OnDestroy {
 
   public ngOnInit(): void {
     this.boardForm = this.formBuilder.group({
-      title: new FormControl('', [Validators.required]),
-      description: new FormControl('', [Validators.required]),
+      title: new FormControl(this.board?.title, [Validators.required]),
+      description: new FormControl(this.board?.description, [
+        Validators.required,
+      ]),
     });
-    this.boardForm.get('title')?.setValue(this.board?.title);
-    this.boardForm.get('description')?.setValue(this.board?.description);
   }
 
   public ngOnDestroy(): void {

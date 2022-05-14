@@ -14,6 +14,7 @@ import { CoreRoutingModule } from './core-routing.module';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatCardModule } from '@angular/material/card';
 import { MatListModule } from '@angular/material/list';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -33,6 +34,8 @@ import { MatListModule } from '@angular/material/list';
     MatCardModule,
     MatListModule,
     MatDialogModule,
+    FormsModule,
+    ReactiveFormsModule,
   ],
   exports: [
     HeaderComponent,
