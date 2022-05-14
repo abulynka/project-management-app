@@ -23,6 +23,17 @@
     "delete-message": "do you realy want to delete",
     "process": "process"
   },
+  "task": {
+    "task-create": "create task",
+    "task-update": "update task",
+    "title": "title",
+    "enter-title": "enter title",
+    "order": "order",
+    "enter-order": "enter order",
+    "description": "description",
+    "enter-desc": "enter description",
+    "process": "process"
+  },
   "not-found": {
     "first-part": "We are searching for your page...",
     "second-part": "...But we can not find it."
@@ -49,9 +60,9 @@
       "alexander"
     ],
     "position": [
-      "team lead",
-      "frontender",
-      "frontender"
+      "team lead, developer",
+      "developer",
+      "developer"
     ],
     "role": [
       "Teamlead, developed application architecture, routing, responsible for Husky, for the components: header, footer, main boards list, not found page, dialog box, edit task, welcome page. Added WebSockets support.",
@@ -70,6 +81,21 @@
     "login-email-invalid": "login email is invalid",
     "password": "password",
     "enter-password": "please, enter your password",
-    "sign-up": "sign up"
+    "name": "name",
+    "enter-name": "please, enter your name",
+    "name-is-required": "name is required",
+    "sign-up": "sign up",
+    "fail": "Signup failed!",
+    "success": " Your registration is successful!"
+  },
+  "validation": {
+    "required": "Data is required",
+    "max-length": "Data must be less than 20 characters long",
+    "min-length": "Data must be at least 3 characters long",
+    "number": "Data must be a number",
+    "password-length": "Password must be at least 6 characters"
+  },
+  "edit": {
+    "update": "update"
   }
 }
