@@ -1,47 +1,68 @@
 <section class="edit-profile">
   <div class="edit-profile__container">
-    <h4 class="edit-profile__title">Update</h4>
+    <h4 class="edit-profile__title">
+      {{ 'edit.update' | translate | titlecase }}
+    </h4>
     <form
+      [formGroup]="updateForm"
       class="edit-profile__form"
-      [formGroup]="user"
-      (ngSubmit)="onSubmit(user.value)"
+      (ngSubmit)="onSubmit(updateForm.value)"
     >
-      <div *ngIf="user.invalid" class="edit-profile__error">
-        Something goes wrong
-      </div>
-      <mat-form-field class="form-group">
-        <mat-label for="login">Login</mat-label>
+      <mat-form-field appearance="fill">
+        <mat-label>{{ 'auth.login' | translate | titlecase }}</mat-label>
         <input
           formControlName="login"
-          id="login"
           matInput
-          placeholder="Enter New Login"
+          placeholder="{{ 'auth.enter-login' | translate | titlecase }}"
           type="text"
-          required
         />
+        <small
+          class="signup__error"
+          *ngIf="updateForm.get('login')?.hasError('required')"
+        >
+          {{ 'auth.login-is-required' | translate | titlecase }}
+        </small>
+        <small
+          class="login__input-error"
+          *ngIf="updateForm.get('login')?.hasError('email')"
+        >
+          {{ 'auth.login-email-invalid' | translate | titlecase }}
+        </small>
       </mat-form-field>
-      <mat-form-field class="form-group">
-        <mat-label for="name">Name</mat-label>
+      <mat-form-field>
+        <mat-label>{{ 'auth.name' | translate | titlecase }}</mat-label>
         <input
           formControlName="name"
-          id="name"
           matInput
-          placeholder="Enter New Name"
+          placeholder="{{ 'auth.enter-name' | translate | titlecase }}"
           type="text"
         />
+        <small
+          class="signup__error"
+          *ngIf="updateForm.get('name')?.hasError('required')"
+        >
+          {{ 'auth.name-is-required' | translate | titlecase }}
+        </small>
       </mat-form-field>
-      <mat-form-field class="form-group">
-        <mat-label for="password">Password</mat-label>
+      <mat-form-field>
+        <mat-label>{{ 'auth.password' | translate | titlecase }}</mat-label>
         <input
           formControlName="password"
-          id="password"
           matInput
-          placeholder="Enter Password"
+          placeholder="{{ 'auth.enter-password' | translate | titlecase }}"
           type="password"
         />
+        <small
+          class="login__input-error"
+          *ngIf="updateForm.get('password')?.hasError('required')"
+        >
+          {{ 'auth.enter-password' | translate | titlecase }}
+        </small>
       </mat-form-field>
-      <div class="form-group">
-        <button type="submit" mat-button color="primary">Update</button>
+      <div>
+        <button type="submit" mat-button>
+          {{ 'edit.update' | translate | titlecase }}
+        </button>
       </div>
     </form>
   </div>

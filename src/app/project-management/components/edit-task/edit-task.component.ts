@@ -4,6 +4,7 @@ import {
   FormControl,
   Validators,
   AbstractControl,
+  FormBuilder,
 } from '@angular/forms';
 import { TokenStorageService } from 'src/app/core/services/token-storage.service';
 import {
@@ -11,8 +12,6 @@ import {
   UpdateTask,
 } from 'src/app/project-management/models/boards.model';
 import { TasksService } from 'src/app/project-management/services/tasks.service';
-
-const MIN_LENGTH: number = 3;
 
 @Component({
   selector: 'app-edit-task',
@@ -22,15 +21,16 @@ const MIN_LENGTH: number = 3;
 export class EditTaskComponent implements OnInit {
   public errorMessage: boolean = false;
 
-  public formTitle?: string | null;
+  public task: FormGroup = {} as FormGroup;
 
-  public task!: FormGroup;
+  public taskId: string | null = null;
 
   public userId?: string | null = this.storageService.getUser()?.id;
 
   public constructor(
     public storageService: TokenStorageService,
     public taskService: TasksService,
+    private formBuilder: FormBuilder,
   ) {}
 
   public get title(): AbstractControl | null {
@@ -46,15 +46,14 @@ export class EditTaskComponent implements OnInit {
   }
 
   public ngOnInit(): void {
-    this.initEditTaskForm(null);
+    this.initEditTaskForm();
   }
 
   public onSubmit(): void {
     const board: string = '';
     const column: string = '';
-    const taskId: string | null = null;
-    taskId
-      ? this.updateTask(board, column, taskId)
+    this.taskId
+      ? this.updateTask(board, column, this.taskId)
       : this.createNewTask(board, column);
   }
 
@@ -92,21 +91,14 @@ export class EditTaskComponent implements OnInit {
     }
   }
 
-  private initEditTaskForm(taskId: string | null): void {
-    this.formTitle = taskId ? 'Edit' : 'Create';
-    this.task = new FormGroup({
-      title: new FormControl('', [
-        Validators.required,
-        Validators.minLength(MIN_LENGTH),
-      ]),
+  private initEditTaskForm(): void {
+    this.task = this.formBuilder.group({
+      title: new FormControl('', [Validators.required]),
       order: new FormControl('', [
         Validators.required,
         Validators.pattern('^[0-9]*$'),
       ]),
-      description: new FormControl('', [
-        Validators.required,
-        Validators.minLength(MIN_LENGTH),
-      ]),
+      description: new FormControl('', [Validators.required]),
     });
   }
 }

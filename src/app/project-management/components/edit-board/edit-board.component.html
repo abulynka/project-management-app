@@ -5,12 +5,21 @@
     </h4>
     <form [formGroup]="boardForm" class="edit-board__form">
       <mat-form-field appearance="fill">
-        <mat-label>{{ 'board.title' | translate | titlecase }}</mat-label>
+        <mat-label for="title">{{
+          'board.title' | translate | titlecase
+        }}</mat-label>
         <input
           matInput
           formControlName="title"
-          placeholder="{{ 'board.title' | translate | titlecase }}"
+          placeholder="{{ 'value' | translate | titlecase }}"
+          type="text"
         />
+        <small
+          class="edit-task__error"
+          *ngIf="boardForm.get('title')?.hasError('required')"
+        >
+          {{ 'validation.required' | translate }}
+        </small>
       </mat-form-field>
 
       <button type="submit" (click)="onSubmit()" mat-button>

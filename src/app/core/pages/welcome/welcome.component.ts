@@ -28,8 +28,10 @@ export class WelcomeComponent implements OnInit {
   }
 
   private initTranslateDataObserver(): void {
-    this.translate.get('welcome').subscribe((data) => {
-      this.translateData = data;
+    this.translate.onLangChange.subscribe(() => {
+      this.translate.get('welcome').subscribe((data: translateData) => {
+        this.translateData = data;
+      });
     });
   }
 }
