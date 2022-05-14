@@ -16,9 +16,11 @@ export class TaskColumnComponent {
 
   @Input() public tasks!: Task[];
 
+  /* eslint-disable */
   @Output() public newTaskEvent: EventEmitter<Task['title']> = new EventEmitter<
     Task['title']
   >();
+  /* eslint-enable */
 
   public drop(event: CdkDragDrop<any[]>): void {
     if (event.previousContainer === event.container) {
