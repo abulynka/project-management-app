@@ -22,12 +22,12 @@
   <section
     cdkDropList
     cdkDropListOrientation="horizontal"
-    [cdkDropListData]="board.columns"
+    [cdkDropListData]="columns"
     (cdkDropListDropped)="dropColumn($event)"
   >
     <div cdkDropListGroup class="board__content drag-list">
       <app-task-column
-        *ngFor="let column of board.columns"
+        *ngFor="let column of columns"
         class="drag-el"
         [title]="column.title"
         [tasks]="column.tasks"
