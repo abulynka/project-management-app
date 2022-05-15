@@ -4,12 +4,15 @@ import {
   SignUpResponse,
 } from '../auth/models/authorization.model';
 
-import { Board, BoardShort } from '../project-management/models/boards.model';
+import { BoardShort, Column } from '../project-management/models/boards.model';
 
-export interface ProjectManagementState {
-  readonly boards: Board[];
+export interface BoardsState {
   readonly boardsShort: BoardShort[];
   readonly createdBoard: BoardShort | null;
+}
+
+export interface ColumnsState {
+  readonly columns: Record<string, Column[]>;
 }
 
 export interface AuthState {

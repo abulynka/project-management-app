@@ -1,7 +1,7 @@
 import { ActionCreator, createAction, props } from '@ngrx/store';
 import { BoardResponse } from '../../project-management/models/boards.model';
 
-export enum ProjectManagementActionType {
+export enum BoardsActionType {
   CreateBoard = 'create-board',
   CreatedBoard = 'created-board',
   UpdateBoard = 'update-board',
@@ -13,30 +13,30 @@ export enum ProjectManagementActionType {
 }
 
 export const createdBoard: ActionCreator<any> = createAction(
-  ProjectManagementActionType.CreatedBoard,
+  BoardsActionType.CreatedBoard,
   props<{
-    action: ProjectManagementActionType.CreatedBoard;
+    action: BoardsActionType.CreatedBoard;
     payload: BoardResponse;
   }>(),
 );
 
 export const updatedBoard: ActionCreator<any> = createAction(
-  ProjectManagementActionType.UpdatedBoard,
+  BoardsActionType.UpdatedBoard,
   props<{
-    action: ProjectManagementActionType.UpdatedBoard;
+    action: BoardsActionType.UpdatedBoard;
     payload: BoardResponse;
   }>(),
 );
 
 export const deletedBoard: ActionCreator<any> = createAction(
-  ProjectManagementActionType.DeletedBoard,
+  BoardsActionType.DeletedBoard,
   props<{
-    action: ProjectManagementActionType.DeletedBoard;
+    action: BoardsActionType.DeletedBoard;
     payload: BoardResponse;
   }>(),
 );
 
 export const loadedBoards: ActionCreator<any> = createAction(
-  ProjectManagementActionType.LoadedBoards,
+  BoardsActionType.LoadedBoards,
   props<{ payload: BoardResponse[] }>(),
 );
