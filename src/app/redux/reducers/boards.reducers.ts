@@ -37,7 +37,7 @@ export const reducer: ActionReducer<any> = createReducer(
 
   on(deletedBoard, (state: any, action: any): BoardsState => {
     return {
-      boardsShort: state.boards.filter((board: BoardShort) => {
+      boardsShort: state.boardsShort.filter((board: BoardShort) => {
         return board.id !== action.payload;
       }),
       createdBoard: null,
