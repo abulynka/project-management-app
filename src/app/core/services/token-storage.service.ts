@@ -23,6 +23,10 @@ export class TokenStorageService {
     sessionStorage.removeItem(TOKEN_KEY);
   }
 
+  public removeUser(): void {
+    sessionStorage.removeItem(USER_KEY);
+  }
+
   public getToken(): string | null {
     return sessionStorage.getItem(TOKEN_KEY);
   }

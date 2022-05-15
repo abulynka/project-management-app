@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { map, Observable } from 'rxjs';
 import {
   SignUpData,
   SignUpResponse,
@@ -21,8 +21,18 @@ export class UserService {
     return this.http.get<Response>(`${apiRoot}/users/${id}`);
   }
 
-  public updateUser(id: string, _userData: SignUpData): Observable<Response> {
-    return this.http.put<Response>(`${apiRoot}/users/${id}`, _userData);
+  public getUserByLoginName(
+    login: string,
+  ): Observable<SignUpResponse | undefined> {
+    return this.getUsers().pipe(
+      map((users: SignUpResponse[]) => {
+        return users.find((user: SignUpResponse) => user.login === login);
+      }),
+    );
+  }
+
+  public updateUser(id: string, userData: SignUpData): Observable<Response> {
+    return this.http.put<Response>(`${apiRoot}/users/${id}`, userData);
   }
 
   public deleteUser(id: string): Observable<Response> {
