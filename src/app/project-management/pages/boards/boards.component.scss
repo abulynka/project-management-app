@@ -1,5 +1,5 @@
 .boards {
-  height: 100%;
+  height: var(--main-height);
   overflow: auto;
 
   &__item {
