@@ -10,12 +10,12 @@ import {
   FormBuilder,
 } from '@angular/forms';
 import { select, Store } from '@ngrx/store';
-import { ProjectManagementState } from '../../../redux/state.models';
+import { BoardsState } from '../../../redux/state.models';
 import {
   createdBoard,
-  ProjectManagementActionType,
+  BoardsActionType,
   updatedBoard,
-} from '../../../redux/actions/project-management.action';
+} from '../../../redux/actions/boards.action';
 
 @Component({
   selector: 'app-edit-board',
@@ -23,7 +23,7 @@ import {
   styleUrls: ['./edit-board.component.scss'],
 })
 export class EditBoardComponent implements OnInit, OnDestroy {
-  public boardForm: FormGroup = {} as FormGroup;
+  public boardForm!: FormGroup;
 
   public board: Board | BoardShort | undefined;
 
@@ -36,10 +36,14 @@ export class EditBoardComponent implements OnInit, OnDestroy {
 
   public constructor(
     private formBuilder: FormBuilder,
-    private store: Store<ProjectManagementState>,
+    private store: Store<BoardsState>,
     @Inject(MAT_DIALOG_DATA)
     public data: { board: BoardShort | Board | undefined },
-  ) {}
+  ) {
+    if (data) {
+      this.board = data.board;
+    }
+  }
 
   public get title(): AbstractControl | null {
     return this.boardForm.get('title');
@@ -62,7 +66,7 @@ export class EditBoardComponent implements OnInit, OnDestroy {
     if (this.boardForm.status === 'VALID') {
       if (this.board) {
         this.store.dispatch({
-          type: ProjectManagementActionType.UpdateBoard,
+          type: BoardsActionType.UpdateBoard,
           payload: {
             id: this.board.id,
             title: this.boardForm.get('title')?.value,
@@ -77,7 +81,7 @@ export class EditBoardComponent implements OnInit, OnDestroy {
           });
       } else {
         this.store.dispatch({
-          type: ProjectManagementActionType.CreateBoard,
+          type: BoardsActionType.CreateBoard,
           payload: {
             title: this.boardForm.get('title')?.value,
             description: this.boardForm.get('description')?.value,
@@ -87,9 +91,7 @@ export class EditBoardComponent implements OnInit, OnDestroy {
         this.store
           .pipe(select(createdBoard), takeUntil(this.destroy$))
           .subscribe((value: any) => {
-            this.boardProcessedSource.next(
-              value.projectManagement.createdBoard.id,
-            );
+            this.boardProcessedSource.next(value.boards.createdBoard.id);
           });
       }
     }

@@ -6,9 +6,9 @@ import { MatDialog } from '@angular/material/dialog';
 import { ConfirmationModalComponent } from '../../../shared/confirmation-modal/confirmation-modal.component';
 import { EditBoardComponent } from '../../components/edit-board/edit-board.component';
 import { select, Store } from '@ngrx/store';
-import { ProjectManagementState } from '../../../redux/state.models';
-import { getBoards } from '../../../redux/selectors/project-management.selector';
-import { ProjectManagementActionType } from '../../../redux/actions/project-management.action';
+import { BoardsState } from '../../../redux/state.models';
+import { getBoards } from '../../../redux/selectors/boards.selector';
+import { BoardsActionType } from '../../../redux/actions/boards.action';
 
 @Component({
   selector: 'app-boards',
@@ -25,7 +25,7 @@ export class BoardsComponent implements OnInit {
     private router: Router,
     private dialog: MatDialog,
     private translateService: TranslateService,
-    private store: Store<ProjectManagementState>,
+    private store: Store<BoardsState>,
   ) {}
 
   private static capitalizeFirstLetter(message: string): string {
@@ -77,7 +77,7 @@ export class BoardsComponent implements OnInit {
           .subscribe((result: boolean) => {
             if (result) {
               this.store.dispatch({
-                type: ProjectManagementActionType.DeleteBoard,
+                type: BoardsActionType.DeleteBoard,
                 payload: id,
               });
             }

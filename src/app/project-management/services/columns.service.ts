@@ -10,8 +10,8 @@ import { apiRoot } from 'src/environments/environment';
 export class ColumnsService {
   public constructor(public http: HttpClient) {}
 
-  public getAllColumns(boardId: string): Observable<ColumnResponse> {
-    return this.http.get<ColumnResponse>(
+  public getAllColumns(boardId: string): Observable<ColumnResponse[]> {
+    return this.http.get<ColumnResponse[]>(
       `${apiRoot}/boards/${boardId}/columns`,
     );
   }

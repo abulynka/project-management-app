@@ -68,6 +68,7 @@
           <mat-slide-toggle
             class="header__toggle"
             (change)="changeLanguage($event)"
+            [checked]="langaugeChecked"
             >{{ langTitle.short }}</mat-slide-toggle
           >
         </li>

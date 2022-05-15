@@ -7,6 +7,7 @@ import { Router } from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';
 import { EditBoardComponent } from '../../../project-management/components/edit-board/edit-board.component';
 import { Subject, takeUntil } from 'rxjs';
+import { DataStorageService } from '../../services/data-storage.service';
 
 const HEIGHT: number = 100;
 
@@ -24,15 +25,20 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
   public authorized: boolean = false;
 
+  public langaugeChecked: boolean = false;
+
   private component!: EditBoardComponent;
 
   private destroy$: Subject<void> = new Subject<void>();
+
+  private readonly lang: string = 'language';
 
   public constructor(
     private langService: LangService,
     private authService: AuthService,
     private router: Router,
     private dialog: MatDialog,
+    private dataStorageService: DataStorageService,
   ) {}
 
   @HostListener('window:scroll', ['$event']) public onscroll(): void {
@@ -44,8 +50,11 @@ export class HeaderComponent implements OnInit, OnDestroy {
   }
 
   public ngOnInit(): void {
-    const curLang: Lang = this.langService.getLang();
-    this.setLanguageTitle(curLang);
+    const lang: Lang =
+      (this.dataStorageService.getItem(this.lang) as Lang) || 'en';
+    this.switchLanguage(lang);
+    this.langaugeChecked = lang !== 'en';
+
     this.authorized = this.authService.authorized();
     this.authService.authorizeChangeStatus$.subscribe((authorized: boolean) => {
       this.authorized = authorized;
@@ -59,11 +68,9 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
   public changeLanguage = (event: MatSlideToggleChange): void => {
     if (event.checked) {
-      this.setLanguageTitle('ru');
-      this.langService.setLang('ru');
+      this.switchLanguage('ru');
     } else {
-      this.setLanguageTitle('en');
-      this.langService.setLang('en');
+      this.switchLanguage('en');
     }
   };
 
@@ -101,6 +108,12 @@ export class HeaderComponent implements OnInit, OnDestroy {
         this.dialog.closeAll();
         this.router.navigate(['boards', id]).then();
       });
+  }
+
+  private switchLanguage(lang: Lang): void {
+    this.setLanguageTitle(lang);
+    this.langService.setLang(lang);
+    this.dataStorageService.setItem(this.lang, lang);
   }
 
   private setLanguageTitle(lang: Lang): void {

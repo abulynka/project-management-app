@@ -24,14 +24,15 @@ export class WelcomeComponent implements OnInit {
   public constructor(private translate: TranslateService) {}
 
   public ngOnInit(): void {
-    this.initTranslateDataObserver();
+    this.updateTranslateData();
+    this.translate.onLangChange.subscribe(() => {
+      this.updateTranslateData();
+    });
   }
 
-  private initTranslateDataObserver(): void {
-    this.translate.onLangChange.subscribe(() => {
-      this.translate.get('welcome').subscribe((data: translateData) => {
-        this.translateData = data;
-      });
+  private updateTranslateData(): void {
+    this.translate.get('welcome').subscribe((data: translateData) => {
+      this.translateData = data;
     });
   }
 }

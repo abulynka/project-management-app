@@ -21,8 +21,9 @@ import { EditTaskComponent } from './components/edit-task/edit-task.component';
 import { EditBoardComponent } from './components/edit-board/edit-board.component';
 import { ConfirmationModalModule } from '../shared/confirmation-modal/confirmation-modal.module';
 import { Store } from '@ngrx/store';
-import { ProjectManagementState } from '../redux/state.models';
-import { ProjectManagementActionType } from '../redux/actions/project-management.action';
+import { BoardsState } from '../redux/state.models';
+import { BoardsActionType } from '../redux/actions/boards.action';
+import { EditColumnComponent } from './components/edit-column/edit-column.component';
 
 @NgModule({
   declarations: [
@@ -33,18 +34,18 @@ import { ProjectManagementActionType } from '../redux/actions/project-management
     EditTaskComponent,
     TaskColumnComponent,
     EditBoardComponent,
+    EditColumnComponent,
   ],
   imports: [
     FormsModule,
+    ReactiveFormsModule,
     CommonModule,
-    FormsModule,
     ProjectManagementRoutingModule,
     DragDropModule,
     TranslateModule,
     MatListModule,
     MatIconModule,
     MatFormFieldModule,
-    ReactiveFormsModule,
     MatButtonModule,
     MatInputModule,
     ConfirmationModalModule,
@@ -53,7 +54,7 @@ import { ProjectManagementActionType } from '../redux/actions/project-management
   exports: [BoardsComponent, EditBoardComponent],
 })
 export class ProjectManagementModule {
-  public constructor(private store: Store<ProjectManagementState>) {
-    this.store.dispatch({ type: ProjectManagementActionType.LoadBoards });
+  public constructor(private store: Store<BoardsState>) {
+    this.store.dispatch({ type: BoardsActionType.LoadBoards });
   }
 }

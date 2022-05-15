@@ -4,6 +4,7 @@ import { map, Observable, Subject } from 'rxjs';
 import { apiRoot } from 'src/environments/environment';
 import { SignInResponse, SignUpResponse } from '../models/authorization.model';
 import { TokenStorageService } from '../../core/services/token-storage.service';
+import { UserService } from '../../project-management/services/user.service';
 
 @Injectable({
   providedIn: 'root',
@@ -17,6 +18,7 @@ export class AuthService {
   public constructor(
     public http: HttpClient,
     public tokenStorage: TokenStorageService,
+    public userService: UserService,
   ) {}
 
   public authorized(): boolean {
@@ -30,6 +32,14 @@ export class AuthService {
         map((response: SignInResponse): void => {
           this.tokenStorage.saveToken(response);
           this.authorizeChangeStatusSource.next(this.authorized());
+
+          this.userService
+            .getUserByLoginName(login)
+            .subscribe((user: SignUpResponse | undefined): void => {
+              if (user) {
+                this.tokenStorage.saveUser(user);
+              }
+            });
         }),
       );
   }
@@ -48,6 +58,7 @@ export class AuthService {
 
   public logout(): void {
     this.tokenStorage.removeToken();
+    this.tokenStorage.removeUser();
     this.authorizeChangeStatusSource.next(this.authorized());
   }
 }
