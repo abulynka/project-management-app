@@ -37,7 +37,6 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
   @HostListener('window:scroll', ['$event']) public onscroll(): void {
     if (window.scrollY > HEIGHT) {
-      console.log(window.scrollY);
       this.isAnimationOn = true;
     } else {
       this.isAnimationOn = false;

@@ -97,10 +97,10 @@ export class EditBoardComponent implements OnInit, OnDestroy {
 
   private initEditBoardForm(): void {
     this.boardForm = this.formBuilder.group({
-      title: new FormControl('', [Validators.required]),
-      description: new FormControl('', [Validators.required]),
+      title: new FormControl(this.board?.title, [Validators.required]),
+      description: new FormControl(this.board?.description, [
+        Validators.required,
+      ]),
     });
-    this.title?.setValue(this.board?.title);
-    this.description?.setValue(this.board?.description);
   }
 }

@@ -2,9 +2,7 @@
   <mat-toolbar color="primary">
     <mat-toolbar-row
       class="header__toolbar-row"
-      [ngClass]="
-        isAnimationOn ? 'header__toolbar-row_onscroll' : 'header__toolbar-row'
-      "
+      [class.header__toolbar-row_onscroll]="isAnimationOn"
     >
       <mat-icon class="header__menu header__burger" (click)="toggle()">
         {{ isShowMenu ? 'close' : 'menu' }}
