@@ -20,7 +20,11 @@ import { TaskService } from '../../services/task/task.service';
 export class BoardComponent implements OnInit, OnDestroy {
   public board: Board = {} as Board;
 
+  public title: string = '';
+
   public columnList$: BehaviorSubject<[] | Column[]> | null = null;
+
+  public titleSwitch: boolean = false;
 
   private destroy$: Subject<void> = new Subject<void>();
 
@@ -40,6 +44,7 @@ export class BoardComponent implements OnInit, OnDestroy {
       .subscribe((board: Board | undefined) => {
         if (board) {
           this.board = board;
+          this.title = this.board.title;
           this.initColumnListStateObserver();
         }
       });
@@ -75,6 +80,14 @@ export class BoardComponent implements OnInit, OnDestroy {
   ): void {
     const newTask: Task = this.taskService.create(event);
     this.columnService.addTask(newTask, columnId);
+  }
+
+  public titleSwitchClick(): void {
+    this.titleSwitch = !this.titleSwitch;
+  }
+
+  public titleSwitchClickAndSave(): void {
+    this.titleSwitchClick();
   }
 
   private initColumnListStateObserver(): void {

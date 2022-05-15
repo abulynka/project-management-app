@@ -1,6 +1,22 @@
 <div class="board">
   <header class="board__header">
-    <h2 class="board__title">{{ board.title }}</h2>
+    <h2 *ngIf="!titleSwitch" class="board__title" (click)="titleSwitchClick()">
+      {{ title }}
+    </h2>
+    <input
+      *ngIf="titleSwitch"
+      class="board__title"
+      matInput
+      [(ngModel)]="title"
+    />
+    <button
+      *ngIf="titleSwitch"
+      mat-stroked-button
+      class="board__title-save"
+      (click)="titleSwitchClickAndSave()"
+    >
+      <mat-icon>save</mat-icon>
+    </button>
   </header>
 
   <section
