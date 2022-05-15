@@ -24,7 +24,7 @@
     "delete-message": "do you realy want to delete",
     "process": "process"
   },
-  "task": {
+  "task-form": {
     "task-create": "create task",
     "task-update": "update task",
     "title": "title",

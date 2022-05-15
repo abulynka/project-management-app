@@ -60,7 +60,7 @@
         </small>
       </mat-form-field>
       <div>
-        <button type="submit" mat-button>
+        <button type="submit" mat-button [disabled]="updateForm.invalid">
           {{ 'edit.update' | translate | titlecase }}
         </button>
       </div>

@@ -19,8 +19,6 @@ import { TasksService } from 'src/app/project-management/services/tasks.service'
   styleUrls: ['./edit-task.component.scss'],
 })
 export class EditTaskComponent implements OnInit {
-  public errorMessage: boolean = false;
-
   public task: FormGroup = {} as FormGroup;
 
   public taskId: string | null = null;
@@ -70,8 +68,6 @@ export class EditTaskComponent implements OnInit {
       this.taskService.updateTask(board, column, taskId, body).subscribe({
         next: () => {},
       });
-    } else {
-      this.errorMessage = true;
     }
   }
 
@@ -86,8 +82,6 @@ export class EditTaskComponent implements OnInit {
       this.taskService.createTask(board, column, body).subscribe({
         next: () => {},
       });
-    } else {
-      this.errorMessage = true;
     }
   }
 

@@ -2,17 +2,17 @@
   <h4 class="edit-task__title">
     {{
       taskId
-        ? ('task.task-update' | translate | titlecase)
-        : ('task.task-create' | translate | titlecase)
+        ? ('task-form.task-update' | translate | titlecase)
+        : ('task-form.task-create' | translate | titlecase)
     }}
   </h4>
   <form class="edit-task__form" [formGroup]="task" (ngSubmit)="onSubmit()">
     <mat-form-field>
-      <mat-label>{{ 'task.title' | translate | titlecase }}</mat-label>
+      <mat-label>{{ 'task-form.title' | translate | titlecase }}</mat-label>
       <input
         formControlName="title"
         matInput
-        placeholder="{{ 'task.enter-title' | translate | titlecase }}"
+        placeholder="{{ 'task-form.enter-title' | translate | titlecase }}"
         type="text"
       />
       <small
@@ -23,11 +23,11 @@
       </small>
     </mat-form-field>
     <mat-form-field>
-      <mat-label>{{ 'task.order' | translate | titlecase }}</mat-label>
+      <mat-label>{{ 'task-form.order' | translate | titlecase }}</mat-label>
       <input
         formControlName="order"
         matInput
-        placeholder="{{ 'task.enter-order' | translate | titlecase }}"
+        placeholder="{{ 'task-form.enter-order' | translate | titlecase }}"
         type="text"
       />
       <small
@@ -38,11 +38,13 @@
       </small>
     </mat-form-field>
     <mat-form-field>
-      <mat-label>{{ 'task.description' | translate | titlecase }}</mat-label>
+      <mat-label>{{
+        'task-form.description' | translate | titlecase
+      }}</mat-label>
       <input
         formControlName="description"
         matInput
-        placeholder="{{ 'task.enter-desc' | translate | titlecase }}"
+        placeholder="{{ 'task-form.enter-desc' | translate | titlecase }}"
         type="text"
       />
       <small
@@ -53,8 +55,8 @@
       </small>
     </mat-form-field>
     <div class="form-group">
-      <button type="submit" mat-button color="primary">
-        {{ 'task.process' | translate | titlecase }}
+      <button type="submit" mat-button [disabled]="task.invalid">
+        {{ 'task-form.process' | translate | titlecase }}
       </button>
     </div>
   </form>

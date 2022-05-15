@@ -5,6 +5,7 @@ import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 import {
   FormControl,
   FormGroup,
+  AbstractControl,
   Validators,
   FormBuilder,
 } from '@angular/forms';
@@ -44,13 +45,16 @@ export class EditBoardComponent implements OnInit, OnDestroy {
     }
   }
 
+  public get title(): AbstractControl | null {
+    return this.boardForm.get('title');
+  }
+
+  public get description(): AbstractControl | null {
+    return this.boardForm.get('description');
+  }
+
   public ngOnInit(): void {
-    this.boardForm = this.formBuilder.group({
-      title: new FormControl(this.board?.title, [Validators.required]),
-      description: new FormControl(this.board?.description, [
-        Validators.required,
-      ]),
-    });
+    this.initEditBoardForm();
   }
 
   public ngOnDestroy(): void {
@@ -91,5 +95,14 @@ export class EditBoardComponent implements OnInit, OnDestroy {
           });
       }
     }
+  }
+
+  private initEditBoardForm(): void {
+    this.boardForm = this.formBuilder.group({
+      title: new FormControl(this.board?.title, [Validators.required]),
+      description: new FormControl(this.board?.description, [
+        Validators.required,
+      ]),
+    });
   }
 }
