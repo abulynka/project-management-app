@@ -4,11 +4,15 @@
   [(ngModel)]="selectedOptions"
   (ngModelChange)="openBoard()"
 >
-  <mat-list-option *ngFor="let board of boards" [value]="board.id">
+  <mat-list-option
+    *ngFor="let board of boards"
+    [value]="board.id"
+    class="boards__option"
+  >
     <section class="boards__item">
-      {{ board.title }}
-      <mat-icon (click)="deleteBoard($event, board.id)">delete</mat-icon>
       <mat-icon (click)="editBoard($event, board.id)">edit</mat-icon>
+      <mat-icon (click)="deleteBoard($event, board.id)">delete</mat-icon>
+      {{ board.title }}
     </section>
   </mat-list-option>
 </mat-selection-list>

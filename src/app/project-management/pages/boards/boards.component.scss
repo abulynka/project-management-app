@@ -1,21 +1,43 @@
+@import '../../../../styles/settings/mixins';
+
 .boards {
-  height: 100%;
-  overflow: auto;
+  max-height: calc(100vh - var(--header-height) - var(--footer-height));
+  min-height: calc(100vh - var(--header-height) - var(--footer-height));
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  margin: 8px 15px 15px;
+  align-content: flex-start;
+
+  @include smart {
+    flex-wrap: nowrap;
+  }
+
+  &__option {
+    max-width: 320px;
+    min-height: 30px;
+    padding: 20px;
+    margin: 5px 5px;
+    background-color: rgba(0,0,0,.04);
+    cursor: pointer;
+    border-radius: 9px;
+    transition: all .3s;
+
+    &:hover {
+      transform: scale(1.01);
+    }
+
+    @include smart {
+      max-width: 270px;
+    }
+  }
 
   &__item {
     display: flex;
     align-items: center;
 
-    background-color: rgb(190, 187, 187);
-    border-radius: 3px;
-    box-shadow: 0 1px 0 #091e4240;
-    cursor: pointer;
-    display: block;
-    margin-bottom: 8px;
-    max-width: 300px;
-    min-height: 20px;
-    position: relative;
-    text-decoration: none;
-    z-index: 0;
+    & > * {
+      margin-right: 8px;
+    }
   }
 }
