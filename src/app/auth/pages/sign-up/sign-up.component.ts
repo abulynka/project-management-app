@@ -3,6 +3,7 @@ import { SignUpResponse } from '../../models/authorization.model';
 import { AuthService } from '../../services/auth.service';
 import { TokenStorageService } from '../../../core/services/token-storage.service';
 import {
+  AbstractControl,
   FormBuilder,
   FormControl,
   FormGroup,
@@ -34,14 +35,26 @@ export class SignUpComponent implements OnInit {
     private formBuilder: FormBuilder,
   ) {}
 
+  public get login(): AbstractControl | null {
+    return this.signUpForm.get('login');
+  }
+
+  public get name(): AbstractControl | null {
+    return this.signUpForm.get('name');
+  }
+
+  public get password(): AbstractControl | null {
+    return this.signUpForm.get('password');
+  }
+
   public ngOnInit(): void {
     this.initSignUpForm();
   }
 
   public onSubmit(): void {
-    const login: string = this.signUpForm.get('login')?.value;
-    const name: string = this.signUpForm.get('name')?.value;
-    const password: string = this.signUpForm.get('password')?.value;
+    const login: string = this.login?.value;
+    const name: string = this.name?.value;
+    const password: string = this.password?.value;
 
     this.authService.signUp(name, login, password).subscribe({
       next: (response: SignUpResponse) => {
@@ -74,9 +87,9 @@ export class SignUpComponent implements OnInit {
 
   public initSignUpForm(): void {
     this.signUpForm = this.formBuilder.group({
-      login: new FormControl(null, [Validators.required, Validators.email]),
-      name: new FormControl(null, [Validators.required]),
-      password: new FormControl(null, [Validators.required]),
+      login: new FormControl('', [Validators.required, Validators.email]),
+      name: new FormControl('', [Validators.required]),
+      password: new FormControl('', [Validators.required]),
     });
   }
 }

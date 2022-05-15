@@ -39,9 +39,9 @@ export class EditProfileComponent implements OnInit {
 
   public initUpdateForm(): void {
     this.updateForm = this.formBuilder.group({
-      login: new FormControl(null, [Validators.required, Validators.email]),
-      name: new FormControl(null, [Validators.required]),
-      password: new FormControl(null, [Validators.required]),
+      login: new FormControl('', [Validators.required, Validators.email]),
+      name: new FormControl('', [Validators.required]),
+      password: new FormControl('', [Validators.required]),
     });
   }
 }

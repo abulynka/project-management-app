@@ -3,6 +3,12 @@
   position: sticky;
   top: 0;
   z-index: 10;
+  transition: all .25s ease-out;
+
+  & .header__toolbar-row_onscroll {
+    background-color: #7c43bd;
+    transform: scaleY(1.1);
+  }
 
   &__title {
     cursor: pointer;

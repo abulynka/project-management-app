@@ -39,16 +39,14 @@ export class EditBoardComponent implements OnInit, OnDestroy {
     private store: Store<ProjectManagementState>,
     @Inject(MAT_DIALOG_DATA)
     public data: { board: BoardShort | Board | undefined },
-  ) {
-    if (data) {
-      this.board = data.board;
-      this.boardForm.get('title')?.setValue(this.board?.title);
-      this.boardForm.get('description')?.setValue(this.board?.description);
-    }
-  }
+  ) {}
 
   public get title(): AbstractControl | null {
     return this.boardForm.get('title');
+  }
+
+  public get description(): AbstractControl | null {
+    return this.boardForm.get('description');
   }
 
   public ngOnInit(): void {
@@ -99,8 +97,10 @@ export class EditBoardComponent implements OnInit, OnDestroy {
 
   private initEditBoardForm(): void {
     this.boardForm = this.formBuilder.group({
-      title: new FormControl('', [Validators.required]),
+      title: new FormControl(this.board?.title, [Validators.required]),
+      description: new FormControl(this.board?.description, [
+        Validators.required,
+      ]),
     });
-    this.boardForm.get('title')?.setValue(this.board?.title);
   }
 }

@@ -19,16 +19,10 @@
           type="text"
           formControlName="login"
         />
-        <small
-          class="signup__error"
-          *ngIf="signUpForm.get('login')?.hasError('required')"
-        >
+        <small class="signup__error" *ngIf="login?.hasError('required')">
           {{ 'auth.login-is-required' | translate | titlecase }}
         </small>
-        <small
-          class="login__input-error"
-          *ngIf="signUpForm.get('login')?.hasError('email')"
-        >
+        <small class="login__input-error" *ngIf="login?.hasError('email')">
           {{ 'auth.login-email-invalid' | translate | titlecase }}
         </small>
       </mat-form-field>
@@ -40,10 +34,7 @@
           type="text"
           formControlName="name"
         />
-        <small
-          class="signup__error"
-          *ngIf="signUpForm.get('name')?.hasError('required')"
-        >
+        <small class="signup__error" *ngIf="name?.hasError('required')">
           {{ 'auth.name-is-required' | translate | titlecase }}
         </small>
       </mat-form-field>
@@ -57,13 +48,13 @@
         />
         <small
           class="login__input-error"
-          *ngIf="signUpForm.get('password')?.hasError('required')"
+          *ngIf="password?.hasError('required')"
         >
           {{ 'auth.enter-password' | translate | titlecase }}
         </small>
       </mat-form-field>
       <div>
-        <button type="submit" mat-button>
+        <button type="submit" mat-button [disabled]="signUpForm.invalid">
           {{ 'auth.sign-up' | translate | titlecase }}
         </button>
       </div>
