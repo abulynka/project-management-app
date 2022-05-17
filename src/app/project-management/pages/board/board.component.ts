@@ -2,7 +2,7 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 
 import { ActivatedRoute } from '@angular/router';
 import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
-import { BehaviorSubject, Subject, takeUntil } from 'rxjs';
+import { BehaviorSubject, forkJoin, Subject, takeUntil } from 'rxjs';
 
 import { ColumnService } from '../../services/column.service';
 import {
@@ -18,6 +18,8 @@ import { ColumnsService } from '../../services/columns.service';
 import { BoardsService } from '../../services/boards.service';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { EditColumnComponent } from '../../components/edit-column/edit-column.component';
+import { ConfirmationModalComponent } from '../../../shared/confirmation-modal/confirmation-modal.component';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-board',
@@ -27,7 +29,7 @@ import { EditColumnComponent } from '../../components/edit-column/edit-column.co
 export class BoardComponent implements OnInit, OnDestroy {
   public board: BoardShort = {} as BoardShort;
 
-  public columns: ColumnResponse[] = [];
+  public columnsData: ColumnResponse[] = [];
 
   public title: string = '';
 
@@ -44,7 +46,27 @@ export class BoardComponent implements OnInit, OnDestroy {
     private columnsService: ColumnsService,
     private boardsService: BoardsService,
     private dialog: MatDialog,
+    private translateService: TranslateService,
   ) {}
+
+  public get columns(): ColumnResponse[] {
+    return this.columnsData;
+  }
+
+  public set columns(columns: ColumnResponse[]) {
+    if (columns) {
+      this.columnsData = [...columns].sort(
+        (column1: ColumnResponse, column2: ColumnResponse) => {
+          if (column1.order < column2.order) {
+            return -1;
+          } else if (column1.order > column2.order) {
+            return 1;
+          }
+          return 0;
+        },
+      );
+    }
+  }
 
   public ngOnInit(): void {
     this.store
@@ -73,13 +95,30 @@ export class BoardComponent implements OnInit, OnDestroy {
   }
 
   public onDeleteColumn(columnId: string): void {
-    this.columnsService
-      .deleteColumn(this.board.id, columnId)
-      .pipe(takeUntil(this.destroy$))
-      .subscribe(() => {
-        this.columns = this.columns.filter(
-          (column: ColumnResponse) => column.id !== columnId,
-        );
+    this.translateService
+      .get(['column.delete-title', 'column.delete-message'])
+      .subscribe((translates: Record<string, string>) => {
+        this.dialog
+          .open(ConfirmationModalComponent, {
+            minWidth: '320px',
+            data: {
+              title: translates['column.delete-title'],
+              message: `${translates['column.delete-message']}?`,
+            },
+          })
+          .afterClosed()
+          .subscribe((result: boolean) => {
+            if (result) {
+              this.columnsService
+                .deleteColumn(this.board.id, columnId)
+                .pipe(takeUntil(this.destroy$))
+                .subscribe(() => {
+                  this.columns = this.columns.filter(
+                    (column: ColumnResponse) => column.id !== columnId,
+                  );
+                });
+            }
+          });
       });
   }
 
@@ -90,12 +129,10 @@ export class BoardComponent implements OnInit, OnDestroy {
     dialogInstance.componentInstance.columnProcessed$
       .pipe(takeUntil(this.destroy$))
       .subscribe(() => {
-        const column: ColumnResponse = this.columnService.add(
+        const column: ColumnResponse = this.columnService.newColumn(
           dialogInstance.componentInstance.title,
         );
         dialogInstance.close();
-
-        console.log('here');
 
         this.columnsService
           .createColumn(this.board.id, {
@@ -103,8 +140,8 @@ export class BoardComponent implements OnInit, OnDestroy {
             order: column.order,
           } as NewColumn)
           .pipe(takeUntil(this.destroy$))
-          .subscribe((response: ColumnResponse) => {
-            console.log(response);
+          .subscribe((columnResponse: ColumnResponse) => {
+            this.columnService.add(columnResponse);
           });
       });
   }
@@ -116,11 +153,38 @@ export class BoardComponent implements OnInit, OnDestroy {
         event.previousIndex,
         event.currentIndex,
       );
-      this.columnService.updateOrder(
+      const columns: ColumnResponse[] = this.columnService.updateOrder(
         this.columns,
         event.previousIndex,
         event.currentIndex,
       );
+
+      let max: number = 4096;
+
+      const wait: any[] = [];
+      columns.forEach((column: ColumnResponse) => {
+        wait.push(
+          this.columnsService.updateColumn(this.board.id, column.id, {
+            title: column.title,
+            order: max--,
+          }),
+        );
+      });
+
+      forkJoin(wait)
+        .pipe(takeUntil(this.destroy$))
+        .subscribe((): void => {
+          columns.forEach((column: ColumnResponse) => {
+            const { id, ...newColumn }: any = {
+              ...column,
+            };
+
+            this.columnsService
+              .updateColumn(this.board.id, column.id, newColumn)
+              .pipe(takeUntil(this.destroy$))
+              .subscribe();
+          });
+        });
     }
   }
 
