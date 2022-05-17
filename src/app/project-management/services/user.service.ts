@@ -5,6 +5,7 @@ import {
   SignUpData,
   SignUpResponse,
 } from 'src/app/auth/models/authorization.model';
+import { UserData } from 'src/app/auth/models/user-data.model';
 import { apiRoot } from 'src/environments/environment';
 
 @Injectable({
@@ -31,8 +32,8 @@ export class UserService {
     );
   }
 
-  public updateUser(id: string, userData: SignUpData): Observable<Response> {
-    return this.http.put<Response>(`${apiRoot}/users/${id}`, userData);
+  public updateUser(id: string, userData: SignUpData): Observable<UserData> {
+    return this.http.put<UserData>(`${apiRoot}/users/${id}`, userData);
   }
 
   public deleteUser(id: string): Observable<Response> {

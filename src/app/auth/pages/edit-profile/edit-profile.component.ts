@@ -8,6 +8,7 @@ import {
 import { TokenStorageService } from 'src/app/core/services/token-storage.service';
 import { UserService } from 'src/app/project-management/services/user.service';
 import { SignUpData, SignUpResponse } from '../../models/authorization.model';
+import { UserData } from '../../models/user-data.model';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { TranslateService } from '@ngx-translate/core';
 
@@ -36,7 +37,8 @@ export class EditProfileComponent implements OnInit {
   public onSubmit(value: SignUpData): void {
     if (this.updateForm.status === 'VALID' && this.user) {
       this.userService.updateUser(this.user.id, value).subscribe({
-        next: () => {
+        next: (response: UserData) => {
+          this.storageService.saveUser(response);
           this.translate
             .get('auth.profile-saved')
             .subscribe((message: string) => {
