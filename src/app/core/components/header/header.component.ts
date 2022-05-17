@@ -42,11 +42,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
   ) {}
 
   @HostListener('window:scroll', ['$event']) public onscroll(): void {
-    if (window.scrollY > HEIGHT) {
-      this.isAnimationOn = true;
-    } else {
-      this.isAnimationOn = false;
-    }
+    this.isAnimationOn = window.scrollY > HEIGHT;
   }
 
   public ngOnInit(): void {
