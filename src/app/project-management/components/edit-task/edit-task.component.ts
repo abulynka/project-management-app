@@ -46,7 +46,7 @@ export class EditTaskComponent implements OnInit {
   public get newTask(): NewTask {
     return {
       title: this.task.get('title')?.value,
-      order: parseInt(this.task.get('order')?.value),
+      order: 0,
       description: this.task.get('description')?.value,
       userId: this.userId,
       done: false,
@@ -56,7 +56,7 @@ export class EditTaskComponent implements OnInit {
   public get updateTask(): UpdateTask {
     return {
       title: this.task.get('title')?.value,
-      order: parseInt(this.task.get('order')?.value),
+      order: 0,
       description: this.task.get('description')?.value,
       userId: this.updateTaskInstance?.userId || '',
       columnId: this.updateTaskInstance?.columnId || '',
@@ -77,10 +77,6 @@ export class EditTaskComponent implements OnInit {
     this.task = this.formBuilder.group({
       title: new FormControl(this.updateTaskInstance?.title, [
         Validators.required,
-      ]),
-      order: new FormControl(this.updateTaskInstance?.order, [
-        Validators.required,
-        Validators.pattern('^[0-9]*$'),
       ]),
       description: new FormControl(this.updateTaskInstance?.description, [
         Validators.required,
