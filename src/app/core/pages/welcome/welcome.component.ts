@@ -27,7 +27,7 @@ export class WelcomeComponent implements OnInit {
     this.initTranslateDataObserver();
   }
 
-  private initTranslateDataObserver() {
+  private initTranslateDataObserver(): void {
     this.translate.onLangChange.subscribe((event: LangChangeEvent) => {
       this.translateData = event.translations['welcome'];
     });

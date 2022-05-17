@@ -10,7 +10,6 @@ import { BoardShort } from '../../project-management/models/boards.model';
 
 const initialState: BoardsState = {
   boardsShort: [],
-  createdBoard: null,
 };
 
 export const reducer: ActionReducer<any> = createReducer(
@@ -19,7 +18,6 @@ export const reducer: ActionReducer<any> = createReducer(
   on(createdBoard, (state: any, action: any): BoardsState => {
     return {
       boardsShort: [...state.boardsShort, action.payload],
-      createdBoard: action.payload,
     };
   }),
 
@@ -31,7 +29,6 @@ export const reducer: ActionReducer<any> = createReducer(
         }
         return board;
       }),
-      createdBoard: null,
     };
   }),
 
@@ -40,7 +37,6 @@ export const reducer: ActionReducer<any> = createReducer(
       boardsShort: state.boardsShort.filter((board: BoardShort) => {
         return board.id !== action.payload;
       }),
-      createdBoard: null,
     };
   }),
 
