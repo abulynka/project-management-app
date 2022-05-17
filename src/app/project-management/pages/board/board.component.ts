@@ -5,12 +5,15 @@ import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 import { BehaviorSubject, Subject, takeUntil } from 'rxjs';
 
 import { ColumnService } from '../../services/column.service';
-import { BoardShort, Column, Task } from '../../models/boards.model';
+import {
+  BoardShort,
+  ColumnResponse,
+  NewColumn,
+} from '../../models/boards.model';
 import { select, Store } from '@ngrx/store';
 import { BoardsState } from '../../../redux/state.models';
 import { getBoardById } from '../../../redux/selectors/boards.selector';
 
-import { TaskService } from '../../services/task/task.service';
 import { ColumnsService } from '../../services/columns.service';
 import { BoardsService } from '../../services/boards.service';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
@@ -24,13 +27,13 @@ import { EditColumnComponent } from '../../components/edit-column/edit-column.co
 export class BoardComponent implements OnInit, OnDestroy {
   public board: BoardShort = {} as BoardShort;
 
-  public columns: Column[] = [];
+  public columns: ColumnResponse[] = [];
 
   public title: string = '';
 
-  public columnList$: BehaviorSubject<[] | Column[]> | null = null;
+  public columnList$: BehaviorSubject<[] | ColumnResponse[]> | null = null;
 
-  public titleSwitch: boolean = false;
+  public isEditMode: boolean = false;
 
   private destroy$: Subject<void> = new Subject<void>();
 
@@ -38,7 +41,6 @@ export class BoardComponent implements OnInit, OnDestroy {
     private columnService: ColumnService,
     private route: ActivatedRoute,
     private store: Store<BoardsState>,
-    private taskService: TaskService,
     private columnsService: ColumnsService,
     private boardsService: BoardsService,
     private dialog: MatDialog,
@@ -55,7 +57,7 @@ export class BoardComponent implements OnInit, OnDestroy {
           this.columnsService
             .getAllColumns(board.id)
             .pipe(takeUntil(this.destroy$))
-            .subscribe((columns: any) => {
+            .subscribe((columns: ColumnResponse[]) => {
               this.columns = columns;
               this.board = board;
               this.title = this.board.title;
@@ -70,15 +72,29 @@ export class BoardComponent implements OnInit, OnDestroy {
     this.destroy$.complete();
   }
 
-  public onAddColumn(): void {
+  public addColumn(): void {
     const dialogInstance: MatDialogRef<EditColumnComponent> =
       this.dialog.open(EditColumnComponent);
 
     dialogInstance.componentInstance.columnProcessed$
       .pipe(takeUntil(this.destroy$))
       .subscribe(() => {
-        this.columnService.add(dialogInstance.componentInstance.title);
+        const column: ColumnResponse = this.columnService.add(
+          dialogInstance.componentInstance.title,
+        );
         dialogInstance.close();
+
+        console.log('here');
+
+        this.columnsService
+          .createColumn(this.board.id, {
+            title: column.title,
+            order: column.order,
+          } as NewColumn)
+          .pipe(takeUntil(this.destroy$))
+          .subscribe((response: ColumnResponse) => {
+            console.log(response);
+          });
       });
   }
 
@@ -97,16 +113,8 @@ export class BoardComponent implements OnInit, OnDestroy {
     }
   }
 
-  public addNewTaskInColumn(
-    event: Task['title'],
-    columnId: Column['id'],
-  ): void {
-    const newTask: Task = this.taskService.create(event);
-    this.columnService.addTask(newTask, columnId);
-  }
-
   public titleSwitchClick(): void {
-    this.titleSwitch = !this.titleSwitch;
+    this.isEditMode = !this.isEditMode;
   }
 
   public titleSwitchClickAndSave(): void {
@@ -122,7 +130,7 @@ export class BoardComponent implements OnInit, OnDestroy {
     this.columnList$ = this.columnService.setState(this.columns);
     this.columnList$
       .pipe(takeUntil(this.destroy$))
-      .subscribe((columns: Column[]) => {
+      .subscribe((columns: ColumnResponse[]) => {
         this.columns = columns;
       });
   }
