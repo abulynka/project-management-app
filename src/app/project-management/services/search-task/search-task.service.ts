@@ -1,56 +1,57 @@
 import { Injectable } from '@angular/core';
+import { Router } from '@angular/router';
+import { Subject } from 'rxjs';
 import { Board, Column, Task } from '../../models/boards.model';
 
 @Injectable({
   providedIn: 'root',
 })
 export class SearchTaskService {
+  public constructor(private router: Router) { }
+
+  private searchResult$: Subject<Task[] | []> = new Subject();
+
   public searchByValue(searchValue: string, boards: Board[]): void {
+    if (!searchValue) return;
+    
     const tasks: Task[] = [];
-    console.log(searchValue, boards);
 
     boards.forEach((board: Board) => {
       board.columns.forEach((column: Column) => {
-        const matchedTasks: Task[] = column.tasks.filter((task: Task) => {
-          const values: string[] = Object.values(task);
-          // eslint-disable-next-line @typescript-eslint/typedef
-          const findedValue = values.find((itemValue: string) => {
-            // eslint-disable-next-line @typescript-eslint/comma-dangle
-            return itemValue.includes(searchValue);
-          });
+        const matchedTasks: Task[] = column.tasks.filter(
+          ({ title, order, description, userName }: Task) => {
+            const valuesFields: string[] = [
+              title,
+              String(order),
+              description,
+              String(userName),
+            ];
 
-          if (findedValue) {
-            return true;
-          }
+            const findedValue: string | undefined = valuesFields.find(
+              (itemValue: string) => {
+                return itemValue.includes(searchValue);
+              },
+            );
 
-          return false;
-        });
-        console.log({ matchedTasks });
+            if (findedValue) {
+              return true;
+            }
+
+            return false;
+          },
+        );
+        // TODO: save boardId and columnId in matchedTasks
+        // TODO: openTask() => openBoard() => findTaksInColumn and scroll to column, then hover findedTask
         tasks.push(...matchedTasks);
       });
     });
 
     console.log({ tasks });
+    this.searchResult$.next(tasks);
+    this.router.navigate(['search-result']).then();
+  }
+
+  public getResult(): Subject<Task[] | []> {
+    return this.searchResult$;
   }
 }
-
-// поиск таска по номеру таска, названию, пользователям, которые в нём участвуют и по тексту описания задачи.
-// private searchByValue = (value: string): IItem[] | [] => {
-//   console.log({ value });
-
-//   return this.data.filter((item: IItem) => {
-//     const values: string[] = Object.values(item);
-
-//     // eslint-disable-next-line @typescript-eslint/typedef
-//     const findedValue = values.find((itemValue: string) => {
-//       // eslint-disable-next-line @typescript-eslint/comma-dangle
-//       return itemValue.includes(value);
-//     });
-
-//     if (findedValue) {
-//       return true;
-//     }
-
-//     return false;
-//   });
-// };
