@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
 import { ReactiveFormsModule } from '@angular/forms';
 import { FormsModule } from '@angular/forms';
 import { AuthRoutingModule } from './auth-routing.module';
@@ -23,6 +24,7 @@ import { TranslateModule } from '@ngx-translate/core';
     MatInputModule,
     MatButtonModule,
     MatSnackBarModule,
+    MatIconModule,
     TranslateModule,
   ],
   exports: [LoginComponent],
