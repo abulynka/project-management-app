@@ -1,0 +1,5 @@
+<section class="list">
+  <div *ngFor="let task of tasks$ | async" class="task" (click)="openTask(task)">
+    <h3 class="task__title">Title: {{ task.title }}</h3>
+  </div>
+</section>

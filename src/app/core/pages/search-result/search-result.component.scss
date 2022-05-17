@@ -1,0 +1,14 @@
+.list {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  padding: 2em;
+}
+
+.task {
+  border-radius: .5rem;
+  background-color: aliceblue;
+  cursor: pointer;
+}
+
