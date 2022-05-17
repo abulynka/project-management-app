@@ -1,32 +1,39 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
-import { Column, Task } from '../models/boards.model';
+import { Column, ColumnResponse, Task } from '../models/boards.model';
 
 @Injectable({
   providedIn: 'root',
 })
 export class ColumnService {
-  private columnList: Column[] | [] = [];
+  private columnList: ColumnResponse[] | [] = [];
 
-  private columnList$: BehaviorSubject<[] | Column[]> = new BehaviorSubject(
-    this.columnList,
-  );
+  private columnList$: BehaviorSubject<[] | ColumnResponse[]> =
+    new BehaviorSubject(this.columnList);
 
-  public getState(): BehaviorSubject<[] | Column[]> {
+  public getState(): BehaviorSubject<[] | ColumnResponse[]> {
     return this.columnList$;
   }
 
-  public setState(columns: Column[]): BehaviorSubject<[] | Column[]> {
+  public setState(
+    columns: ColumnResponse[],
+  ): BehaviorSubject<[] | ColumnResponse[]> {
     this.columnList = columns;
     this.columnList$.next(this.columnList);
     return this.columnList$;
   }
 
-  public add(title: string): void {
-    this.columnList$.next(this.pushNewItem(this.newColumn(title)));
+  public add(title: string): ColumnResponse {
+    const column: ColumnResponse = this.newColumn(title);
+    this.columnList$.next(this.pushNewItem(column));
+    return column;
   }
 
-  public updateOrder(list: Column[], prevIdx: number, curIdx: number): void {
+  public updateOrder(
+    list: ColumnResponse[],
+    prevIdx: number,
+    curIdx: number,
+  ): void {
     list[curIdx].order = curIdx + 1;
     list[prevIdx].order = prevIdx + 1;
 
@@ -34,12 +41,14 @@ export class ColumnService {
     this.columnList$.next(list);
   }
 
-  public addTask(task: Task, columnId: Column['id']): void {
-    const columnIndex: number = this.columnList.findIndex(
-      (column: Column) => column.id === columnId,
-    );
-    const selectedColumn: Column = this.columnList[columnIndex];
-    selectedColumn.tasks = [...selectedColumn.tasks, task];
+  public addTask(task: Task): void {
+    // const columnIndex: number = this.columnList.findIndex(
+    //   (column: ColumnResponse) => column.id === task.columnId,
+    // );
+    // const selectedColumn: ColumnResponse = this.columnList[columnIndex];
+    // selectedColumn.tasks = [...selectedColumn.tasks, task];
+
+    console.log(task);
 
     this.columnList$.next(this.columnList);
   }
@@ -53,7 +62,7 @@ export class ColumnService {
     };
   }
 
-  private pushNewItem(item: Column): Column[] {
+  private pushNewItem(item: ColumnResponse): ColumnResponse[] {
     return (this.columnList = [...this.columnList, item]);
   }
 }
