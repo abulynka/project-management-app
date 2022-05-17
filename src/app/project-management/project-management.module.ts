@@ -25,6 +25,7 @@ import { BoardsState } from '../redux/state.models';
 import { BoardsActionType } from '../redux/actions/boards.action';
 import { EditColumnComponent } from './components/edit-column/edit-column.component';
 import { SearchBoxModule } from '../shared/search-box/search-box.module';
+import { MatTooltipModule } from '@angular/material/tooltip';
 
 @NgModule({
   declarations: [
@@ -52,6 +53,7 @@ import { SearchBoxModule } from '../shared/search-box/search-box.module';
     ConfirmationModalModule,
     MatDialogModule,
     SearchBoxModule,
+    MatTooltipModule,
   ],
   exports: [BoardsComponent, EditBoardComponent],
 })

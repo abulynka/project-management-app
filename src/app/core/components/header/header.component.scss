@@ -1,3 +1,5 @@
+@import '../../../../styles/settings/mixins';
+
 .header {
   width: 100%;
   position: sticky;
@@ -22,8 +24,8 @@
       flex-direction: column;
     }
 
-    @media (min-width: 800px) {
-      display: none;
+    @include min-tablet {
+      display: none
     }
   }
 
@@ -46,8 +48,8 @@
     display: flex;
     list-style: none;
 
-    @media (max-width: 800px) {
-      display: none;
+    @include tablet {
+      display: none
     }
   }
 

@@ -1,21 +1,61 @@
 <div class="column">
   <header class="column__header">
-    <h2 class="column__title">{{ title }}</h2>
+    <h2 *ngIf="!isEditMode" class="column__title" (click)="titleSwitchClick()">
+      {{ title }} - {{ columnOrder }}
+    </h2>
+    <button
+      *ngIf="isEditMode"
+      mat-stroked-button
+      class="column__title-button"
+      (click)="titleSwitchClickCancel()"
+      matTooltip="{{ 'task-column.cancel' | translate | titlecase }}"
+    >
+      <mat-icon>cancel</mat-icon>
+    </button>
+    <button
+      *ngIf="isEditMode"
+      mat-stroked-button
+      class="column__title-button"
+      (click)="titleSwitchClickSubmit()"
+      matTooltip="{{ 'task-column.submit' | translate | titlecase }}"
+    >
+      <mat-icon>save</mat-icon>
+    </button>
+    <input
+      *ngIf="isEditMode"
+      class="column__title"
+      matInput
+      [(ngModel)]="title"
+    />
+    <mat-icon
+      class="column__title-button"
+      matTooltip="{{ 'task-column.submit' | translate | titlecase }}"
+      *ngIf="!isEditMode"
+      (click)="onDeleteColumn($event)"
+      >delete</mat-icon
+    >
   </header>
 
   <div
     class="column__list drag-list"
     cdkDropList
     [cdkDropListData]="tasks"
-    (cdkDropListDropped)="drop($event)"
+    (cdkDropListDropped)="dropTask($event)"
   >
     <div
       *ngFor="let task of tasks"
-      class="column__task drag-el"
+      class="column__task task drag-el"
       cdkDrag
       [cdkDragData]="task"
+      (click)="onEditTask(task)"
     >
-      <h3>{{ task.title }}</h3>
+      <h3 class="task__title">{{ task.title }} - {{ task.order }}</h3>
+      <mat-icon
+        class="task__delete"
+        matTooltip="{{ 'task-column.delete' | translate | titlecase }}"
+        (click)="onDeleteTask($event, task.id, task.title)"
+        >delete</mat-icon
+      >
     </div>
   </div>
 

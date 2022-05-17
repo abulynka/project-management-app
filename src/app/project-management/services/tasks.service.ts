@@ -49,8 +49,8 @@ export class TasksService {
     boardId: string,
     columnId: string,
     taskId: string,
-  ): Observable<TaskResponse> {
-    return this.http.delete<TaskResponse>(
+  ): Observable<null> {
+    return this.http.delete<null>(
       `${apiRoot}/boards/${boardId}/columns/${columnId}/tasks/${taskId}`,
     );
   }
@@ -59,11 +59,11 @@ export class TasksService {
     boardId: string,
     columnId: string,
     taskId: string,
-    taskInfo: UpdateTask,
-  ): Observable<TaskByIdResponse> {
-    return this.http.put<TaskByIdResponse>(
+    task: UpdateTask,
+  ): Observable<TaskResponse> {
+    return this.http.put<TaskResponse>(
       `${apiRoot}/boards/${boardId}/columns/${columnId}/tasks/${taskId}`,
-      taskInfo,
+      task,
     );
   }
 }

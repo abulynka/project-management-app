@@ -59,7 +59,8 @@
           {{ 'auth.enter-password' | translate | titlecase }}
         </small>
       </mat-form-field>
-      <div>
+      <div class="edit-profile__btn-container">
+        <mat-icon (click)="deleteUser($event)">delete</mat-icon>
         <button type="submit" mat-button [disabled]="updateForm.invalid">
           {{ 'edit.update' | translate | titlecase }}
         </button>

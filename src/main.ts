@@ -10,5 +10,4 @@ if (environment.production) {
 
 platformBrowserDynamic()
   .bootstrapModule(AppModule)
-  // eslint-disable-next-line @typescript-eslint/typedef
-  .catch((err) => console.error(err));
+  .catch((err: any) => console.error(err));
