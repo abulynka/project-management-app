@@ -16,6 +16,12 @@
   }
 }
 
+@mixin min-tablet {
+  @media (min-width: 1101px) {
+    @content
+  }
+}
+
 @mixin glass-container {
   height: fit-content;
   padding: 3%;

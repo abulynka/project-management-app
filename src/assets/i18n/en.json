@@ -99,7 +99,10 @@
     "sign-up": "sign up",
     "fail": "Signup failed!",
     "success": " Your registration is successful!",
-    "profile-saved": "Profile saved!"
+    "profile-saved": "Profile saved!",
+    "profile-deleted": "Profile deleted!",
+    "delete-title": "User",
+    "delete-message": "Do you realy want to delete"
   },
   "validation": {
     "required": "Data is required",

@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../../services/auth.service';
-import { TokenStorageService } from '../../../core/services/token-storage.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { HttpErrorResponse } from '@angular/common/http';
 import { MatSnackBar } from '@angular/material/snack-bar';
@@ -22,7 +21,6 @@ export class LoginComponent implements OnInit {
 
   public constructor(
     public authService: AuthService,
-    private tokenStorage: TokenStorageService,
     private router: Router,
     private route: ActivatedRoute,
     private snackBar: MatSnackBar,

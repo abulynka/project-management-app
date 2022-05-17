@@ -32,12 +32,12 @@ export class TokenStorageService {
     sessionStorage.setItem(USER_KEY, JSON.stringify(response));
   }
 
-  public getUser(): SignUpResponse | null {
+  public getUser(): SignUpResponse | undefined {
     const user: string | null = sessionStorage.getItem(USER_KEY);
     if (user) {
       return JSON.parse(user);
     } else {
-      return null;
+      return undefined;
     }
   }
 }
