@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { NotFoundComponent } from './core/pages/not-found/not-found.component';
+import { SearchResultComponent } from './core/pages/search-result/search-result.component';
 import { WelcomeComponent } from './core/pages/welcome/welcome.component';
 
 const routes: Routes = [
@@ -24,6 +25,10 @@ const routes: Routes = [
       import('./auth/auth.module').then((m: { AuthModule: any }) => {
         return m.AuthModule;
       }),
+  },
+  {
+    path: 'search-result',
+    component: SearchResultComponent,
   },
   {
     path: '**',

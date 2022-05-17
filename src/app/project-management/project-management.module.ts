@@ -15,7 +15,6 @@ import { ProjectManagementRoutingModule } from './project-management-routing.mod
 import { BoardsComponent } from './pages/boards/boards.component';
 import { BoardComponent } from './pages/board/board.component';
 import { NotFoundComponent } from './pages/not-found/not-found.component';
-import { TaskComponent } from './pages/task/task.component';
 import { TaskColumnComponent } from './components/task-column/task-column.component';
 import { EditTaskComponent } from './components/edit-task/edit-task.component';
 import { EditBoardComponent } from './components/edit-board/edit-board.component';
@@ -32,7 +31,6 @@ import { MatTooltipModule } from '@angular/material/tooltip';
     BoardsComponent,
     BoardComponent,
     NotFoundComponent,
-    TaskComponent,
     EditTaskComponent,
     TaskColumnComponent,
     EditBoardComponent,

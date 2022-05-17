@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Board, BoardResponse, BoardShort } from '../../models/boards.model';
+import {
+  BoardResponse,
+  BoardShort,
+} from '../../models/boards.model';
 import { TranslateService } from '@ngx-translate/core';
 import { MatDialog } from '@angular/material/dialog';
 import { ConfirmationModalComponent } from '../../../shared/confirmation-modal/confirmation-modal.component';
@@ -9,8 +12,6 @@ import { select, Store } from '@ngrx/store';
 import { BoardsState } from '../../../redux/state.models';
 import { getBoards } from '../../../redux/selectors/boards.selector';
 import { BoardsActionType } from '../../../redux/actions/boards.action';
-import { SearchTaskService } from '../../services/search-task/search-task.service';
-import { BoardsService } from '../../services/boards.service';
 
 @Component({
   selector: 'app-boards',
@@ -28,8 +29,6 @@ export class BoardsComponent implements OnInit {
     private dialog: MatDialog,
     private translateService: TranslateService,
     private store: Store<BoardsState>,
-    private boardsService: BoardsService,
-    private searchTaskService: SearchTaskService,
   ) {}
 
   private static capitalizeFirstLetter(message: string): string {
@@ -49,13 +48,6 @@ export class BoardsComponent implements OnInit {
           }
         },
       );
-    });
-  }
-
-  public onSearch(value: string): void {
-    this.boardsService.getFullBoards().subscribe((boards: Board[]) => {
-      console.log({ boards });
-      this.searchTaskService.searchByValue(value, boards);
     });
   }
 
