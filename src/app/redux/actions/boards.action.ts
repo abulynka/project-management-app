@@ -12,31 +12,35 @@ export enum BoardsActionType {
   LoadedBoards = 'loaded-boards',
 }
 
-export const createdBoard: ActionCreator<any> = createAction(
-  BoardsActionType.CreatedBoard,
-  props<{
-    action: BoardsActionType.CreatedBoard;
-    payload: BoardResponse;
-  }>(),
-);
+export const createdBoard: ActionCreator<BoardsActionType.CreatedBoard> =
+  createAction(
+    BoardsActionType.CreatedBoard,
+    props<{
+      action: BoardsActionType.CreatedBoard;
+      payload: BoardResponse;
+    }>(),
+  );
 
-export const updatedBoard: ActionCreator<any> = createAction(
-  BoardsActionType.UpdatedBoard,
-  props<{
-    action: BoardsActionType.UpdatedBoard;
-    payload: BoardResponse;
-  }>(),
-);
+export const updatedBoard: ActionCreator<BoardsActionType.UpdatedBoard> =
+  createAction(
+    BoardsActionType.UpdatedBoard,
+    props<{
+      action: BoardsActionType.UpdatedBoard;
+      payload: BoardResponse;
+    }>(),
+  );
 
-export const deletedBoard: ActionCreator<any> = createAction(
-  BoardsActionType.DeletedBoard,
-  props<{
-    action: BoardsActionType.DeletedBoard;
-    payload: BoardResponse;
-  }>(),
-);
+export const deletedBoard: ActionCreator<BoardsActionType.DeletedBoard> =
+  createAction(
+    BoardsActionType.DeletedBoard,
+    props<{
+      action: BoardsActionType.DeletedBoard;
+      payload: BoardResponse;
+    }>(),
+  );
 
-export const loadedBoards: ActionCreator<any> = createAction(
-  BoardsActionType.LoadedBoards,
-  props<{ payload: BoardResponse[] }>(),
-);
+export const loadedBoards: ActionCreator<BoardsActionType.LoadedBoards> =
+  createAction(
+    BoardsActionType.LoadedBoards,
+    props<{ payload: BoardResponse[] }>(),
+  );
