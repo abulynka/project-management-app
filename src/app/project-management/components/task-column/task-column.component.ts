@@ -38,9 +38,9 @@ export class TaskColumnComponent implements OnInit, OnDestroy {
 
   @Input() public columnOrder!: number;
 
-  public tasks!: Task[];
-
   public isEditMode: boolean = false;
+
+  private tasksData: Task[] = [];
 
   private destroy$: Subject<void> = new Subject<void>();
 
@@ -51,6 +51,21 @@ export class TaskColumnComponent implements OnInit, OnDestroy {
     private columnsService: ColumnsService,
     private translateService: TranslateService,
   ) {}
+
+  public get tasks(): Task[] {
+    return this.tasksData;
+  }
+
+  public set tasks(tasks: Task[]) {
+    this.tasksData = tasks.sort((task1: Task, task2: Task): number => {
+      if (task1.order < task2.order) {
+        return -1;
+      } else if (task1.order > task2.order) {
+        return 1;
+      }
+      return 0;
+    });
+  }
 
   public ngOnInit(): void {
     this.tasksService
@@ -85,13 +100,28 @@ export class TaskColumnComponent implements OnInit, OnDestroy {
     this.titleSwitchClick();
   }
 
-  public drop(event: CdkDragDrop<any[]>): void {
+  public dropTask(event: CdkDragDrop<any[]>): void {
     if (event.previousContainer === event.container) {
       moveItemInArray(
         event.container.data,
         event.previousIndex,
         event.currentIndex,
       );
+
+      const indexFrom: number = Math.min(
+        event.previousIndex,
+        event.currentIndex,
+      );
+      for (let i: number = indexFrom; i < event.container.data.length; ++i) {
+        const { id, files, ...task }: any = event.container.data[i];
+        event.container.data[i].order = i + 1;
+        task.order = i + 1;
+
+        this.tasksService
+          .updateTask(this.boardId, this.columnId, id, task)
+          .pipe(takeUntil(this.destroy$))
+          .subscribe();
+      }
     } else {
       transferArrayItem(
         event.previousContainer.data,
@@ -132,7 +162,7 @@ export class TaskColumnComponent implements OnInit, OnDestroy {
     editTask.editTaskProcessed$
       .pipe(takeUntil(this.destroy$))
       .subscribe((): void => {
-        const newTask: NewTask = editTask.newTask;
+        const newTask: NewTask = this.columnService.newTask(editTask.newTask);
         this.dialog.closeAll();
 
         this.tasksService
@@ -145,11 +175,17 @@ export class TaskColumnComponent implements OnInit, OnDestroy {
       });
   }
 
-  public onDeleteColumn(): void {
+  public onDeleteColumn(event: MouseEvent): void {
+    event.stopPropagation();
     this.deleteColumn.emit(this.columnId);
   }
 
-  public onDeleteTask(taskId: string, taskTitle: string): void {
+  public onDeleteTask(
+    event: MouseEvent,
+    taskId: string,
+    taskTitle: string,
+  ): void {
+    event.stopPropagation();
     this.translateService
       .get(['task-column.delete-title', 'task-column.delete-message'])
       .subscribe((translates: Record<string, string>) => {

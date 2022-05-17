@@ -1,7 +1,7 @@
 <div class="column">
   <header class="column__header">
     <h2 *ngIf="!isEditMode" class="column__title" (click)="titleSwitchClick()">
-      {{ title }}
+      {{ title }} - {{ columnOrder }}
     </h2>
     <button
       *ngIf="isEditMode"
@@ -31,7 +31,7 @@
       class="column__title-button"
       matTooltip="{{ 'task-column.submit' | translate | titlecase }}"
       *ngIf="!isEditMode"
-      (click)="onDeleteColumn()"
+      (click)="onDeleteColumn($event)"
       >delete</mat-icon
     >
   </header>
@@ -40,7 +40,7 @@
     class="column__list drag-list"
     cdkDropList
     [cdkDropListData]="tasks"
-    (cdkDropListDropped)="drop($event)"
+    (cdkDropListDropped)="dropTask($event)"
   >
     <div
       *ngFor="let task of tasks"
@@ -49,11 +49,11 @@
       [cdkDragData]="task"
       (click)="onEditTask(task)"
     >
-      <h3 class="task__title">{{ task.title }}</h3>
+      <h3 class="task__title">{{ task.title }} - {{ task.order }}</h3>
       <mat-icon
         class="task__delete"
         matTooltip="{{ 'task-column.delete' | translate | titlecase }}"
-        (click)="onDeleteTask(task.id, task.title)"
+        (click)="onDeleteTask($event, task.id, task.title)"
         >delete</mat-icon
       >
     </div>
