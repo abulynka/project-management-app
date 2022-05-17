@@ -1,9 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
 import {
   FormGroup,
   FormControl,
   Validators,
-  AbstractControl,
   FormBuilder,
 } from '@angular/forms';
 import { TokenStorageService } from 'src/app/core/services/token-storage.service';
@@ -11,7 +10,8 @@ import {
   NewTask,
   UpdateTask,
 } from 'src/app/project-management/models/boards.model';
-import { TasksService } from 'src/app/project-management/services/tasks.service';
+import { Observable, Subject } from 'rxjs';
+import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-edit-task',
@@ -23,24 +23,46 @@ export class EditTaskComponent implements OnInit {
 
   public taskId: string | null = null;
 
-  public userId?: string | null = this.storageService.getUser()?.id;
+  public userId: string = `${this.storageService.getUser()?.id}`;
+
+  public editTaskProcessedSource: Subject<void> = new Subject<void>();
+
+  public editTaskProcessed$: Observable<void> =
+    this.editTaskProcessedSource.asObservable();
+
+  private updateTaskInstance: UpdateTask | undefined;
 
   public constructor(
     public storageService: TokenStorageService,
-    public taskService: TasksService,
     private formBuilder: FormBuilder,
-  ) {}
-
-  public get title(): AbstractControl | null {
-    return this.task.get('title');
+    @Inject(MAT_DIALOG_DATA)
+    public data: { updateTask: UpdateTask | undefined },
+  ) {
+    if (data) {
+      this.updateTaskInstance = data.updateTask;
+    }
   }
 
-  public get description(): AbstractControl | null {
-    return this.task.get('description');
+  public get newTask(): NewTask {
+    return {
+      title: this.task.get('title')?.value,
+      order: 0,
+      description: this.task.get('description')?.value,
+      userId: this.userId,
+      done: false,
+    };
   }
 
-  public get order(): AbstractControl | null {
-    return this.task.get('order');
+  public get updateTask(): UpdateTask {
+    return {
+      title: this.task.get('title')?.value,
+      order: 0,
+      description: this.task.get('description')?.value,
+      userId: this.updateTaskInstance?.userId || '',
+      columnId: this.updateTaskInstance?.columnId || '',
+      boardId: this.updateTaskInstance?.boardId || '',
+      done: this.updateTaskInstance?.done || false,
+    };
   }
 
   public ngOnInit(): void {
@@ -48,51 +70,17 @@ export class EditTaskComponent implements OnInit {
   }
 
   public onSubmit(): void {
-    const board: string = '';
-    const column: string = '';
-    this.taskId
-      ? this.updateTask(board, column, this.taskId)
-      : this.createNewTask(board, column);
-  }
-
-  public updateTask(board: string, column: string, taskId: string): void {
-    const body: UpdateTask = {
-      title: this.title?.value,
-      order: Number(this.order?.value),
-      description: this.description?.value,
-      userId: this.userId as string,
-      columnId: column,
-      boardId: board,
-    };
-    if (this.task.status === 'VALID') {
-      this.taskService.updateTask(board, column, taskId, body).subscribe({
-        next: () => {},
-      });
-    }
-  }
-
-  public createNewTask(board: string, column: string): void {
-    const body: NewTask = {
-      title: this.title?.value,
-      order: Number(this.order?.value),
-      description: this.description?.value,
-      userId: this.userId as string,
-    };
-    if (this.task.status === 'VALID') {
-      this.taskService.createTask(board, column, body).subscribe({
-        next: () => {},
-      });
-    }
+    this.editTaskProcessedSource.next();
   }
 
   private initEditTaskForm(): void {
     this.task = this.formBuilder.group({
-      title: new FormControl('', [Validators.required]),
-      order: new FormControl('', [
+      title: new FormControl(this.updateTaskInstance?.title, [
         Validators.required,
-        Validators.pattern('^[0-9]*$'),
       ]),
-      description: new FormControl('', [Validators.required]),
+      description: new FormControl(this.updateTaskInstance?.description, [
+        Validators.required,
+      ]),
     });
   }
 }

@@ -24,6 +24,7 @@ import { Store } from '@ngrx/store';
 import { BoardsState } from '../redux/state.models';
 import { BoardsActionType } from '../redux/actions/boards.action';
 import { EditColumnComponent } from './components/edit-column/edit-column.component';
+import { MatTooltipModule } from '@angular/material/tooltip';
 
 @NgModule({
   declarations: [
@@ -50,6 +51,7 @@ import { EditColumnComponent } from './components/edit-column/edit-column.compon
     MatInputModule,
     ConfirmationModalModule,
     MatDialogModule,
+    MatTooltipModule,
   ],
   exports: [BoardsComponent, EditBoardComponent],
 })

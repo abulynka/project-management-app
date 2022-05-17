@@ -21,7 +21,7 @@
     },
     "btn-add": "Add column",
     "delete-title": "board",
-    "delete-message": "do you realy want to delete",
+    "delete-message": "Do you realy want to delete board",
     "process": "process"
   },
   "task-form": {
@@ -34,6 +34,17 @@
     "description": "description",
     "enter-desc": "enter description",
     "process": "process"
+  },
+  "column": {
+    "delete-title": "column",
+    "delete-message": "Do you realy want to delete column"
+  },
+  "task-column": {
+    "delete": "delete",
+    "cancel": "cancel",
+    "submit": "submit",
+    "delete-title": "task",
+    "delete-message": "Do you realy want to delete task"
   },
   "not-found": {
     "first-part": "We are searching for your page...",

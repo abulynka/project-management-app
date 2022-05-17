@@ -14,15 +14,7 @@ export interface Column {
   tasks: Task[];
 }
 
-export interface Task {
-  id: string;
-  title: string;
-  order: number;
-  done: boolean;
-  description: string;
-  userId: string;
-  files: File[];
-}
+export interface Task extends TaskResponse {}
 
 export interface File {
   filename: string;
@@ -50,6 +42,17 @@ export interface TaskResponse {
   id: string;
   title: string;
   order: number;
+  boardId: string;
+  columnId: string;
+  description: string;
+  done: boolean;
+  userId: string;
+}
+
+export interface EditTask {
+  title: string;
+  order: number;
+  description: string;
 }
 
 export interface NewTask {
@@ -57,6 +60,7 @@ export interface NewTask {
   order: number;
   description: string;
   userId: string;
+  done: boolean;
 }
 
 export interface UpdateTask {
@@ -66,6 +70,7 @@ export interface UpdateTask {
   userId: string;
   columnId: string;
   boardId: string;
+  done: boolean;
 }
 
 export interface TaskByIdResponse {

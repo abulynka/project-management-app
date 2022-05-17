@@ -10,10 +10,6 @@ import { USER_KEY } from 'src/environments/environment';
   providedIn: 'root',
 })
 export class TokenStorageService {
-  public signOut(): void {
-    sessionStorage.clear();
-  }
-
   public saveToken(response: SignInResponse): void {
     sessionStorage.removeItem(TOKEN_KEY);
     sessionStorage.setItem(TOKEN_KEY, response.token);
