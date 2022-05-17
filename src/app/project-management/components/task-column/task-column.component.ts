@@ -1,4 +1,11 @@
-import { Component, Input, OnDestroy, OnInit } from '@angular/core';
+import {
+  Component,
+  EventEmitter,
+  Input,
+  OnDestroy,
+  OnInit,
+  Output,
+} from '@angular/core';
 import {
   CdkDragDrop,
   moveItemInArray,
@@ -20,6 +27,9 @@ import { TranslateService } from '@ngx-translate/core';
   styleUrls: ['./task-column.component.scss'],
 })
 export class TaskColumnComponent implements OnInit, OnDestroy {
+  @Output() public deleteColumn: EventEmitter<string> =
+    new EventEmitter<string>();
+
   @Input() public title!: string;
 
   @Input() public boardId!: string;
@@ -135,7 +145,11 @@ export class TaskColumnComponent implements OnInit, OnDestroy {
       });
   }
 
-  public onDelete(taskId: string, taskTitle: string): void {
+  public onDeleteColumn(): void {
+    this.deleteColumn.emit(this.columnId);
+  }
+
+  public onDeleteTask(taskId: string, taskTitle: string): void {
     this.translateService
       .get(['task-column.delete-title', 'task-column.delete-message'])
       .subscribe((translates: Record<string, string>) => {

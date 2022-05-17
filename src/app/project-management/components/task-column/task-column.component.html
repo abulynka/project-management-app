@@ -27,6 +27,13 @@
       matInput
       [(ngModel)]="title"
     />
+    <mat-icon
+      class="column__title-button"
+      matTooltip="{{ 'task-column.submit' | translate | titlecase }}"
+      *ngIf="!isEditMode"
+      (click)="onDeleteColumn()"
+      >delete</mat-icon
+    >
   </header>
 
   <div
@@ -46,7 +53,7 @@
       <mat-icon
         class="task__delete"
         matTooltip="{{ 'task-column.delete' | translate | titlecase }}"
-        (click)="onDelete(task.id, task.title)"
+        (click)="onDeleteTask(task.id, task.title)"
         >delete</mat-icon
       >
     </div>

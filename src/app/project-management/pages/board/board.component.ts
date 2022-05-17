@@ -72,6 +72,17 @@ export class BoardComponent implements OnInit, OnDestroy {
     this.destroy$.complete();
   }
 
+  public onDeleteColumn(columnId: string): void {
+    this.columnsService
+      .deleteColumn(this.board.id, columnId)
+      .pipe(takeUntil(this.destroy$))
+      .subscribe(() => {
+        this.columns = this.columns.filter(
+          (column: ColumnResponse) => column.id !== columnId,
+        );
+      });
+  }
+
   public addColumn(): void {
     const dialogInstance: MatDialogRef<EditColumnComponent> =
       this.dialog.open(EditColumnComponent);

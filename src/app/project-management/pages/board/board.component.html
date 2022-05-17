@@ -33,6 +33,7 @@
         [columnId]="column.id"
         [title]="column.title"
         [columnOrder]="column.order"
+        (deleteColumn)="onDeleteColumn($event)"
         cdkDrag
       >
       </app-task-column>
