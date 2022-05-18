@@ -4,9 +4,9 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
-    "start:prod": "ng serve --configuration production --proxy-config proxy.production.conf.json",
+    "start:prod": "ng serve --configuration production --proxy-config src/proxy.production.conf.json",
     "build": "ng build",
-    "build:prod": "ng build --configuration production --proxy-config proxy.production.conf.json",
+    "build:prod": "ng build --configuration production --proxy-config src/proxy.production.conf.json",
     "watch": "ng build --watch --configuration development",
     "test": "ng test --watch=false --browsers ChromeHeadless",
     "lint": "ng lint",
