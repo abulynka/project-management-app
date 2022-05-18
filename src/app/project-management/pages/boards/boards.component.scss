@@ -1,13 +1,18 @@
 @import '../../../../styles/settings/mixins';
 
+:root {
+  --height: calc(var(--main-height) - 8px - 15px);
+}
+
 .boards {
-  max-height: calc(100vh - var(--header-height) - var(--footer-height));
-  min-height: calc(100vh - var(--header-height) - var(--footer-height));
+  max-height: var(--height);
+  min-height: var(--height);
   display: flex;
   flex-direction: column;
   flex-wrap: wrap;
   margin: 8px 15px 15px;
   align-content: flex-start;
+  padding: 0;
 
   @include smart {
     flex-wrap: nowrap;
