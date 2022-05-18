@@ -1,11 +1,12 @@
 # The following redirect is intended for use with most SPAs that handle
 # routing internally.
-[[redirects]]
-  from = "/api/*"
-  to = "https://kanban-rest-rss.herokuapp.com/:splat"
-  status = 200
-  force = true
-  headers = {X-From = "Netlify"}
+
+#[[redirects]]
+#  from = "/api/*"
+#  to = "https://kanban-rest-rss.herokuapp.com/:splat"
+#  status = 200
+#  force = true
+#  headers = {X-From = "Netlify"}
 
 [[redirects]]
   from = "/*"
