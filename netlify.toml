@@ -5,7 +5,7 @@
   from = "/api/*"
   to = "https://kanban-rest-rss.herokuapp.com/:splat"
   force = true
-  headers = {X-From = "Netlify"}
+  status = 200
 
 [[redirects]]
   from = "/*"
