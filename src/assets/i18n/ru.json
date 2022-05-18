@@ -113,5 +113,11 @@
   },
   "edit": {
     "update": "изменить"
-  }
+  },
+  "search-result": {
+    "title": "Найденные задачи",
+    "not-found": "Задачи не найдены",
+    "task-title": "Название"
+  },
+  "search-box-label": "Введите..."
 }

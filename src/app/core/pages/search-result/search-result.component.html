@@ -1,5 +1,17 @@
 <section class="list">
-  <div *ngFor="let task of tasks$ | async" class="task" (click)="openTask(task)">
-    <h3 class="task__title">Title: {{ task.title }}</h3>
-  </div>
+  <h2 class="list__title">{{ 'search-result.title' | translate }}</h2>
+  <ng-container *ngIf="tasks$; else notFoundBlock">
+    <div
+      *ngFor="let task of tasks$ | async"
+      class="task"
+      (click)="openBoard(task)"
+    >
+      <h3 class="task__title">
+        {{ 'search-result.task-title' | translate }} {{ task.title }}
+      </h3>
+    </div>
+  </ng-container>
+  <ng-template #notFoundBlock>
+    <h3>{{ 'search-result.not-found' | translate }}</h3>
+  </ng-template>
 </section>

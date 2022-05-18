@@ -1,25 +1,27 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-import { Subject } from 'rxjs';
+import { BehaviorSubject, Subject } from 'rxjs';
 import { Board, Column, Task } from '../../models/boards.model';
 
 @Injectable({
   providedIn: 'root',
 })
 export class SearchTaskService {
-  public constructor(private router: Router) { }
+  private searchResult$: BehaviorSubject<Task[]> = new BehaviorSubject<Task[]>(
+    [],
+  );
 
-  private searchResult$: Subject<Task[] | []> = new Subject();
+  public constructor(private router: Router) {}
 
   public searchByValue(searchValue: string, boards: Board[]): void {
     if (!searchValue) return;
-    
+
     const tasks: Task[] = [];
 
     boards.forEach((board: Board) => {
       board.columns.forEach((column: Column) => {
-        const matchedTasks: Task[] = column.tasks.filter(
-          ({ title, order, description, userName }: Task) => {
+        const matchedTasks: Task[] = column.tasks
+          .filter(({ title, order, description, userName }: Task) => {
             const valuesFields: string[] = [
               title,
               String(order),
@@ -38,20 +40,27 @@ export class SearchTaskService {
             }
 
             return false;
-          },
-        );
-        // TODO: save boardId and columnId in matchedTasks
-        // TODO: openTask() => openBoard() => findTaksInColumn and scroll to column, then hover findedTask
+          })
+          .map((partialTask: Omit<Task, 'columnId' & 'boardId'>) =>
+            this.addInfoToTask(partialTask, board.id, column.id),
+          );
         tasks.push(...matchedTasks);
       });
     });
 
-    console.log({ tasks });
     this.searchResult$.next(tasks);
     this.router.navigate(['search-result']).then();
   }
 
   public getResult(): Subject<Task[] | []> {
     return this.searchResult$;
+  }
+
+  private addInfoToTask(
+    task: Omit<Task, 'columnId' & 'boardId'>,
+    boardId: string,
+    columnId: string,
+  ): Task {
+    return { ...task, boardId, columnId };
   }
 }

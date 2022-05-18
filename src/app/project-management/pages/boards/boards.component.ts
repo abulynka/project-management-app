@@ -1,9 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import {
-  BoardResponse,
-  BoardShort,
-} from '../../models/boards.model';
+import { BoardResponse, BoardShort } from '../../models/boards.model';
 import { TranslateService } from '@ngx-translate/core';
 import { MatDialog } from '@angular/material/dialog';
 import { ConfirmationModalComponent } from '../../../shared/confirmation-modal/confirmation-modal.component';

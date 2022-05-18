@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { Subject } from 'rxjs';
 
 import { environment } from 'src/environments/environment';
 import { SignUpResponse } from './auth/models/authorization.model';
@@ -19,7 +18,8 @@ export class AppComponent implements OnInit {
 
   private fullBoards: Board[] = [];
 
-  public constructor(private langService: LangService, 
+  public constructor(
+    private langService: LangService,
     private searchTaskService: SearchTaskService,
     private userService: UserService,
     private boardsService: BoardsService,
@@ -45,7 +45,7 @@ export class AppComponent implements OnInit {
       .getUsers()
       .subscribe((users: SignUpResponse[]) => (this.users = users));
   }
-  
+
   private setUserNamesInTasks(boards: Board[]): void {
     this.fullBoards = boards.map((board: Board) => {
       const updatedColumns: Board['columns'] = board.columns.map(
