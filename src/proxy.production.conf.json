@@ -2,6 +2,7 @@
   "/api/*": {
     "target": "https://kanban-rest-rss.herokuapp.com",
     "secure": true,
+    "changeOrigin": true,
     "logLevel": "debug",
     "pathRewrite": {"^/api": ""}
   }
