@@ -10,3 +10,4 @@ status = 200
 for = "/*"
 [headers.values]
 Access-Control-Allow-Origin = "*"
+Access-Control-Allow-Methods = "*"
