@@ -39,6 +39,8 @@ export class BoardComponent implements OnInit, OnDestroy {
 
   private destroy$: Subject<void> = new Subject<void>();
 
+  private titleSave: string = '';
+
   public constructor(
     private columnService: ColumnService,
     private route: ActivatedRoute,
@@ -189,16 +191,24 @@ export class BoardComponent implements OnInit, OnDestroy {
   }
 
   public titleSwitchClick(): void {
+    if (!this.isEditMode) {
+      this.titleSave = this.title;
+    }
+
     this.isEditMode = !this.isEditMode;
   }
 
   public titleSwitchClickAndSave(): void {
     this.titleSwitchClick();
-    this.boardsService.updateBoard(
-      this.board.id,
-      this.title,
-      this.board.description,
-    );
+    this.boardsService
+      .updateBoard(this.board.id, this.title, this.board.description)
+      .pipe(takeUntil(this.destroy$))
+      .subscribe();
+  }
+
+  public titleSwitchCancel(): void {
+    this.titleSwitchClick();
+    this.title = this.titleSave;
   }
 
   private initColumnListStateObserver(): void {

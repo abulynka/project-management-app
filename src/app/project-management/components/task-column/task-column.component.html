@@ -1,7 +1,7 @@
 <div class="column">
   <header class="column__header">
     <h2 *ngIf="!isEditMode" class="column__title" (click)="titleSwitchClick()">
-      {{ title }} - {{ columnOrder }} - {{ columnId }}
+      {{ title }}
     </h2>
     <button
       *ngIf="isEditMode"
@@ -23,7 +23,7 @@
     </button>
     <input
       *ngIf="isEditMode"
-      class="column__title"
+      class="column__title column__title-edit"
       matInput
       [(ngModel)]="title"
     />
@@ -49,7 +49,7 @@
       [cdkDragData]="task"
       (click)="onEditTask(task)"
     >
-      <h3 class="task__title">{{ task.title }} - {{ task.order }}</h3>
+      <h3 class="task__title">{{ task.title }}</h3>
       <mat-icon
         class="task__delete"
         matTooltip="{{ 'task-column.delete' | translate | titlecase }}"

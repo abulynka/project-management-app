@@ -16,6 +16,12 @@
     margin: 0;
     font-size: 1.5rem;
     line-height: 1.5;
+    max-width: 320px;
+    cursor: pointer;
+
+    &-edit {
+      background-color: #e0e0ff;
+    }
 
     &-save {
       margin: 0 5px;

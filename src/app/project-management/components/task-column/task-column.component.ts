@@ -44,6 +44,8 @@ export class TaskColumnComponent implements OnInit, OnDestroy {
 
   private destroy$: Subject<void> = new Subject<void>();
 
+  private titleSave: string = '';
+
   public constructor(
     private dialog: MatDialog,
     private tasksService: TasksService,
@@ -82,6 +84,9 @@ export class TaskColumnComponent implements OnInit, OnDestroy {
   }
 
   public titleSwitchClick(): void {
+    if (!this.isEditMode) {
+      this.titleSave = this.title;
+    }
     this.isEditMode = !this.isEditMode;
   }
 
@@ -98,6 +103,7 @@ export class TaskColumnComponent implements OnInit, OnDestroy {
 
   public titleSwitchClickCancel(): void {
     this.titleSwitchClick();
+    this.title = this.titleSave;
   }
 
   public dropTask(event: CdkDragDrop<any[]>): void {

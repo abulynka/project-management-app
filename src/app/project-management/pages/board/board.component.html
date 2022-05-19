@@ -5,17 +5,25 @@
     </h2>
     <input
       *ngIf="isEditMode"
-      class="board__title"
+      class="board__title board__title-edit"
       matInput
       [(ngModel)]="title"
     />
     <button
       *ngIf="isEditMode"
       mat-stroked-button
-      class="board__title-save"
+      class="board__title-button"
       (click)="titleSwitchClickAndSave()"
     >
       <mat-icon>save</mat-icon>
+    </button>
+    <button
+      *ngIf="isEditMode"
+      mat-stroked-button
+      class="board__title-button"
+      (click)="titleSwitchCancel()"
+    >
+      <mat-icon>cancel</mat-icon>
     </button>
   </header>
 
