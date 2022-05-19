@@ -38,6 +38,13 @@ export interface ColumnResponse {
   order: number;
 }
 
+export interface TaskSearchFields {
+  title: string;
+  order: number;
+  description: string;
+  userName?: string;
+}
+
 export interface TaskResponse {
   id: string;
   title: string;
@@ -47,6 +54,7 @@ export interface TaskResponse {
   description: string;
   done: boolean;
   userId: string;
+  userName?: string;
 }
 
 export interface EditTask {

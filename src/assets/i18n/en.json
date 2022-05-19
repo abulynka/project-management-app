@@ -113,5 +113,11 @@
   },
   "edit": {
     "update": "update"
-  }
+  },
+  "search-result": {
+    "title": "Found tasks",
+    "not-found": "Tasks not found",
+    "task-title": "Title"
+  },
+  "search-box-label": "Type..."
 }

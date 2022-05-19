@@ -15,6 +15,7 @@ import { StoreModule } from '@ngrx/store';
 import { boardsReducer } from './redux/reducers/boards.reducers';
 import { EffectsModule } from '@ngrx/effects';
 import { BoardsEffect } from './redux/effects/boards.effect';
+import { SearchBoxModule } from './shared/search-box/search-box.module';
 
 export function HttpLoaderFactory(httpClient: HttpClient): TranslateHttpLoader {
   return new TranslateHttpLoader(httpClient, './assets/i18n/', '.json');
@@ -28,6 +29,7 @@ export function HttpLoaderFactory(httpClient: HttpClient): TranslateHttpLoader {
     HttpClientModule,
     AppRoutingModule,
     CoreModule,
+    SearchBoxModule,
     TranslateModule.forRoot({
       loader: {
         provide: TranslateLoader,

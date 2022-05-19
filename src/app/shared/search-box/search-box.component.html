@@ -1,12 +1,7 @@
 <form class="search-form" [formGroup]="searchForm" (ngSubmit)="onSubmit()">
   <mat-form-field appearance="fill">
-    <mat-label>{{ label }}</mat-label>
-    <input
-      type="text"
-      matInput
-      [placeholder]="placeholder"
-      formControlName="searchValue"
-    />
+    <mat-label>{{ 'search-box-label' | translate }}</mat-label>
+    <input #searchInput type="text" matInput formControlName="searchValue" />
     <mat-icon class="search-form__icon" matSuffix (click)="onIconClick()"
       >search</mat-icon
     >
