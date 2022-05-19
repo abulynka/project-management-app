@@ -1,7 +1,7 @@
 <div class="column">
   <header class="column__header">
     <h2 *ngIf="!isEditMode" class="column__title" (click)="titleSwitchClick()">
-      {{ title }} - {{ columnOrder }}
+      {{ title }} - {{ columnOrder }} - {{ columnId }}
     </h2>
     <button
       *ngIf="isEditMode"

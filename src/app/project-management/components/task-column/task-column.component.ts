@@ -112,16 +112,8 @@ export class TaskColumnComponent implements OnInit, OnDestroy {
         event.previousIndex,
         event.currentIndex,
       );
-      for (let i: number = indexFrom; i < event.container.data.length; ++i) {
-        const { id, files, ...task }: any = event.container.data[i];
-        event.container.data[i].order = i + 1;
-        task.order = i + 1;
 
-        this.tasksService
-          .updateTask(this.boardId, this.columnId, id, task)
-          .pipe(takeUntil(this.destroy$))
-          .subscribe();
-      }
+      this.reorderTasks(event.container.data, indexFrom);
     } else {
       transferArrayItem(
         event.previousContainer.data,
@@ -129,6 +121,18 @@ export class TaskColumnComponent implements OnInit, OnDestroy {
         event.previousIndex,
         event.currentIndex,
       );
+
+      const task: Task = event.item.data;
+      const previousColumnId: string = task.columnId;
+      task.columnId = this.columnId;
+      const { id, files, ...updateTask }: any = task;
+
+      this.tasksService
+        .updateTask(this.boardId, previousColumnId, task.id, updateTask)
+        .pipe(takeUntil(this.destroy$))
+        .subscribe(() => {
+          this.reorderTasks(event.container.data, 0);
+        });
     }
   }
 
@@ -211,5 +215,23 @@ export class TaskColumnComponent implements OnInit, OnDestroy {
             }
           });
       });
+  }
+
+  private reorderTasks(updateTasks: Task[], indexFrom: number): void {
+    for (let i: number = indexFrom; i < updateTasks.length; ++i) {
+      const { id, files, ...task }: any = updateTasks[i];
+
+      if (updateTasks[i].order === i + 1) {
+        continue;
+      }
+
+      updateTasks[i].order = i + 1;
+      task.order = i + 1;
+
+      this.tasksService
+        .updateTask(this.boardId, this.columnId, id, task)
+        .pipe(takeUntil(this.destroy$))
+        .subscribe();
+    }
   }
 }

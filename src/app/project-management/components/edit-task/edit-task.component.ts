@@ -21,8 +21,6 @@ import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 export class EditTaskComponent implements OnInit {
   public task: FormGroup = {} as FormGroup;
 
-  public taskId: string | null = null;
-
   public userId: string = `${this.storageService.getUser()?.id}`;
 
   public editTaskProcessedSource: Subject<void> = new Subject<void>();
@@ -30,7 +28,7 @@ export class EditTaskComponent implements OnInit {
   public editTaskProcessed$: Observable<void> =
     this.editTaskProcessedSource.asObservable();
 
-  private updateTaskInstance: UpdateTask | undefined;
+  public updateTaskInstance: UpdateTask | undefined;
 
   public constructor(
     public storageService: TokenStorageService,
