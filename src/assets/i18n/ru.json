@@ -102,7 +102,11 @@
     "profile-saved": "Профайл сохранен!",
     "profile-deleted": "Профайл удален!",
     "delete-title": "Пользователь",
-    "delete-message": "Вы действительно хотите удалить"
+    "delete-message": "Вы действительно хотите удалить",
+    "at-least-eight-charachters": "как минимум 8 символов",
+    "both-uppercase-and-lowercase-letters": "должны быть буквы верхнего и нижнего решистра",
+    "letters-and-numbers": "должны быть и буквы и числа",
+    "one-special-character": "должен быть хотя бы один символ из списка: ! @ # ? ]"
   },
   "validation": {
     "required": "Поле должно быть заполнено",
