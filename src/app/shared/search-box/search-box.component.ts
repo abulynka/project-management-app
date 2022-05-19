@@ -18,6 +18,9 @@ export class SearchBoxComponent implements OnInit {
   @Output() public searchValueEvent: EventEmitter<string> =
     new EventEmitter<string>();
 
+  @Output() public searchFocusEvent: EventEmitter<string> =
+    new EventEmitter<string>();
+
   @ViewChild('searchInput', { read: ElementRef })
   private searchInputRef!: ElementRef;
 
@@ -37,12 +40,16 @@ export class SearchBoxComponent implements OnInit {
     this.submitSearchValue(this.searchForm.get('searchValue')?.value);
   }
 
+  public onFocus(): void {
+    this.searchFocusEvent.emit();
+  }
+
   private submitSearchValue(value: string): void {
     this.searchValueEvent.emit(value);
   }
 
   private initSearchValueObserver(): void {
-    const DELAY_TIME: number = 1000;
+    const DELAY_TIME: number = 2000;
     const MAX_LENGTH: number = 3;
     this.searchForm
       .get('searchValue')

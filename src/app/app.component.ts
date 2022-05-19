@@ -7,8 +7,7 @@ import { Board, Column, Task } from './project-management/models/boards.model';
 import { BoardsService } from './project-management/services/boards.service';
 import { SearchTaskService } from './project-management/services/search-task/search-task.service';
 import { UserService } from './project-management/services/user.service';
-import { AuthService } from './auth/services/auth.service';
-import { map, Subject, takeUntil } from 'rxjs';
+import { Subject, takeUntil } from 'rxjs';
 
 @Component({
   selector: 'app-root',
@@ -27,26 +26,10 @@ export class AppComponent implements OnInit, OnDestroy {
     private searchTaskService: SearchTaskService,
     private userService: UserService,
     private boardsService: BoardsService,
-    private authService: AuthService,
   ) {}
 
   public ngOnInit(): void {
     this.initSetDefaultLanguage();
-
-    if (this.authService.authorized()) {
-      this.initUsersObserver();
-      this.genFullBoardsObserver();
-    }
-
-    this.authService.authorizeChangeStatus$.pipe(
-      map((isAuthorized: boolean) => {
-        if (isAuthorized) {
-          this.initUsersObserver();
-          this.genFullBoardsObserver();
-        }
-        return isAuthorized;
-      }),
-    );
   }
 
   public ngOnDestroy(): void {
@@ -56,6 +39,11 @@ export class AppComponent implements OnInit, OnDestroy {
 
   public onSearch(value: string): void {
     this.searchTaskService.searchByValue(value, this.fullBoards);
+  }
+
+  public onFocus(): void {
+    this.initUsersObserver();
+    this.genFullBoardsObserver();
   }
 
   private initSetDefaultLanguage(): void {
