@@ -12,6 +12,8 @@ import {
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { TranslateService } from '@ngx-translate/core';
 import { HttpErrorResponse } from '@angular/common/http';
+import { Router } from '@angular/router';
+import { PasswordValidator } from '../../components/password.validator';
 
 @Component({
   selector: 'app-sign-up',
@@ -33,6 +35,7 @@ export class SignUpComponent implements OnInit {
     private snackBar: MatSnackBar,
     private translate: TranslateService,
     private formBuilder: FormBuilder,
+    private router: Router,
   ) {}
 
   public get login(): AbstractControl | null {
@@ -61,11 +64,25 @@ export class SignUpComponent implements OnInit {
         this.tokenStorage.saveUser(response);
         this.isSuccessful = true;
         this.isSignUpFailed = false;
+
+        this.translate
+          .get(['auth.success', 'dialog.close'])
+          .subscribe((message: Record<string, string>) => {
+            this.snackBar.open(
+              message['auth.success'],
+              message['dialog.close'],
+              {
+                duration: 3000,
+                panelClass: ['green-snackbar'],
+              },
+            );
+          });
+        this.router.navigate(['auth', 'login']).then();
       },
       error: (response: HttpErrorResponse) => {
         this.isSignUpFailed = true;
         let errorMessage: string = '';
-        switch (response.error.message) {
+        switch (response?.error?.message) {
           case 'User was not founded!':
             errorMessage = 'auth.user-not-found';
             break;
@@ -89,7 +106,10 @@ export class SignUpComponent implements OnInit {
     this.signUpForm = this.formBuilder.group({
       login: new FormControl('', [Validators.required, Validators.email]),
       name: new FormControl('', [Validators.required]),
-      password: new FormControl('', [Validators.required]),
+      password: new FormControl('', [
+        Validators.required,
+        PasswordValidator.validate,
+      ]),
     });
   }
 }

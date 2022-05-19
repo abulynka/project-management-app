@@ -102,7 +102,11 @@
     "profile-saved": "Profile saved!",
     "profile-deleted": "Profile deleted!",
     "delete-title": "User",
-    "delete-message": "Do you realy want to delete"
+    "delete-message": "Do you realy want to delete",
+    "at-least-eight-charachters": "at least 8 chars",
+    "both-uppercase-and-lowercase-letters": "a mixture of both uppercase and lowercase letters",
+    "letters-and-numbers": "a mixture of letters and numbers",
+    "one-special-character": "inclusion of at least one special character, e.g., ! @ # ? ]"
   },
   "validation": {
     "required": "Data is required",

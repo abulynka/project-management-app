@@ -7,9 +7,25 @@
   z-index: 10;
   transition: all .25s ease-out;
 
+  &__toolbar {
+    @include smart {
+      min-height: 128px;
+    }
+  }
+
   & .header__toolbar-row_onscroll {
-    background-color: #7c43bd;
     transform: scaleY(1.1);
+
+    @include smart {
+      flex-direction: column;
+    }
+  }
+
+  & .header__toolbar-row {
+
+    @include smart {
+      flex-direction: column;
+    }
   }
 
   &__title {

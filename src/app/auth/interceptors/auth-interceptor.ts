@@ -1,7 +1,4 @@
-import {
-  /*HttpErrorResponse,*/ HttpErrorResponse,
-  HttpEvent,
-} from '@angular/common/http';
+import { HttpErrorResponse, HttpEvent } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import {
   HttpInterceptor,
@@ -9,7 +6,7 @@ import {
   HttpRequest,
 } from '@angular/common/http';
 import { TokenStorageService } from '../../core/services/token-storage.service';
-import { catchError, Observable, throwError } from 'rxjs';
+import { catchError, NEVER, Observable } from 'rxjs';
 import { Router } from '@angular/router';
 import { AuthService } from '../services/auth.service';
 
@@ -39,13 +36,14 @@ export class AuthInterceptor implements HttpInterceptor {
         if (error.status === UNAUTHORIZED) {
           this.errorHandle();
         }
-        return throwError(error);
+
+        return NEVER;
       }),
     );
   }
 
   private errorHandle(): void {
-    this.router.navigate(['']);
+    this.router.navigate(['']).then();
     this.authService.logout();
   }
 }

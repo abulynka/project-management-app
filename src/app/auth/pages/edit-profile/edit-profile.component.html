@@ -58,6 +58,41 @@
         >
           {{ 'auth.enter-password' | translate | titlecase }}
         </small>
+        <small
+          class="login__input-error"
+          *ngIf="
+            updateForm.get('password')?.hasError('atLeastEightCharachters')
+          "
+        >
+          {{ 'auth.at-least-eight-charachters' | translate | titlecase }}
+        </small>
+
+        <small
+          class="login__input-error"
+          *ngIf="
+            updateForm
+              .get('password')
+              ?.hasError('bothUppercaseAndLowercaseLetters')
+          "
+        >
+          {{
+            'auth.both-uppercase-and-lowercase-letters' | translate | titlecase
+          }}
+        </small>
+
+        <small
+          class="login__input-error"
+          *ngIf="updateForm.get('password')?.hasError('lettersAndNumbers')"
+        >
+          {{ 'auth.letters-and-numbers' | translate | titlecase }}
+        </small>
+
+        <small
+          class="login__input-error"
+          *ngIf="updateForm.get('password')?.hasError('oneSpecialCharacter')"
+        >
+          {{ 'auth.one-special-character' | translate | titlecase }}
+        </small>
       </mat-form-field>
       <div class="edit-profile__btn-container">
         <mat-icon (click)="deleteUser($event)">delete</mat-icon>
