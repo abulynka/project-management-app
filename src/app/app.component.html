@@ -1,0 +1,12 @@
+<app-header class="header">
+  <app-search-box
+    (searchValueEvent)="onSearch($event)"
+    (searchFocusEvent)="onFocus()"
+    class="header__search"
+  >
+  </app-search-box>
+</app-header>
+<main class="main">
+  <router-outlet></router-outlet>
+</main>
+<app-footer class="footer"></app-footer>

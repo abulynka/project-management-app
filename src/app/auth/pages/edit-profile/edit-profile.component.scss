@@ -1,0 +1,41 @@
+.edit-profile {
+  height: var(--main-height);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  &__container {
+    width: 350px;
+    height: 350px;
+    padding: 20px 20px;
+    background-color: var(--login-bg-color);
+    margin: 10px;
+  }
+
+  &__form {
+    display: flex;
+    flex-direction: column;
+
+    & > * {
+      margin-top: 8px;
+    }
+  }
+
+  &__title {
+    font-size: 18px;
+    font-weight: bold;
+  }
+
+  &__error {
+    color:  var(--error-color);
+  }
+
+  &__btn-container {
+    display: flex;
+    justify-content: flex-start;
+
+    & > * {
+      cursor: pointer;
+    }
+  }
+}

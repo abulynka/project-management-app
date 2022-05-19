@@ -1,0 +1,103 @@
+<section class="signup">
+  <div class="signup__container">
+    <h4 class="signup__title">
+      {{ 'auth.sign-up' | translate | titlecase }}
+    </h4>
+    <form
+      [formGroup]="signUpForm"
+      class="signup__form"
+      *ngIf="!isSuccessful"
+      name="form"
+      (ngSubmit)="f.form.valid && onSubmit()"
+      #f="ngForm"
+    >
+      <mat-form-field appearance="fill">
+        <mat-label> {{ 'auth.login' | translate | titlecase }}</mat-label>
+        <input
+          matInput
+          placeholder="{{ 'auth.enter-login' | translate | titlecase }}"
+          type="text"
+          formControlName="login"
+        />
+        <small class="signup__error" *ngIf="login?.hasError('required')">
+          {{ 'auth.login-is-required' | translate | titlecase }}
+        </small>
+        <small class="login__input-error" *ngIf="login?.hasError('email')">
+          {{ 'auth.login-email-invalid' | translate | titlecase }}
+        </small>
+      </mat-form-field>
+
+      <mat-form-field appearance="fill">
+        <mat-label>{{ 'auth.name' | translate | titlecase }}</mat-label>
+        <input
+          matInput
+          placeholder="{{ 'auth.enter-name' | translate | titlecase }}"
+          type="text"
+          formControlName="name"
+        />
+        <small class="signup__error" *ngIf="name?.hasError('required')">
+          {{ 'auth.name-is-required' | translate | titlecase }}
+        </small>
+      </mat-form-field>
+
+      <mat-form-field appearance="fill">
+        <mat-label>{{ 'auth.password' | translate | titlecase }}</mat-label>
+        <input
+          matInput
+          placeholder="{{ 'auth.enter-password' | translate | titlecase }}"
+          formControlName="password"
+          type="password"
+        />
+
+        <small
+          class="login__input-error"
+          *ngIf="password?.hasError('required')"
+        >
+          {{ 'auth.enter-password' | translate | titlecase }}
+        </small>
+
+        <small
+          class="login__input-error"
+          *ngIf="password?.hasError('atLeastEightCharachters')"
+        >
+          {{ 'auth.at-least-eight-charachters' | translate | titlecase }}
+        </small>
+
+        <small
+          class="login__input-error"
+          *ngIf="password?.hasError('bothUppercaseAndLowercaseLetters')"
+        >
+          {{
+            'auth.both-uppercase-and-lowercase-letters' | translate | titlecase
+          }}
+        </small>
+
+        <small
+          class="login__input-error"
+          *ngIf="password?.hasError('lettersAndNumbers')"
+        >
+          {{ 'auth.letters-and-numbers' | translate | titlecase }}
+        </small>
+
+        <small
+          class="login__input-error"
+          *ngIf="password?.hasError('oneSpecialCharacter')"
+        >
+          {{ 'auth.one-special-character' | translate | titlecase }}
+        </small>
+      </mat-form-field>
+
+      <div>
+        <button type="submit" mat-button [disabled]="signUpForm.invalid">
+          {{ 'auth.sign-up' | translate | titlecase }}
+        </button>
+      </div>
+      <div class="alert alert-warning" *ngIf="f.submitted && isSignUpFailed">
+        {{ 'auth.fail' | translate }}<br />{{ errorMessage }}
+      </div>
+    </form>
+    <div class="alert alert-success" *ngIf="isSuccessful">
+      {{ 'auth.success' | translate }}
+    </div>
+  </div>
+</section>

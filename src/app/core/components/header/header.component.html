@@ -1,0 +1,128 @@
+<header class="header" (scroll)="onscroll()">
+  <mat-toolbar color="primary" class="header__toolbar">
+    <mat-toolbar-row
+      class="header__toolbar-row"
+      [class.header__toolbar-row_onscroll]="isAnimationOn"
+    >
+      <mat-icon class="header__menu header__burger" (click)="toggle()">
+        {{ isShowMenu ? 'close' : 'menu' }}
+      </mat-icon>
+
+      <span
+        class="header__title"
+        title="{{ 'app.home' | translate | titlecase }}"
+        (click)="home()"
+        >{{ 'app.title' | translate | titlecase }}</span
+      >
+
+      <ng-container *ngIf="authorized">
+        <ng-content></ng-content>
+      </ng-container>
+
+      <ul class="header__list">
+        <li>
+          <a
+            *ngIf="authorized"
+            class="header__button"
+            mat-flat-button
+            (click)="boardsList()"
+          >
+            {{ 'header.boards-list' | translate | titlecase }}
+          </a>
+        </li>
+        <li>
+          <a
+            *ngIf="authorized"
+            (click)="createNewBoard()"
+            class="header__button"
+            mat-flat-button
+          >
+            {{ 'header.create-new-board' | translate | titlecase }}
+          </a>
+        </li>
+        <li>
+          <a
+            *ngIf="authorized"
+            (click)="editProfile()"
+            class="header__button"
+            mat-flat-button
+          >
+            {{ 'header.edit-profile' | translate | titlecase }}
+          </a>
+        </li>
+        <li>
+          <a
+            *ngIf="authorized"
+            (click)="logout()"
+            class="header__button"
+            mat-flat-button
+          >
+            {{ 'header.logout' | translate | titlecase }}
+          </a>
+          <a
+            *ngIf="!authorized"
+            (click)="loginSingIn()"
+            class="header__button"
+            mat-flat-button
+          >
+            {{ 'header.login-sign-up' | translate | titlecase }}
+          </a>
+        </li>
+        <li>
+          <mat-slide-toggle
+            class="header__toggle"
+            (change)="changeLanguage($event)"
+            [checked]="langaugeChecked"
+            >{{ langTitle.short }}</mat-slide-toggle
+          >
+        </li>
+      </ul>
+    </mat-toolbar-row>
+
+    <mat-toolbar-row class="header__menu header__menu_large" *ngIf="isShowMenu">
+      <button
+        *ngIf="authorized"
+        mat-button
+        class="header__button_large"
+        (click)="boardsList()"
+      >
+        {{ 'header.boards-list' | translate | titlecase }}
+      </button>
+    </mat-toolbar-row>
+    <mat-toolbar-row class="header__menu header__menu_large" *ngIf="isShowMenu">
+      <button
+        *ngIf="authorized"
+        (click)="createNewBoard()"
+        mat-button
+        class="header__button_large"
+      >
+        {{ 'header.create-new-board' | translate | titlecase }}
+      </button>
+    </mat-toolbar-row>
+    <mat-toolbar-row class="header__menu header__menu_large" *ngIf="isShowMenu">
+      <mat-slide-toggle
+        class="header__toggle_large"
+        (change)="changeLanguage($event)"
+        >{{ langTitle.long }}</mat-slide-toggle
+      >
+    </mat-toolbar-row>
+    <mat-toolbar-row class="header__menu header__menu_large" *ngIf="isShowMenu">
+      <button
+        *ngIf="authorized"
+        (click)="editProfile()"
+        mat-button
+        class="header__button_large"
+      >
+        {{ 'header.edit-profile' | translate | titlecase }}
+      </button>
+    </mat-toolbar-row>
+    <mat-toolbar-row class="header__menu header__menu_large" *ngIf="isShowMenu">
+      <button *ngIf="!authorized" mat-button class="header__button_large">
+        {{ 'header.login-sign-up' | translate | titlecase }}
+      </button>
+      <button *ngIf="authorized" mat-button class="header__button_large">
+        {{ 'header.logout' | translate | titlecase }}
+      </button>
+    </mat-toolbar-row>
+  </mat-toolbar>
+</header>

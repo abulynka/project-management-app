@@ -1,0 +1,40 @@
+:host {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  margin: 1rem 0;
+}
+
+.list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  min-width: 290px;
+  max-width: 800px;
+  min-height: calc(100vh - 360px);
+  background-color: #ebecf0;
+  border-radius: 10px;
+  padding: 10px 8px;
+
+  &__title {
+    text-align: center;
+    font-size: 1.5rem;
+  }
+}
+
+.task {
+  display: flex;
+  align-items: center;
+  padding: 5px 10px;
+  justify-content: space-between;
+  background-color: white;
+  border-radius: 5px;
+  cursor: pointer;
+
+  &__title {
+    padding: 0;
+    margin: 0;
+  }
+}
+

@@ -1,0 +1,71 @@
+@import '../../../../styles/settings/mixins';
+
+.footer {
+  &__container {
+    display: flex;
+    justify-content: space-between;
+
+    @include small-tablet {
+      height: 140px;
+    }
+
+    @include smart {
+      height: 180px;
+      flex-direction: column;
+    }
+  }
+
+  &__authors {
+    width: 40vw;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    list-style: none;
+
+    @include small-tablet {
+      flex-direction: column;
+      justify-content: flex-start;
+      margin-bottom: 10px;
+      margin-top: 10px;
+    }
+  }
+
+  &__year {
+    width: 20vw;
+    display: flex;
+    justify-content: center;
+    margin: 0;
+  }
+
+  &__rs {
+    width: 40vw;
+    display: flex;
+    justify-content: center;
+  }
+
+  &__link {
+    display: flex;
+    height: 30px;
+    font-size: 18px;
+    font-weight: normal;
+    color: white;
+    text-decoration: none;
+
+    @include small-tablet {
+      font-size: 14px;
+    }
+
+    &-img {
+      height: 30px;
+
+      @include small-tablet {
+        height: 25px;
+      }
+    }
+
+    & > p {
+      margin-left: 4px;
+      margin-right: 4px;
+    }
+  }
+}

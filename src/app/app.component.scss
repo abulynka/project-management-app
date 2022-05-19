@@ -1,0 +1,26 @@
+@import './../styles/settings/mixins';
+
+.header {
+  height: 64px;
+
+  &__search {
+    height: 100%;
+  }
+}
+
+.main {
+  min-height: calc(100vh - 128px);
+  overflow-y: hidden;
+
+  @include small-tablet {
+    min-height: calc(100vh - 204px);
+  }
+
+  @include smart {
+    min-height: calc(100vh - 308px);
+  }
+}
+
+.footer {
+  height: 64px;
+}

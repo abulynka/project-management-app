@@ -1,0 +1,11 @@
+.edit-board {
+
+  &__form {
+    display: flex;
+    flex-direction: column;
+  }
+
+  &__error {
+    color: var(--login-error);
+  }
+}

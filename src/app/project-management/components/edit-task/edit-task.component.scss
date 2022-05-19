@@ -1,0 +1,22 @@
+.edit-task {
+  width: 350px;
+  padding: 20px 20px;
+  background-color: var(--login-bg-color);
+
+  &__form {
+    display: flex;
+    flex-direction: column;
+    & > * {
+      margin-top: 8px;
+    }
+  }
+
+  &__title {
+    font-size: 18px;
+    font-weight: bold;
+  }
+
+  &__error {
+    color: var(--login-error);
+  }
+}

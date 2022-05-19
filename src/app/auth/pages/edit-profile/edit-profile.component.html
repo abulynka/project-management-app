@@ -1,0 +1,105 @@
+<section class="edit-profile">
+  <div class="edit-profile__container">
+    <h4 class="edit-profile__title">
+      {{ 'edit.update' | translate | titlecase }}
+    </h4>
+    <form
+      [formGroup]="updateForm"
+      class="edit-profile__form"
+      (ngSubmit)="onSubmit(updateForm.value)"
+    >
+      <mat-form-field appearance="fill">
+        <mat-label>{{ 'auth.login' | translate | titlecase }}</mat-label>
+        <input
+          formControlName="login"
+          matInput
+          placeholder="{{ 'auth.enter-login' | translate | titlecase }}"
+          type="text"
+        />
+        <small
+          class="signup__error"
+          *ngIf="updateForm.get('login')?.hasError('required')"
+        >
+          {{ 'auth.login-is-required' | translate | titlecase }}
+        </small>
+        <small
+          class="login__input-error"
+          *ngIf="updateForm.get('login')?.hasError('email')"
+        >
+          {{ 'auth.login-email-invalid' | translate | titlecase }}
+        </small>
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>{{ 'auth.name' | translate | titlecase }}</mat-label>
+        <input
+          formControlName="name"
+          matInput
+          placeholder="{{ 'auth.enter-name' | translate | titlecase }}"
+          type="text"
+        />
+        <small
+          class="signup__error"
+          *ngIf="updateForm.get('name')?.hasError('required')"
+        >
+          {{ 'auth.name-is-required' | translate | titlecase }}
+        </small>
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>{{ 'auth.password' | translate | titlecase }}</mat-label>
+        <input
+          formControlName="password"
+          matInput
+          placeholder="{{ 'auth.enter-password' | translate | titlecase }}"
+          type="password"
+        />
+        <small
+          class="login__input-error"
+          *ngIf="updateForm.get('password')?.hasError('required')"
+        >
+          {{ 'auth.enter-password' | translate | titlecase }}
+        </small>
+        <small
+          class="login__input-error"
+          *ngIf="
+            updateForm.get('password')?.hasError('atLeastEightCharachters')
+          "
+        >
+          {{ 'auth.at-least-eight-charachters' | translate | titlecase }}
+        </small>
+
+        <small
+          class="login__input-error"
+          *ngIf="
+            updateForm
+              .get('password')
+              ?.hasError('bothUppercaseAndLowercaseLetters')
+          "
+        >
+          {{
+            'auth.both-uppercase-and-lowercase-letters' | translate | titlecase
+          }}
+        </small>
+
+        <small
+          class="login__input-error"
+          *ngIf="updateForm.get('password')?.hasError('lettersAndNumbers')"
+        >
+          {{ 'auth.letters-and-numbers' | translate | titlecase }}
+        </small>
+
+        <small
+          class="login__input-error"
+          *ngIf="updateForm.get('password')?.hasError('oneSpecialCharacter')"
+        >
+          {{ 'auth.one-special-character' | translate | titlecase }}
+        </small>
+      </mat-form-field>
+      <div class="edit-profile__btn-container">
+        <mat-icon (click)="deleteUser($event)">delete</mat-icon>
+        <button type="submit" mat-button [disabled]="updateForm.invalid">
+          {{ 'edit.update' | translate | titlecase }}
+        </button>
+      </div>
+    </form>
+  </div>
+</section>

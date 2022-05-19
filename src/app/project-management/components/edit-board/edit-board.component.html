@@ -1,0 +1,45 @@
+<section class="edit-board">
+  <div class="edit-board__container">
+    <h4 class="edit-board__title">
+      {{ 'board.title' | translate | titlecase }}
+    </h4>
+    <form [formGroup]="boardForm" class="edit-board__form">
+      <mat-form-field appearance="fill">
+        <mat-label>{{ 'board.title' | translate | titlecase }}</mat-label>
+        <input
+          matInput
+          formControlName="title"
+          placeholder="{{ 'value' | translate | titlecase }}"
+          type="text"
+        />
+        <small class="edit-task__error" *ngIf="title?.hasError('required')">
+          {{ 'validation.required' | translate }}
+        </small>
+      </mat-form-field>
+
+      <mat-form-field appearance="fill">
+        <mat-label>{{ 'board.description' | translate | titlecase }}</mat-label>
+        <input
+          matInput
+          formControlName="description"
+          placeholder="{{ 'board.description' | translate | titlecase }}"
+        />
+        <small
+          class="edit-task__error"
+          *ngIf="description?.hasError('required')"
+        >
+          {{ 'validation.required' | translate }}
+        </small>
+      </mat-form-field>
+
+      <button
+        type="submit"
+        (click)="onSubmit()"
+        mat-button
+        [disabled]="boardForm.invalid"
+      >
+        {{ 'board.process' | translate | titlecase }}
+      </button>
+    </form>
+  </div>
+</section>

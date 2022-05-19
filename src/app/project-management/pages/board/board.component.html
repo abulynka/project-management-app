@@ -1,0 +1,55 @@
+<div class="board">
+  <header class="board__header">
+    <h2 *ngIf="!isEditMode" class="board__title" (click)="titleSwitchClick()">
+      {{ title }}
+    </h2>
+    <input
+      *ngIf="isEditMode"
+      class="board__title board__title-edit"
+      matInput
+      [(ngModel)]="title"
+    />
+    <button
+      *ngIf="isEditMode"
+      mat-stroked-button
+      class="board__title-button"
+      (click)="titleSwitchClickAndSave()"
+    >
+      <mat-icon>save</mat-icon>
+    </button>
+    <button
+      *ngIf="isEditMode"
+      mat-stroked-button
+      class="board__title-button"
+      (click)="titleSwitchCancel()"
+    >
+      <mat-icon>cancel</mat-icon>
+    </button>
+  </header>
+
+  <section
+    class="board__main"
+    cdkDropList
+    cdkDropListOrientation="horizontal"
+    [cdkDropListData]="columnsData"
+    (cdkDropListDropped)="dropColumn($event)"
+  >
+    <div cdkDropListGroup class="board__content drag-list">
+      <app-task-column
+        *ngFor="let column of columnsData"
+        class="drag-el"
+        [boardId]="board.id"
+        [columnId]="column.id"
+        [title]="column.title"
+        [columnOrder]="column.order"
+        (deleteColumn)="onDeleteColumn($event)"
+        cdkDrag
+      >
+      </app-task-column>
+
+      <button class="board__btn-add" mat-stroked-button (click)="addColumn()">
+        <mat-icon>add</mat-icon> <span>{{ 'board.btn-add' | translate }}</span>
+      </button>
+    </div>
+  </section>
+</div>
