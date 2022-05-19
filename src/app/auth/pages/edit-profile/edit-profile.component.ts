@@ -15,6 +15,7 @@ import { TranslateService } from '@ngx-translate/core';
 import { ConfirmationModalComponent } from '../../../shared/confirmation-modal/confirmation-modal.component';
 import { AuthService } from '../../services/auth.service';
 import { Router } from '@angular/router';
+import { PasswordValidator } from '../../components/password.validator';
 
 @Component({
   selector: 'app-edit-profile',
@@ -102,7 +103,10 @@ export class EditProfileComponent implements OnInit {
         Validators.email,
       ]),
       name: new FormControl(this.user?.name, [Validators.required]),
-      password: new FormControl('', [Validators.required]),
+      password: new FormControl('', [
+        Validators.required,
+        PasswordValidator.validate,
+      ]),
     });
   }
 }
