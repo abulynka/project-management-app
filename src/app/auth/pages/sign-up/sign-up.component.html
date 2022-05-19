@@ -26,6 +26,7 @@
           {{ 'auth.login-email-invalid' | translate | titlecase }}
         </small>
       </mat-form-field>
+
       <mat-form-field appearance="fill">
         <mat-label>{{ 'auth.name' | translate | titlecase }}</mat-label>
         <input
@@ -38,6 +39,7 @@
           {{ 'auth.name-is-required' | translate | titlecase }}
         </small>
       </mat-form-field>
+
       <mat-form-field appearance="fill">
         <mat-label>{{ 'auth.password' | translate | titlecase }}</mat-label>
         <input
@@ -46,13 +48,45 @@
           formControlName="password"
           type="password"
         />
+
         <small
           class="login__input-error"
           *ngIf="password?.hasError('required')"
         >
           {{ 'auth.enter-password' | translate | titlecase }}
         </small>
+
+        <small
+          class="login__input-error"
+          *ngIf="password?.hasError('atLeastEightCharachters')"
+        >
+          {{ 'auth.at-least-eight-charachters' | translate | titlecase }}
+        </small>
+
+        <small
+          class="login__input-error"
+          *ngIf="password?.hasError('bothUppercaseAndLowercaseLetters')"
+        >
+          {{
+            'auth.both-uppercase-and-lowercase-letters' | translate | titlecase
+          }}
+        </small>
+
+        <small
+          class="login__input-error"
+          *ngIf="password?.hasError('lettersAndNumbers')"
+        >
+          {{ 'auth.letters-and-numbers' | translate | titlecase }}
+        </small>
+
+        <small
+          class="login__input-error"
+          *ngIf="password?.hasError('oneSpecialCharacter')"
+        >
+          {{ 'auth.one-special-character' | translate | titlecase }}
+        </small>
       </mat-form-field>
+
       <div>
         <button type="submit" mat-button [disabled]="signUpForm.invalid">
           {{ 'auth.sign-up' | translate | titlecase }}
