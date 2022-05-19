@@ -13,6 +13,14 @@ export class SearchTaskService {
 
   public constructor(private router: Router) {}
 
+  private static addInfoToTask(
+    task: Omit<Task, 'columnId' & 'boardId'>,
+    boardId: string,
+    columnId: string,
+  ): Task {
+    return { ...task, boardId, columnId };
+  }
+
   public searchByValue(searchValue: string, boards: Board[]): void {
     if (!searchValue) return;
 
@@ -35,14 +43,10 @@ export class SearchTaskService {
               },
             );
 
-            if (findedValue) {
-              return true;
-            }
-
-            return false;
+            return Boolean(findedValue);
           })
           .map((partialTask: Omit<Task, 'columnId' & 'boardId'>) =>
-            this.addInfoToTask(partialTask, board.id, column.id),
+            SearchTaskService.addInfoToTask(partialTask, board.id, column.id),
           );
         tasks.push(...matchedTasks);
       });
@@ -54,13 +58,5 @@ export class SearchTaskService {
 
   public getResult(): Subject<Task[] | []> {
     return this.searchResult$;
-  }
-
-  private addInfoToTask(
-    task: Omit<Task, 'columnId' & 'boardId'>,
-    boardId: string,
-    columnId: string,
-  ): Task {
-    return { ...task, boardId, columnId };
   }
 }

@@ -7,7 +7,7 @@ import {
   ViewChild,
 } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
-import { debounceTime } from 'rxjs/operators';
+import { debounceTime, distinctUntilChanged, filter } from 'rxjs/operators';
 
 @Component({
   selector: 'app-search-box',
@@ -39,19 +39,18 @@ export class SearchBoxComponent implements OnInit {
 
   private submitSearchValue(value: string): void {
     this.searchValueEvent.emit(value);
-    this.reset();
-  }
-
-  private reset(): void {
-    this.searchForm.reset();
-    this.searchInputRef.nativeElement.blur();
   }
 
   private initSearchValueObserver(): void {
     const DELAY_TIME: number = 1000;
+    const MAX_LENGTH: number = 3;
     this.searchForm
       .get('searchValue')
-      ?.valueChanges.pipe(debounceTime(DELAY_TIME))
+      ?.valueChanges.pipe(
+        debounceTime(DELAY_TIME),
+        distinctUntilChanged(),
+        filter((model: string) => model.length >= MAX_LENGTH),
+      )
       .subscribe((value: string) => {
         if (value) {
           this.submitSearchValue(value);
