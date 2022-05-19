@@ -44,8 +44,8 @@ export class LoginComponent implements OnInit {
         this.router.navigate(['/boards']).then();
       },
       error: (response: HttpErrorResponse) => {
-        let errorMessage: string = '';
-        switch (response.error.message) {
+        let errorMessage: string = 'Unknown Error';
+        switch (response?.error?.message) {
           case 'User was not founded!':
             errorMessage = 'auth.user-not-found';
             break;

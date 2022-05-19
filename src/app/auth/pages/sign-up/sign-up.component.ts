@@ -82,7 +82,7 @@ export class SignUpComponent implements OnInit {
       error: (response: HttpErrorResponse) => {
         this.isSignUpFailed = true;
         let errorMessage: string = '';
-        switch (response.error.message) {
+        switch (response?.error?.message) {
           case 'User was not founded!':
             errorMessage = 'auth.user-not-found';
             break;
