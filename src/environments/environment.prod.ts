@@ -16,6 +16,7 @@ export const environment: IEnvironment = {
   defaultLocale: 'en',
 };
 
-export const apiRoot: string = 'http://localhost:4200/api';
+export const apiRoot: string =
+  'https://project-management-app-rss.netlify.app/api';
 export const TOKEN_KEY: string = 'auth-token';
 export const USER_KEY: string = 'auth-user';

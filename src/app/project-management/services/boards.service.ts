@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { concat, concatMap, Observable, toArray } from 'rxjs';
 import { Board, BoardResponse } from '../models/boards.model';
 import { apiRoot } from 'src/environments/environment';
 
@@ -22,6 +22,17 @@ export class BoardsService {
       title,
       description,
     });
+  }
+
+  public getFullBoards(): any {
+    return this.getBoards().pipe(
+      concatMap((boardsShort: BoardResponse[]) => {
+        const boardsObservables: Array<Observable<Board>> = boardsShort.map(
+          (b: BoardResponse) => this.getBoardById(b.id),
+        );
+        return concat(...boardsObservables).pipe(toArray());
+      }),
+    );
   }
 
   public getBoardById(id: string): Observable<Board> {

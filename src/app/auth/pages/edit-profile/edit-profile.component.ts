@@ -14,6 +14,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { TranslateService } from '@ngx-translate/core';
 import { ConfirmationModalComponent } from '../../../shared/confirmation-modal/confirmation-modal.component';
 import { AuthService } from '../../services/auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-edit-profile',
@@ -28,6 +29,7 @@ export class EditProfileComponent implements OnInit {
   public constructor(
     public userService: UserService,
     public storageService: TokenStorageService,
+    public router: Router,
     private formBuilder: FormBuilder,
     private snackBar: MatSnackBar,
     private translate: TranslateService,
@@ -85,6 +87,7 @@ export class EditProfileComponent implements OnInit {
                         panelClass: ['green-snackbar'],
                       });
                     });
+                  this.router.navigate(['']).then();
                 },
               });
             }

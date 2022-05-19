@@ -1,4 +1,11 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import {
+  Component,
+  ElementRef,
+  EventEmitter,
+  OnInit,
+  Output,
+  ViewChild,
+} from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { debounceTime } from 'rxjs/operators';
 
@@ -8,12 +15,11 @@ import { debounceTime } from 'rxjs/operators';
   styleUrls: ['./search-box.component.scss'],
 })
 export class SearchBoxComponent implements OnInit {
-  @Input() public placeholder: string = 'Type smth ...';
-
-  @Input() public label: string = 'Task name';
-
   @Output() public searchValueEvent: EventEmitter<string> =
     new EventEmitter<string>();
+
+  @ViewChild('searchInput', { read: ElementRef })
+  private searchInputRef!: ElementRef;
 
   public searchForm: FormGroup = new FormGroup({
     searchValue: new FormControl(''),
@@ -33,16 +39,23 @@ export class SearchBoxComponent implements OnInit {
 
   private submitSearchValue(value: string): void {
     this.searchValueEvent.emit(value);
+    this.reset();
+  }
+
+  private reset(): void {
+    this.searchForm.reset();
+    this.searchInputRef.nativeElement.blur();
   }
 
   private initSearchValueObserver(): void {
     const DELAY_TIME: number = 1000;
     this.searchForm
-      // TODO: maybe change onKeyUp
       .get('searchValue')
       ?.valueChanges.pipe(debounceTime(DELAY_TIME))
       .subscribe((value: string) => {
-        this.submitSearchValue(value);
+        if (value) {
+          this.submitSearchValue(value);
+        }
       });
   }
 }

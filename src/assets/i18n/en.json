@@ -77,7 +77,7 @@
       "developer"
     ],
     "role": [
-      "Teamlead, developed application architecture, routing, responsible for Husky, for the components: header, footer, main boards list, not found page, dialog box, edit task, welcome page. Added WebSockets support.",
+      "Teamlead, developed application architecture, routing, responsible for Husky, for the components: header, footer, main boards list, not found page, dialog box, edit task, welcome page. Implemented CI/CD.",
       "Responsible for the forms: authorization, registration, edit profile, edit task. Created backend services and modules. Optimization of welcome page.",
       "Attended actively in application architecture development. Responsible for localization, story book, main board, shared components."
     ]
@@ -117,5 +117,11 @@
   },
   "edit": {
     "update": "update"
-  }
+  },
+  "search-result": {
+    "title": "Found tasks",
+    "not-found": "Tasks not found",
+    "task-title": "Title"
+  },
+  "search-box-label": "Type..."
 }
